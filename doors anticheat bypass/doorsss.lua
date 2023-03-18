@@ -13,34 +13,19 @@ local library = loadstring(game:HttpGet('https://pastebin.com/raw/vPWzQEC8'))()
 local plr = game.Players.LocalPlayer
 local char = plr.Character or plr.CharacterAdded:Wait()
 local hum = char:FindFirstChildOfClass("Humanoid") or char:WaitForChild("Humanoid")
-local newhum = hum:Clone()
-newhum.Name = "humlol"
-newhum.Parent = game.ReplicatedStorage
-local newhuma
-local toogle_anticheat = library.window("anticheat")
+--game.Players.LocalPlayer.Character.Humanoid:Remove()
 
+-- game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 2
 toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
     if val then
-		hum.Name = "1"
-		local newHum = hum:Clone()
-		newHum.Parent = char
-		newHum.Name = "Humanoid"
-		wait()
-		hum.Parent=game.ReplicatedStorage
+      game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 2
+      local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
+      newhum.Name="1"
+      game.Players.LocalPlayer.Character.Humanoid.Parent=game.ReplicatedStorage
     else
-      hum.Name = "1"
-      local newHum = hum:Clone()
-      newHum.Parent = char
-      newHum.Name = "Humanoid"
-      wait()
-      hum:Destroy()
-        -- char:FindFirstChild("Humanoid").Name="1"
-        -- hum.Health=100
-        -- hum.Parent=char
-        -- hum.Name = "Humanoid"
-        -- wait()
-        -- char:FindFirstChild("1"):Destroy()
-        --newhum.Parent=game.ReplicatedStorage
+      game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 1.35
+      game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid'):Remove()
+      game.ReplicatedStorage:FindFirstChildOfClass('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
     end
     task.wait()
 end)

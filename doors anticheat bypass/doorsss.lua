@@ -37,7 +37,8 @@ local win = Flux:Window("doors script", "doors script", Color3.fromRGB(255, 110,
 local tab = win:Tab("anticheat bypass", "http://www.roblox.com/asset/?id=6023426915")
 tab:Label("anticheat bypass 1.")
 tab:Line()
-tab:Toggle("Anticheat bypass", "disable's anticheat", function(val)
+tab:Toggle("Anticheat bypass", "disable anticheat", function(val)
+  print(val)
   if val then
     local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
     newhum.Name="1"

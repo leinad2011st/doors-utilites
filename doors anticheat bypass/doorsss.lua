@@ -16,14 +16,12 @@ local hum = char:FindFirstChildOfClass("Humanoid") or char:WaitForChild("Humanoi
 --game.Players.LocalPlayer.Character.Humanoid:Remove()
 
 -- game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 2
-toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
+toogle_anticheat.gui.toggle("anticheat bypass test 1",false,function(val)
     if val then
-      game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 2
       local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
       newhum.Name="1"
       game.Players.LocalPlayer.Character.Humanoid.Parent=game.ReplicatedStorage
     else
-      game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 1.35
       game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid'):Remove()
       game.ReplicatedStorage:FindFirstChildOfClass('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
     end

@@ -31,6 +31,9 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
 end)
 ]]
 
+--[[ 
+  diffrent ui
+
 
 local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt")()
 local win = Flux:Window("doors script", "doors script", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
@@ -38,6 +41,27 @@ local tab = win:Tab("anticheat bypass", "http://www.roblox.com/asset/?id=6023426
 tab:Label("anticheat bypass 1.")
 tab:Line()
 tab:Toggle("Anticheat bypass", "disable anticheat", function(val)
+  print(val)
+  if val then
+    local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
+    newhum.Name="1"
+    game.Players.LocalPlayer.Character.Humanoid.Parent=game.ReplicatedStorage
+  else
+    game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid'):Remove()
+    game.ReplicatedStorage:FindFirstChildOfClass('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+  end
+  task.wait()
+end)
+]]
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/joeengo/exploiting/main/EngoUILIB_V2.lua", true))()
+
+local main = library:CreateMain("doors script", "", Enum.KeyCode.LeftAlt)
+
+local tab = main:CreateTab("anticheat bypass")
+tab:CreateLabel("Main")
+
+tab:CreateToggle("Anticheat bypass", "disable anticheat", function(val)
   print(val)
   if val then
     local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)

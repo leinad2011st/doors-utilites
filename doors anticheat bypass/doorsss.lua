@@ -16,9 +16,9 @@ local plr = game.Players.LocalPlayer
 local char = plr.Character or plr.CharacterAdded:Wait()
 local hum = char:FindFirstChildOfClass("Humanoid") or char:WaitForChild("Humanoid")
 --game.Players.LocalPlayer.Character.Humanoid:Remove()
-
+local toogle_anticheat = library.window("anticheat bypass")
 -- game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 2
-toogle_anticheat:toggle("anticheat bypass test 1",false,function(val)
+toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
     if val then
       local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
       newhum.Name="1"

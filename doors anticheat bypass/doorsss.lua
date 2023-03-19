@@ -26,7 +26,7 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
       local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
       newhum.Name="1"
       oldhum=game.Players.LocalPlayer.Character.Humanoid
-      --oldhum.Parent=game.ReplicatedStorage
+      oldhum.Parent=nil-- game.ReplicatedStorage
       game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 3
     else
       print("BAAA")

@@ -22,7 +22,7 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
     if val then
       local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
       newhum.Name="1"
-      game.Players.LocalPlayer.Character.Humanoid.Parent=game.ReplicatedStorage
+      game.Players.LocalPlayer.Character.Humanoid.Parent=nil
     else
       game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid'):Remove()
       game.ReplicatedStorage:FindFirstChildOfClass('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]

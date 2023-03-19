@@ -29,8 +29,8 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
       game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 3
     else
       game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid'):Remove()
-      --game.ReplicatedStorage:FindFirstChildOfClass('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
-      oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+      game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+      --oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
     end
     task.wait()
 end)

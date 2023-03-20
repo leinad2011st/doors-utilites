@@ -28,7 +28,7 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
         newhum.Name = "humlol"
         newhum.Parent = char
         task.wait()
-        hum.Parent = game.ReplicatedStorage --nil
+        hum.Parent = nil
         
         hum = newhum
       else

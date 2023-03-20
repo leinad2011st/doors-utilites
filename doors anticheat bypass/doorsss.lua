@@ -22,25 +22,32 @@ local toogle_anticheat = library.window("anticheat bypass")
 local oldhum
 toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
     if val then
-      print("AAA")
-      local newhum = Instance.new('Humanoid', game.Players.LocalPlayer.Character)
-      newhum.Name="1"
-      oldhum=game.Players.LocalPlayer.Character.Humanoid
-      oldhum.Parent= game.ReplicatedStorage
-      local clonehum = oldhum:Clone()
-      newhum:Destory()
-      oldhum:Destory()
-      wait(0.3)
-      clonehum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
-      game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 3
+      if game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Tool") then
+        print("AAA")
+        local newhum = hum:Clone()
+        newhum.Name = "humlol"
+        newhum.Parent = char
+        task.wait()
+        hum.Parent = nil
+        
+        hum = newhum
+      else
+        local msg = Instance.new("Message",game.Workspace) 
+        msg.Text="no tool detected"
+      end
     else
-      print("BAAA")
-      local oldhum = game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid')
-      local clonee = oldhum:Clone()
-      wait(0.1)
-      oldhum:Destory()
-      --game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
-      --oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+      if game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Tool") then
+        print("BAAA")
+        local oldhum = game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid')
+        local clonee = oldhum:Clone()
+        wait(0.1)
+        oldhum:Destory()
+        --game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+        --oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+      else
+        local msg = Instance.new("Message",game.Workspace) 
+        msg.Text="no tool detected"
+      end
     end
     task.wait()
 end)

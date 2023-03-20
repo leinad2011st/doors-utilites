@@ -28,25 +28,29 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
         newhum.Name = "humlol"
         newhum.Parent = char
         task.wait()
-        hum.Parent = nil
+        hum.Parent = game.ReplicatedStorage --nil
         
         hum = newhum
       else
         local msg = Instance.new("Message",game.Workspace) 
         msg.Text="no tool detected"
+        wait(2)
+        msg:Destroy()
       end
     else
       if game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Tool") then
         print("BAAA")
         local oldhum = game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid')
-        local clonee = oldhum:Clone()
+        --local clonee = oldhum:Clone()
         wait(0.1)
         oldhum:Destory()
-        --game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+        game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
         --oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
       else
         local msg = Instance.new("Message",game.Workspace) 
         msg.Text="no tool detected"
+        wait(2)
+        msg:Destroy()
       end
     end
     task.wait()

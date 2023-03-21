@@ -24,17 +24,22 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
     if val then
       if game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Tool") then
         print("AAA")
-        local newhum = hum:Clone()
-        newhum.Name = "humlol"
-        newhum.Parent = char
-        task.wait()
-        hum.Parent = nil
-        
-        hum = newhum
+        game.Players.LocalPlayer.Character.Humanoid.Name = "1"
+        local l = game.Players.LocalPlayer.Character["1"]:Clone()
+        l.Parent = game.Players.LocalPlayer.Character
+        l.Name = "Humanoid"
+        wait(0.1)
+        game.Players.LocalPlayer.Character["1"]:Destroy()
+        game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+        game.Players.LocalPlayer.Character.Animate.Disabled = true
+        wait(0.1)
+        game.Players.LocalPlayer.Character.Animate.Disabled = false
+        game.Players.LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
       else
         local msg = Instance.new("Message",game.Workspace) 
         msg.Text="no tool detected"
         wait(2)
+        msg.text="this is a bug"
         msg:Destroy()
       end
     else
@@ -46,6 +51,7 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
         oldhum:Destory()
         game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
         --oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+        game.Players.LocalPlayer:Destory()
       else
         local msg = Instance.new("Message",game.Workspace) 
         msg.Text="no tool detected"

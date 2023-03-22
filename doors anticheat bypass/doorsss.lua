@@ -22,42 +22,30 @@ local toogle_anticheat = library.window("anticheat bypass")
 local oldhum
 toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
     if val then
-      if game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Tool") then
         print("AAA")
         game.Players.LocalPlayer.Character.Humanoid.Name = "1"
         local l = game.Players.LocalPlayer.Character["1"]:Clone()
         l.Parent = game.Players.LocalPlayer.Character
         l.Name = "Humanoid"
         wait(0.1)
-        game.Players.LocalPlayer.Character["1"]:Destroy()
+        game.Players.LocalPlayer.Character["1"].Parent=game.ReplicatedStorage
         -- game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
         game.Players.LocalPlayer.Character.Animate.Disabled = true
         wait(0.1)
         game.Players.LocalPlayer.Character.Animate.Disabled = false
         game.Players.LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
-      else
-        local msg = Instance.new("Message",game.Workspace) 
-        msg.Text="no tool detected"
-        wait(2)
-        msg.text="this is a bug"
-        msg:Destroy()
-      end
     else
-      if game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Tool") then
         print("BAAA")
-        local oldhum = game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid')
+        local oldhum = game:GetService("ReplicatedStorage")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid')
         --local clonee = oldhum:Clone()
+        --oldhum.Parent=game.Players.LocalPlayer.Character
+        game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid'):Destory()
         wait(0.1)
-        oldhum:Destory()
-        game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
+        --oldhum:Destory()
+        oldhum.Parent=game.Players.LocalPlayer.Character
+        --game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
         --oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
-        game.Players.LocalPlayer:Destory()
-      else
-        local msg = Instance.new("Message",game.Workspace) 
-        msg.Text="no tool detected"
-        wait(2)
-        msg:Destroy()
-      end
+        --game.Players.LocalPlayer:Destory()
     end
     task.wait()
 end)

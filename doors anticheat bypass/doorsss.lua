@@ -18,10 +18,12 @@ local hum = char:FindFirstChildOfClass("Humanoid") or char:WaitForChild("Humanoi
 --game.Players.LocalPlayer.Character.Humanoid:Remove()
 local toogle_anticheat = library.window("anticheat bypass")
 -- game:GetService("Workspace")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid').HipHeight = 2
+local ison = false
 
 local oldhum
-toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
+toogle_anticheat.toggle("anticheat bypass test 1",ison,function(val)
     if val then
+      if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool")then
         print("AAA")
         game.Players.LocalPlayer.Character.Humanoid.Name = "1"
         local l = game.Players.LocalPlayer.Character["1"]:Clone()
@@ -34,7 +36,15 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
         wait(0.1)
         game.Players.LocalPlayer.Character.Animate.Disabled = false
         game.Players.LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
+      else
+        ison=false
+        local msg = Instance.new("message",game.Worksapce)
+        msg.text="NO TOOL DETECTED"
+        wait(2)
+        msg:Destroy()
+      end
     else
+      if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool")then
         print("BAAA")
         local oldhum = game:GetService("ReplicatedStorage")[game.Players.LocalPlayer.Name]:FindFirstChildOfClass('Humanoid')
         --local clonee = oldhum:Clone()
@@ -46,7 +56,14 @@ toogle_anticheat.toggle("anticheat bypass test 1",false,function(val)
         --game.ReplicatedStorage:FindFirstChildWhichIsA('Humanoid').Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
         --oldhum.Parent=game:GetService("Workspace")[game.Players.LocalPlayer.Name]
         --game.Players.LocalPlayer:Destory()
-    end
+      else
+        ison=false
+        local msg = Instance.new("message",game.Worksapce)
+        msg.text="NO TOOL DETECTED"
+        wait(2)
+        msg:Destroy()
+      end
+      end
     task.wait()
 end)
 

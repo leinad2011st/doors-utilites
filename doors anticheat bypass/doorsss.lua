@@ -6,9 +6,7 @@
  |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
          \/          \/         \/    \/                \/     \/     \/                   
           \_Welcome to LuaObfuscator.com   (Alpha 0.2.5) ~  Much Love, Ferib 
-
-]]--
-
+          ]]--
 --old
 
 local library = loadstring(game:HttpGet('https://pastebin.com/raw/vPWzQEC8'))()
@@ -30,7 +28,7 @@ toogle_anticheat.toggle("anticheat bypass test 1",ison,function(val)
         l.Parent = game.Players.LocalPlayer.Character
         l.Name = "Humanoid"
         wait(0.1)
-        game.Players.LocalPlayer.Character["1"].Parent=game.ReplicatedStorage
+        game.Players.LocalPlayer.Character["1"]:Destory() --.Parent= game.ReplicatedStorage
         -- game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
         game.Players.LocalPlayer.Character.Animate.Disabled = true
         wait(0.1)

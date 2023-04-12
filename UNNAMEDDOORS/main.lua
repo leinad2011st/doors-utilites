@@ -167,12 +167,6 @@ end
 
 
 
-if not game["Run Service"]:IsStudio() then
-	humanoid.Died:Connect(function ()
-		bodyGyro = Instance.new("BodyGyro")
-        bodyVel = Instance.new("BodyVelocity")
-	end)
-end
 
 _G.Keybind = "N"
 _G.IncludeNoclip = true
@@ -317,11 +311,21 @@ client:AddToggle('NoClip',{
     end
 })
 
+local deddd = nil
 client:AddToggle('Fly',{
-    Text = 'Fly (N)',
+    Text = 'Fly (R)',
     default = false,
     Tooltip = 'Fly with a keybind',
     Callback = function(Value)
+        if Value==true then
+            local dedd = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").Died:Connect(function ()
+                bodyGyro = Instance.new("BodyGyro")
+                bodyVel = Instance.new("BodyVelocity") 
+            end) 
+        else
+            dedd:Disconnect() 
+            dedd = nil
+        end
         setFlying(Value)
     end
 })

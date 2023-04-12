@@ -108,13 +108,20 @@ client:AddToggle('fullBright',{
     Callback = function(Value)
         flags.Fullbright=Value
         if flags.Fullbright==true then
+            game:GetService("Lighting").Ambient = Color3.new(0,0,0)
+            game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
+            game:GetService("Lighting").Brightness = 1
+            game:GetService("Lighting").GlobalShadows=false
+            game:GetService("Lighting").FogStart = 9999999
+            game:GetService("Lighting").FogEnd = 9999999
             fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
-                game:GetService("Lighting").Ambient = Color3.new(0,0,0)
-                game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
-                game:GetService("Lighting").Brightness = 1
-                game:GetService("Lighting").GlobalShadows=false
-                game:GetService("Lighting").FogStart = 9999999
-                game:GetService("Lighting").FogEnd = 9999999
+            --     game:GetService("Lighting").Ambient = Color3.new(0,0,0)
+            --     game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
+            --     game:GetService("Lighting").Brightness = 1
+            --     game:GetService("Lighting").GlobalShadows=false
+            --     game:GetService("Lighting").FogStart = 9999999
+            --     game:GetService("Lighting").FogEnd = 9999999
+
             end)
 
         elseif flags.Fullbright==false then
@@ -154,11 +161,15 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
     if flags.HidingExitFix==true then
         if prompt.Name=="HidePrompt" then
             wait(0.1)
-            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") or model:FindFirstChildOfClass("AnimationController")
-            local animator = humanoid:FindFirstChildOfClass("Animator")
-            for i,v in ipairs(animator:GetPlayingAnimationTracks()) do
-                v:Stop()
-            end
+            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            
+            repeat
+                for i,v in ipairs(humanoid:GetPlayingAnimationTracks()) do
+                    v:Stop()
+                end
+                wait()
+            until #humanoid:GetPlayingAnimationTracks()==0
+
         end
     end
 end)

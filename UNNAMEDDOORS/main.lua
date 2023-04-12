@@ -192,7 +192,7 @@ game.Workspace.ChildAdded:Connect(function (child)
             i:FindFirstChild("TouchInterest"):Destroy() 
         end 
     end
-    print("BANNNAA: " .. flags.BananaBypass)
+    print("BANNNAA: " .. tostring(flags.BananaBypass) )
     if flags.BananaBypass==true then
         print("BANNNAA: " .. child.Name)
         if child.Name=="BananaPeel" then 

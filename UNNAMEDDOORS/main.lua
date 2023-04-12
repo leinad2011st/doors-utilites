@@ -59,6 +59,8 @@ flags.Fullbright = false
 flags.InstantInteract = false
 flags.HidingExitFix = false
 flags.AntiDupe = false --Closet
+flags.AntiFigureCutscene = false
+
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -68,6 +70,34 @@ local removeJeffThing = nil
 local client = Tabs.Main:AddLeftGroupbox('client')
 local entityBypasses = Tabs.Main:AddLeftGroupbox('Entity Bypasses')
 
+local serverMain = Tabs.Server:AddLeftGroupbox('Main')
+
+local figurething = nil
+serverMain:AddToggle('OpenDoor50NoCutscene', {
+    Text = 'open door 50 without cutscene',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Disable Figure cutscene', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.AntiFigureCutscene = Value
+        if Value==true then 
+            figurething=game["Run Service"].RenderStepped:Connect(function () 
+                local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
+                local plusroom = latesetRoom+1
+                if plusroom==50 then
+                    local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
+                    local Door=Room:FindFirstChild("Door")
+                    local EVENT=Door:FindFirstChild("ClientOpen")
+                    EVENT:FireServer()
+                end
+            end)
+        elseif Value==false then 
+            figurething:Disconnect()
+            figurething = nil
+        end
+    end
+})
+
 
 client:AddToggle('Toggle WalkSpeed', {
     Text = 'Toggle Walk Speed',
@@ -75,7 +105,7 @@ client:AddToggle('Toggle WalkSpeed', {
     Tooltip = 'toggle speed', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
-        flags.ChangeSpeed = not flags.ChangeSpeed
+        flags.ChangeSpeed = Value
     end
 })
 

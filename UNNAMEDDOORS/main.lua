@@ -111,7 +111,7 @@ client:AddToggle('fullBright',{
             fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
                 game:GetService("Lighting").Ambient = Color3.new(0,0,0)
                 game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
-                game:GetService("Lighting").Brightness = 5
+                game:GetService("Lighting").Brightness = 1
                 game:GetService("Lighting").GlobalShadows=false
                 game:GetService("Lighting").FogStart = 9999999
                 game:GetService("Lighting").FogEnd = 9999999
@@ -150,7 +150,7 @@ client:AddToggle('HidingExitingFix',{
     end
 })
 
-game:GetService("ProximityPromptService").PromptTriggered:Connect(function (promt) 
+game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prompt) 
     if flags.HidingExitFix==true then
         if prompt.Name=="HidePrompt" then
             wait(0.1)

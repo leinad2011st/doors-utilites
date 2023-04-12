@@ -257,7 +257,8 @@ if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.R
                     for x,i in pairs(game.Workspace:GetChildren())do
                         if i.Name=="BananaPeel"then
                             -- i.Position=game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(0,5,0)
-                            i:FindFirstChild("TouchInterest").Parent = nil
+                            -- i:FindFirstChild("TouchInterest").Parent = nil
+                            Debris:AddItem(i:FindFirstChild("TouchInterest"), 0.01)
                         end
                     end
                 end)
@@ -281,7 +282,7 @@ if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.R
                         if i.Name=="JeffTheKiller" then 
                             for xx,ii in pairs(i:GetChildren()) do 
                                 if ii:FindFirstChild("TouchInterest") then 
-                                    ii:FindFirstChild("TouchInterest"):Destroy() 
+                                    Debris:AddItem(ii:FindFirstChild("TouchInterest"), 0.01)
                                 end 
                             end
                             i:FindFirstChild("TouchInterest"):Destroy() 

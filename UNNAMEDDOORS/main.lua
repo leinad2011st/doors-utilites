@@ -98,6 +98,93 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
     end
 })
 
+local flyKey = Enum.KeyCode.R
+local camera = game:GetService("Workspace").CurrentCamera
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local rp = character:WaitForChild("HumanoidRootPart")
+local bodyGyro = Instance.new("BodyGyro")
+local bodyVel = Instance.new("BodyVelocity")
+
+local speed=1
+
+local animation = Instance.new("Animation")
+animation.AnimationId = anim
+
+local animationTrack = humanoid:LoadAnimation(animation)
+
+
+bodyGyro.MaxTorque = Vector3.new(1, 1, 1) * 10^6
+bodyGyro.P = 10^6
+bodyVel.MaxForce = Vector3.new(1, 1, 1) * 10^6
+bodyVel.P = 10^4
+
+local isFlying = false
+local movement = {
+	forward = 0, 
+	backward = 0, 
+	right = 0, 
+	left = 0
+}
+
+
+local function setFlying(flying)
+	isFlying = flying
+	bodyGyro.Parent = isFlying and rp or nil
+	bodyVel.Parent = isFlying and rp or nil
+	bodyGyro.CFrame = rp.CFrame
+	bodyVel.Velocity = Vector3.new()
+	
+end
+
+local function updateFlying(dt)
+	if isFlying then
+		humanoid.PlatformStand=true
+		local cf = camera.CFrame
+		local direction = cf.RightVector * (movement.right - movement.left) + cf.LookVector * (movement.forward - movement.backward)
+		if direction:Dot(direction) > 0 then
+			direction = direction.Unit
+		end
+		bodyGyro.CFrame = cf
+		bodyVel.Velocity = direction * humanoid.WalkSpeed * speed
+	else
+		humanoid.PlatformStand=false
+	end
+end
+
+local function handleFlyKey(input, gameProcessedEvent)
+	if not gameProcessedEvent and input.KeyCode == flyKey then
+		if humanoid:GetState() ~= Enum.HumanoidStateType.Dead then
+			setFlying(not isFlying)
+		end
+	end
+end
+
+local function handleMovementBind(actionName, inputState, inputObject)
+	if inputState == Enum.UserInputState.Begin then
+		movement[actionName] = 1
+	elseif inputState == Enum.UserInputState.End then
+		movement[actionName] = 0
+	end
+	local isMoving = movement.right + movement.left + movement.forward + movement.backward > 0
+	return Enum.ContextActionResult.Pass
+end
+
+game:GetService("UserInputService").InputBegan:Connect(handleFlyKey)
+game:GetService("ContextActionService"):BindAction("forward", handleMovementBind, false, Enum.PlayerActions.CharacterForward)
+game:GetService("ContextActionService"):BindAction("backward", handleMovementBind, false, Enum.PlayerActions.CharacterBackward)
+game:GetService("ContextActionService"):BindAction("left", handleMovementBind, false, Enum.PlayerActions.CharacterLeft)
+game:GetService("ContextActionService"):BindAction("right", handleMovementBind, false, Enum.PlayerActions.CharacterRight)
+game:GetService("RunService").RenderStepped:Connect(updateFlying)
+
+if not game["Run Service"]:IsStudio() then
+	humanoid.Died:Connect(function ()
+		bodyGyro = Instance.new("BodyGyro")
+        bodyVel = Instance.new("BodyVelocity")
+	end)
+end
+
 _G.Keybind = "N"
 _G.IncludeNoclip = true
 
@@ -120,6 +207,10 @@ end
 
 function ToggleNoclip()
     isEnabled = not isEnabled
+end
+
+function setNoClip(Val)
+    isEnabled=Val
 end
 
 UIS.InputBegan:Connect(function(input, gp)
@@ -233,7 +324,16 @@ client:AddToggle('NoClip',{
     default = false,
     Tooltip = 'noclips with a keybind',
     Callback = function(Value)
-        ToggleNoclip()
+        setNoClip(Value)
+    end
+})
+
+client:AddToggle('Fly',{
+    Text = 'Fly (N)',
+    default = false,
+    Tooltip = 'Fly with a keybind',
+    Callback = function(Value)
+        setFlying(Value)
     end
 })
 

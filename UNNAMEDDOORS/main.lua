@@ -108,19 +108,14 @@ client:AddToggle('fullBright',{
     Callback = function(Value)
         flags.Fullbright=Value
         if flags.Fullbright==true then
-            game:GetService("Lighting").Ambient = Color3.new(0,0,0)
-            game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
-            game:GetService("Lighting").Brightness = 1
-            game:GetService("Lighting").GlobalShadows=false
-            game:GetService("Lighting").FogStart = 9999999
-            game:GetService("Lighting").FogEnd = 9999999
+
             fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
-            --     game:GetService("Lighting").Ambient = Color3.new(0,0,0)
-            --     game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
-            --     game:GetService("Lighting").Brightness = 1
-            --     game:GetService("Lighting").GlobalShadows=false
-            --     game:GetService("Lighting").FogStart = 9999999
-            --     game:GetService("Lighting").FogEnd = 9999999
+                game:GetService("Lighting").Ambient = Color3.new(0,0,0)
+                game:GetService("Lighting").OutdoorAmbient = Color3.new(254,254,254)
+                game:GetService("Lighting").Brightness = 1
+                game:GetService("Lighting").GlobalShadows=false
+                game:GetService("Lighting").FogStart = 9999999
+                game:GetService("Lighting").FogEnd = 9999999
 
             end)
 
@@ -140,7 +135,7 @@ client:AddToggle('fullBright',{
 client:AddToggle('InstantInteract',{
     Text = 'Instant Interact',
     default = false,
-    Tooltip = 'Disables holdDaration for ProximityPrompts',
+    Tooltip = 'Disables HoldDaration for ProximityPrompts',
     Callback = function(Value)
         flags.InstantInteract=Value
     end
@@ -166,6 +161,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
             repeat
                 for i,v in ipairs(humanoid:GetPlayingAnimationTracks()) do
                     v:Stop()
+                    print("AHHAHA")
                 end
                 wait()
             until #humanoid:GetPlayingAnimationTracks()==0

@@ -171,12 +171,7 @@ local function handleMovementBind(actionName, inputState, inputObject)
 	return Enum.ContextActionResult.Pass
 end
 
-game:GetService("UserInputService").InputBegan:Connect(handleFlyKey)
-game:GetService("ContextActionService"):BindAction("forward", handleMovementBind, false, Enum.PlayerActions.CharacterForward)
-game:GetService("ContextActionService"):BindAction("backward", handleMovementBind, false, Enum.PlayerActions.CharacterBackward)
-game:GetService("ContextActionService"):BindAction("left", handleMovementBind, false, Enum.PlayerActions.CharacterLeft)
-game:GetService("ContextActionService"):BindAction("right", handleMovementBind, false, Enum.PlayerActions.CharacterRight)
-game:GetService("RunService").RenderStepped:Connect(updateFlying)
+
 
 if not game["Run Service"]:IsStudio() then
 	humanoid.Died:Connect(function ()
@@ -555,3 +550,11 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         end
     end
 end)
+
+
+game:GetService("UserInputService").InputBegan:Connect(handleFlyKey)
+game:GetService("ContextActionService"):BindAction("forward", handleMovementBind, false, Enum.PlayerActions.CharacterForward)
+game:GetService("ContextActionService"):BindAction("backward", handleMovementBind, false, Enum.PlayerActions.CharacterBackward)
+game:GetService("ContextActionService"):BindAction("left", handleMovementBind, false, Enum.PlayerActions.CharacterLeft)
+game:GetService("ContextActionService"):BindAction("right", handleMovementBind, false, Enum.PlayerActions.CharacterRight)
+game:GetService("RunService").RenderStepped:Connect(updateFlying)

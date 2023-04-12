@@ -108,8 +108,8 @@ client:AddToggle('fullBright',{
         flags.Fullbright=Value
         if flags.Fullbright==true then
             fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
-                game:GetService("Lighting").Ambient = Color3.new(255,255,255)
-                game:GetService("Lighting").OutdoorAmbient = Color3.new(0,0,0)
+                game:GetService("Lighting").Ambient = Color3.new(0,0,0)
+                game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
                 game:GetService("Lighting").Brightness = 5
                 game:GetService("Lighting").GlobalShadows=false
                 game:GetService("Lighting").FogStart = 9999999

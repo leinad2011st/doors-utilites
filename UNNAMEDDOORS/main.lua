@@ -13,8 +13,21 @@ if game.PlaceId ~= 6839171747 and game.PlaceId ~= 6516141723 then
     return
 end
 
+-- --------------------------------------------------------------------------- --
+
+--TO DOOOO
+--TO DO
+
+
+
+
 --ADD YOUR KEY BIND SCRIPT INTO THIS
 --ethier buttons or key bind settings tab
+--add instant interact
+--add noclip and fly scripts
+--maybe freecam
+
+-- --------------------------------------------------------------------------- --
 
 
 local Window = Library:CreateWindow({

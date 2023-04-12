@@ -111,7 +111,7 @@ client:AddToggle('fullBright',{
 
             fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
                 game:GetService("Lighting").Ambient = Color3.new(0,0,0)
-                game:GetService("Lighting").OutdoorAmbient = Color3.new(200,200,200)
+                game:GetService("Lighting").OutdoorAmbient=Color3.new(1,1,1)
                 game:GetService("Lighting").Brightness = 1
                 game:GetService("Lighting").GlobalShadows=false
                 game:GetService("Lighting").FogStart = 9999999
@@ -158,13 +158,13 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
             wait(0.1)
             local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
             
-            repeat
-                for i,v in ipairs(humanoid:GetPlayingAnimationTracks()) do
-                    v:Stop()
-                    print("AHHAHA")
-                end
-                wait()
-            until #humanoid:GetPlayingAnimationTracks()==1
+            -- repeat
+            --     for i,v in ipairs(humanoid:GetPlayingAnimationTracks()) do
+            --         v:Stop()
+            --         -- print("AHHAHA")
+            --     end
+            --     wait()
+            -- until #humanoid:GetPlayingAnimationTracks()==1
 
         end
     end

@@ -383,7 +383,8 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         if flags.AntiDupe == true then 
             if i.Name=="Closet" then
                 if i:FindFirstChild("DoorFake") then
-                    Debris:AddItem(i:FindFirstChild("DoorFake"):FindFirstChild("TouchInterest"), 0.01)
+                    Debris:AddItem(i:FindFirstChild("DoorFake").Hidden:FindFirstChild("TouchInterest"), 0.01)
+                    print("L BOSO DUPE/SUBSPACE TRIPMINE")
                 end        
             end
         end

@@ -23,9 +23,9 @@ end
 
 --ADD YOUR KEY BIND SCRIPT INTO THIS
 --ethier buttons or key bind settings tab
---add instant interact
 --add noclip and fly scripts
 --maybe freecam
+-- DEFFENTILY ADD CONFIG/ unload
 
 -- --------------------------------------------------------------------------- --
 
@@ -323,8 +323,10 @@ client:AddToggle('Fly',{
                 bodyVel = Instance.new("BodyVelocity") 
             end) 
         else
-            dedd:Disconnect() 
-            dedd = nil
+            if dedd then
+                dedd:Disconnect() 
+                dedd = nil
+            end
         end
         setFlying(Value)
     end
@@ -537,9 +539,13 @@ end)
 
 
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
+    print("new ROOM: "..room.Name)
     for x,i in ipairs(room:GetChildren()) do 
+        -- print("new ROOM: "..room.Name)
         if flags.AntiDupe == true then 
+            print("well anti dupe")
             if i.Name=="Closet" then
+                print("LOAD DELETE hahhahha")
                 if i:FindFirstChild("DoorFake") then
                     Debris:AddItem(i:FindFirstChild("DoorFake").Hidden:FindFirstChild("TouchInterest"), 0.01)
                     print("L BOSO DUPE/SUBSPACE TRIPMINE")

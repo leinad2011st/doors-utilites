@@ -98,6 +98,8 @@ _G.Brightness = game:GetService("Lighting").Brightness
 _G.FogStart = game:GetService("Lighting").FogStart
 _G.FogEnd = game:GetService("Lighting").FogEnd
 
+local fullbrightThing = nil
+
 client:AddToggle('fullBright',{
     Text = 'Full Bright',
     default = false,
@@ -105,16 +107,23 @@ client:AddToggle('fullBright',{
     Callback = function(Value)
         flags.Fullbright=Value
         if flags.Fullbright==true then
-            game:GetService("Lighting").Ambient = Color3.new(255,255,255)
-            game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
-            game:GetService("Lighting").Brightness = 5
-            game:GetService("Lighting").FogStart = 9999999
-            game:GetService("Lighting").FogEnd = 9999999
+            fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
+                game:GetService("Lighting").Ambient = Color3.new(255,255,255)
+                game:GetService("Lighting").OutdoorAmbient = Color3.new(0,0,0)
+                game:GetService("Lighting").Brightness = 5
+                game:GetService("Lighting").GlobalShadows=false
+                game:GetService("Lighting").FogStart = 9999999
+                game:GetService("Lighting").FogEnd = 9999999
+            end)
+
         elseif flags.Fullbright==false then
+            fullbrightThing:Disconnect()
+            fullbrightThing = nil
             game:GetService("Lighting").Ambient = _G.Ambient
             game:GetService("Lighting").OutdoorAmbient = _G.OutdoorAmbient
             game:GetService("Lighting").Brightness = _G.Brightness
             game:GetService("Lighting").FogStart = _G.FogStart
+            game:GetService("Lighting").GlobalShadows=true
             game:GetService("Lighting").FogEnd = _G.FogEnd
         end
     end

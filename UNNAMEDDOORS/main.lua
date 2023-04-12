@@ -55,6 +55,8 @@ flags.BananaBypass = false
 flags.noeyesdamage = false
 flags.noseek=false
 flags.noJeffDamage = false
+flags.Fullbright = false
+flags.InstantInteract = false
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -88,119 +90,50 @@ client:AddSlider('WalkSpeed', {
     end
 })
 
+--FULL BRIGHT STUFF
+
+_G.Ambient=game:GetService("Lighting").Ambient
+_G.OutdoorAmbient = game:GetService("Lighting").OutdoorAmbient
+_G.Brightness = game:GetService("Lighting").Brightness
+_G.FogStart = game:GetService("Lighting").FogStart
+_G.FogEnd = game:GetService("Lighting").FogEnd
+
 client:AddToggle('fullBright',{
     Text = 'Full Bright',
     default = false,
-    Tooltip = 'gives full bright',
+    Tooltip = 'Gives Full Bright',
     Callback = function(Value)
-        if not _G.FullBrightExecuted then
-
-            _G.FullBrightEnabled = false
-        
-            _G.NormalLightingSettings = {
-                Brightness = game:GetService("Lighting").Brightness,
-                ClockTime = game:GetService("Lighting").ClockTime,
-                FogEnd = game:GetService("Lighting").FogEnd,
-                GlobalShadows = game:GetService("Lighting").GlobalShadows,
-                Ambient = game:GetService("Lighting").Ambient
-            }
-        
-            game:GetService("Lighting"):GetPropertyChangedSignal("Brightness"):Connect(function()
-                if game:GetService("Lighting").Brightness ~= 1 and game:GetService("Lighting").Brightness ~= _G.NormalLightingSettings.Brightness then
-                    _G.NormalLightingSettings.Brightness = game:GetService("Lighting").Brightness
-                    if not _G.FullBrightEnabled then
-                        repeat
-                            wait()
-                        until _G.FullBrightEnabled
-                    end
-                    game:GetService("Lighting").Brightness = 1
-                end
-            end)
-        
-            game:GetService("Lighting"):GetPropertyChangedSignal("ClockTime"):Connect(function()
-                if game:GetService("Lighting").ClockTime ~= 12 and game:GetService("Lighting").ClockTime ~= _G.NormalLightingSettings.ClockTime then
-                    _G.NormalLightingSettings.ClockTime = game:GetService("Lighting").ClockTime
-                    if not _G.FullBrightEnabled then
-                        repeat
-                            wait()
-                        until _G.FullBrightEnabled
-                    end
-                    game:GetService("Lighting").ClockTime = 12
-                end
-            end)
-        
-            game:GetService("Lighting"):GetPropertyChangedSignal("FogEnd"):Connect(function()
-                if game:GetService("Lighting").FogEnd ~= 786543 and game:GetService("Lighting").FogEnd ~= _G.NormalLightingSettings.FogEnd then
-                    _G.NormalLightingSettings.FogEnd = game:GetService("Lighting").FogEnd
-                    if not _G.FullBrightEnabled then
-                        repeat
-                            wait()
-                        until _G.FullBrightEnabled
-                    end
-                    game:GetService("Lighting").FogEnd = 786543
-                end
-            end)
-        
-            game:GetService("Lighting"):GetPropertyChangedSignal("GlobalShadows"):Connect(function()
-                if game:GetService("Lighting").GlobalShadows ~= false and game:GetService("Lighting").GlobalShadows ~= _G.NormalLightingSettings.GlobalShadows then
-                    _G.NormalLightingSettings.GlobalShadows = game:GetService("Lighting").GlobalShadows
-                    if not _G.FullBrightEnabled then
-                        repeat
-                            wait()
-                        until _G.FullBrightEnabled
-                    end
-                    game:GetService("Lighting").GlobalShadows = false
-                end
-            end)
-        
-            game:GetService("Lighting"):GetPropertyChangedSignal("Ambient"):Connect(function()
-                if game:GetService("Lighting").Ambient ~= Color3.fromRGB(178, 178, 178) and game:GetService("Lighting").Ambient ~= _G.NormalLightingSettings.Ambient then
-                    _G.NormalLightingSettings.Ambient = game:GetService("Lighting").Ambient
-                    if not _G.FullBrightEnabled then
-                        repeat
-                            wait()
-                        until _G.FullBrightEnabled
-                    end
-                    game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
-                end
-            end)
-        
-            game:GetService("Lighting").Brightness = 1
-            game:GetService("Lighting").ClockTime = 12
-            game:GetService("Lighting").FogEnd = 786543
-            game:GetService("Lighting").GlobalShadows = false
-            game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
-        
-            local LatestValue = true
-            spawn(function()
-                repeat
-                    wait()
-                until _G.FullBrightEnabled
-                while wait() do
-                    if _G.FullBrightEnabled ~= LatestValue then
-                        if not _G.FullBrightEnabled then
-                            game:GetService("Lighting").Brightness = _G.NormalLightingSettings.Brightness
-                            game:GetService("Lighting").ClockTime = _G.NormalLightingSettings.ClockTime
-                            game:GetService("Lighting").FogEnd = _G.NormalLightingSettings.FogEnd
-                            game:GetService("Lighting").GlobalShadows = _G.NormalLightingSettings.GlobalShadows
-                            game:GetService("Lighting").Ambient = _G.NormalLightingSettings.Ambient
-                        else
-                            game:GetService("Lighting").Brightness = 1
-                            game:GetService("Lighting").ClockTime = 12
-                            game:GetService("Lighting").FogEnd = 786543
-                            game:GetService("Lighting").GlobalShadows = false
-                            game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
-                        end
-                        LatestValue = not LatestValue
-                    end
-                end
-            end)
+        flags.Fullbright=Value
+        if flags.Fullbright==true then
+            game:GetService("Lighting").Ambient = Color3.new(255,255,255)
+            game:GetService("Lighting").OutdoorAmbient = Color3.new(255,255,255)
+            game:GetService("Lighting").Brightness = 5
+            game:GetService("Lighting").FogStart = 9999999
+            game:GetService("Lighting").FogEnd = 9999999
+        elseif flags.Fullbright==false then
+            game:GetService("Lighting").Ambient = _G.Ambient
+            game:GetService("Lighting").OutdoorAmbient = _G.OutdoorAmbient
+            game:GetService("Lighting").Brightness = _G.Brightness
+            game:GetService("Lighting").FogStart = _G.FogStart
+            game:GetService("Lighting").FogEnd = _G.FogEnd
         end
-        
-        _G.FullBrightExecuted = true
-        _G.FullBrightEnabled = not _G.FullBrightEnabled
     end
 })
+
+client:AddToggle('InstantInteract',{
+    Text = 'Instant Interact',
+    default = false,
+    Tooltip = 'Disables holdDaration for ProximityPrompts',
+    Callback = function(Value)
+        flags.InstantInteract=Value
+        if Value==true then
+            game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
+                Prompt.HoldDuration=0
+            end)
+        end
+    end
+})
+
 
 entityBypasses:AddToggle('AntiScreach', {
     Text = 'Bypass Screach',
@@ -259,6 +192,8 @@ entityBypasses:AddToggle('DisableChase', {
 	end
 })
 
+
+
 if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("Greed") then
     entityBypasses:AddLabel('---SUPER HARD MODE---')
     entityBypasses:AddToggle('AntiBanana', {
@@ -301,7 +236,6 @@ if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.R
                                     Debris:AddItem(ii:FindFirstChild("TouchInterest"), 0.01)
                                 end 
                             end
-                            i:FindFirstChild("TouchInterest"):Destroy() 
                         end 
                     end
                 end)

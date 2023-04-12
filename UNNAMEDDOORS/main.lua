@@ -4,6 +4,10 @@ local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
+
+local Debris = game:GetService("Debris")
+
+
 if game.PlaceId ~= 6839171747 and game.PlaceId ~= 6516141723 then 
     print("Not in doors")
     return

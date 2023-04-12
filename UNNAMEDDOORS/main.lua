@@ -109,12 +109,6 @@ local bodyVel = Instance.new("BodyVelocity")
 
 local speed=1
 
-local animation = Instance.new("Animation")
-animation.AnimationId = anim
-
-local animationTrack = humanoid:LoadAnimation(animation)
-
-
 bodyGyro.MaxTorque = Vector3.new(1, 1, 1) * 10^6
 bodyGyro.P = 10^6
 bodyVel.MaxForce = Vector3.new(1, 1, 1) * 10^6

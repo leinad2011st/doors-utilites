@@ -542,7 +542,7 @@ end)
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
     print("new ROOM: "..room.Name)
     print("well anti dupe = ".. tostring(flags.AntiDupe))
-    for x,i in pairs(room:GetChildren()) do 
+    for x,i in pairs(game.Workspace.CurrentRooms[room.Name]:GetChildren()) do 
         print("ASSET"..i.Name)
         -- print("new ROOM: "..room.Name)
         if flags.AntiDupe == true then 

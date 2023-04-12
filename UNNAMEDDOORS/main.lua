@@ -4,6 +4,13 @@ local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
+if game.PlaceId ~= 6839171747 and game.PlaceId ~= 6516141723 then 
+    print("Not in doors")
+    return
+end
+
+--ADD YOUR KEY BIND SCRIPT INTO THIS
+
 
 
 local Window = Library:CreateWindow({
@@ -145,10 +152,6 @@ game["Run Service"].RenderStepped:Connect(function(dealta)
                 game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed=Options.WalkSpeed.Value
             end
         end
-    end
-
-    if flags.BananaBypass then
-        
     end
     
 end)

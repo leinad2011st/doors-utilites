@@ -57,6 +57,7 @@ flags.noseek=false
 flags.noJeffDamage = false
 flags.Fullbright = false
 flags.InstantInteract = false
+flags.HidingExitFix = false
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -135,13 +136,38 @@ client:AddToggle('InstantInteract',{
     Tooltip = 'Disables holdDaration for ProximityPrompts',
     Callback = function(Value)
         flags.InstantInteract=Value
-        if Value==true then
-            game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
-                Prompt.HoldDuration=0
-            end)
-        end
     end
 })
+
+client:AddToggle('HidingExitingFix',{
+    Text = 'Hiding/Exiting Fix',
+    default = false,
+    Tooltip = 'instant hide/exit',
+    Callback = function(Value)
+        flags.HidingExitFix=Value
+        -- if Value==true then
+        -- end
+    end
+})
+
+game:GetService("ProximityPromptService").PromptTriggered:Connect(function (promt) 
+    if flags.HidingExitFix==true then
+        if prompt.Name=="HidePrompt" then
+            wait(0.1)
+            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") or model:FindFirstChildOfClass("AnimationController")
+            local animator = humanoid:FindFirstChildOfClass("Animator")
+            for i,v in ipairs(animator:GetPlayingAnimationTracks()) do
+                v:Stop()
+            end
+        end
+    end
+end)
+
+game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
+    if flags.InstantInteract==true then
+        Prompt.HoldDuration=0
+    end
+end)
 
 
 entityBypasses:AddToggle('AntiScreach', {

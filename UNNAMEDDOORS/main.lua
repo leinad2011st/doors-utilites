@@ -58,7 +58,6 @@ client:AddToggle('Toggle WalkSpeed', {
     Tooltip = 'toggle speed', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
-        print('[cb] MyToggle changed to:', Value)
         flags.ChangeSpeed = not flags.ChangeSpeed
     end
 })

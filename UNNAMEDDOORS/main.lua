@@ -58,6 +58,7 @@ flags.noJeffDamage = false
 flags.Fullbright = false
 flags.InstantInteract = false
 flags.HidingExitFix = false
+flags.AntiDupe = false --Closet
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -204,6 +205,16 @@ entityBypasses:AddToggle('AntiEyes', {
     end
 })
 
+entityBypasses:AddToggle('AntiDupe', {
+    Text = "Disable Dupe",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Dupe', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.AntiDupe = Value
+    end
+})
+
 entityBypasses:AddToggle('DisableChase', {
 	Text = "Disable Seek chase",
 	Default = false,
@@ -329,4 +340,17 @@ game.Workspace.ChildAdded:Connect(function (child)
             end
         end
     end)
+end)
+
+
+workspace.CurrentRooms.ChildAdded:Connect(function(room) 
+    for x,i in ipairs(room) do 
+        if flags.AntiDupe == true then 
+            if i.Name=="Closet" then
+                if i:FindFirstChild("DoorFake") then
+                    Debris:AddItem(i:FindFirstChild("DoorFake"):FindFirstChild("TouchInterest"), 0.01)
+                end        
+            end
+        end
+    end
 end)

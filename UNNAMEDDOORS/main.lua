@@ -10,7 +10,7 @@ if game.PlaceId ~= 6839171747 and game.PlaceId ~= 6516141723 then
 end
 
 --ADD YOUR KEY BIND SCRIPT INTO THIS
-
+--ethier buttons or key bind settings tab
 
 
 local Window = Library:CreateWindow({
@@ -37,6 +37,7 @@ flags.ChangeSpeed = false
 flags.BananaBypass = false
 flags.noeyesdamage = false
 flags.noseek=false
+flags.noJeffDamage = false
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -87,24 +88,6 @@ entityBypasses:AddToggle('AntiScreach', {
 })
 
 
-entityBypasses:AddToggle('AntiBanana', {
-    Text = 'Bypass Banana',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Bypass Banana', -- Information shown when you hover over the toggle
-
-    Callback = function(Value)
-        flags.BananaBypass = Value
-        if Value==true then
-            for x,i in pairs(game.Workspace:GetChildren()) do 
-                if i.Name=="BananaPeel" then 
-                    i:FindFirstChild("TouchInterest"):Destroy() 
-                end 
-            end
-
-        end
-    end
-})
-
 entityBypasses:AddToggle('AntiEyes', {
     Text = "No Eyes Damage",
     Default = false, -- Default value (true / false)
@@ -145,6 +128,48 @@ entityBypasses:AddToggle('DisableChase', {
 	end
 })
 
+if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("Greed") then
+    entityBypasses:AddLabel('---SUPER HARD MODE---')
+    entityBypasses:AddToggle('AntiBanana', {
+        Text = 'Bypass Banana',
+        Default = false, -- Default value (true / false)
+        Tooltip = 'Bypass Banana', -- Information shown when you hover over the toggle
+    
+        Callback = function(Value)
+            flags.BananaBypass = Value
+            if Value==true then
+                for x,i in pairs(game.Workspace:GetChildren()) do 
+                    if i.Name=="BananaPeel" then 
+                        i:FindFirstChild("TouchInterest"):Destroy() 
+                    end 
+                end
+    
+            end
+        end
+    })
+    entityBypasses:AddToggle('AntiJeff', {
+        Text = 'No jeff Damage',
+        Default = false, -- Default value (true / false)
+        Tooltip = 'Bypass jeff', -- Information shown when you hover over the toggle
+    
+        Callback = function(Value)
+            flags.noJeffDamage = Value
+            if Value==true then
+                for x,i in pairs(game.Workspace:GetChildren()) do 
+                    if i.Name=="JeffTheKiller" then 
+                        for xx,ii in pairs(i:GetChildren()) do 
+                            if ii:FindFirstChild("TouchInterest") then 
+                                ii:FindFirstChild("TouchInterest"):Destroy() 
+                            end 
+                        end
+                        i:FindFirstChild("TouchInterest"):Destroy() 
+                    end 
+                end
+            end
+        end
+    })
+end
+
 game["Run Service"].RenderStepped:Connect(function(dealta) 
     if flags.ChangeSpeed==true then
         if game.Players.LocalPlayer.Character then
@@ -157,9 +182,21 @@ game["Run Service"].RenderStepped:Connect(function(dealta)
 end)
 
 game.Workspace.ChildAdded:Connect(function (child) 
-    if flags.BananaBypass then
+    if flags.noJeffDamage==true then
+        if child.Name=="JeffTheKiller" then 
+            for xx,ii in pairs(i:GetChildren()) do 
+                if ii:FindFirstChild("TouchInterest") then 
+                    ii:FindFirstChild("TouchInterest"):Destroy() 
+                end 
+            end
+            i:FindFirstChild("TouchInterest"):Destroy() 
+        end 
+    end
+    if flags.BananaBypass==true then
         if child.Name=="BananaPeel" then 
-            child:FindFirstChild("TouchInterest"):Destroy()  
+            if child:FindFirstChild("TouchInterest")then
+                child:FindFirstChild("TouchInterest"):Destroy()  
+            end
         end 
     end
     task.spawn(function()

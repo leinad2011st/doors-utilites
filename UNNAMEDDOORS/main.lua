@@ -66,7 +66,7 @@ local removebannathing = nil
 local removeJeffThing = nil
 
 local client = Tabs.Main:AddLeftGroupbox('client')
-local entityBypasses = Tabs.Main:AddLeftGroupbox('entityBypasses')
+local entityBypasses = Tabs.Main:AddLeftGroupbox('Entity Bypasses')
 
 
 client:AddToggle('Toggle WalkSpeed', {
@@ -173,7 +173,12 @@ end)
 
 game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
     if flags.InstantInteract==true then
-        Prompt.HoldDuration=0
+        if Prompt.Parent.Name~="KeyObtainFake" then
+            Prompt.HoldDuration=0
+        else
+            Prompt.Enabled=false
+            Prompt.HoldDuration=999
+        end
     end
 end)
 
@@ -344,7 +349,7 @@ end)
 
 
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
-    for x,i in ipairs(room) do 
+    for x,i in ipairs(room:GetChildren()) do 
         if flags.AntiDupe == true then 
             if i.Name=="Closet" then
                 if i:FindFirstChild("DoorFake") then

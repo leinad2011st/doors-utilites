@@ -41,7 +41,7 @@ flags.noJeffDamage = false
 
 local eyesspawned = false
 local seekchaseRoom = 0
-
+local removebannathing = nil
 
 local client = Tabs.Main:AddLeftGroupbox('client')
 local entityBypasses = Tabs.Main:AddLeftGroupbox('entityBypasses')
@@ -251,13 +251,20 @@ if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.R
     
         Callback = function(Value)
             flags.BananaBypass = Value
-            if Value==true then
-                for x,i in pairs(game.Workspace:GetChildren()) do 
-                    if i.Name=="BananaPeel" then 
-                        i:FindFirstChild("TouchInterest"):Destroy() 
-                    end 
-                end
+            if flags.BananaBypass then
+                removebannathing=game["Run Service"].RenderStepped:Connect(function ()
+                    for x,i in pairs(game.Workspace:GetChildren())do
+                        if i.Name=="BananaPeel"then
+                            -- i.Position=game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(0,5,0)
+                            i:FindFirstChild("TouchInterest"):Destroy() 
+                        end
+                    end
+                end)
+            else
+                removebannathing:Disconnect()
+                removebannathing = nil
             end
+        
         end
     })
     entityBypasses:AddToggle('AntiJeff', {
@@ -309,15 +316,17 @@ game.Workspace.ChildAdded:Connect(function (child)
             end
         end 
     end
-    if flags.BananaBypass==true then
-        if child.Name=="BananaPeel" then 
-            for x,i in pairs(game.Workspace:GetChildren()) do 
-                if i.Name=="BananaPeel" then 
-                    i:FindFirstChild("TouchInterest"):Destroy() 
-                end 
-            end
-        end 
-    end
+    -- if flags.BananaBypass==true then
+    --     if child.Name=="BananaPeel" then 
+    --         for x,i in pairs(game.Workspace:GetChildren()) do 
+    --             if i.Name=="BananaPeel" then 
+    --                 if i:FindFirstChild("TouchInterest") then
+    --                     i:FindFirstChild("TouchInterest").Parent=nil 
+    --                 end
+    --             end 
+    --         end
+    --     end 
+    -- end
     task.spawn(function()
         if child.Name:gsub("Moving","") == "Eyes" then
             if flags.noeyesdamage == true then

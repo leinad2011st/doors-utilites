@@ -28,7 +28,11 @@ local Tabs = {
 local flags = {}
 flags.ChangeSpeed = false
 flags.BananaBypass = false
+flags.noeyesdamage = false
+flags.noseek=false
 
+local eyesspawned = false
+local seekchaseRoom = 0
 
 
 local client = Tabs.Main:AddLeftGroupbox('client')
@@ -94,6 +98,46 @@ entityBypasses:AddToggle('AntiBanana', {
     end
 })
 
+entityBypasses:AddToggle('AntiEyes', {
+    Text = "No Eyes Damage",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Eyes', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.noeyesdamage = Value
+    end
+})
+
+entityBypasses:AddToggle('DisableChase', {
+	Text = "Disable Seek chase",
+	Default = false,
+    Tooltip = 'Bypass Seek (CLIENT)',
+	Callback = function(val)
+		flags.noseek = val
+
+		if val then
+			local addconnect
+			addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
+				local trigger = room:WaitForChild("TriggerEventCollision",2)
+                seekchaseRoom = room.Name
+				if trigger then
+					trigger.Parent = game.ReplicatedStorage
+				end
+			end)
+
+			repeat task.wait() until not (flags.noseek or game.Workspace.CurrentRooms:FindFirstChild(seekchaseRoom))
+            if game.ReplicatedStorage:FindFirstChild("TriggerEventCollision") then
+                if game.Workspace.CurrentRooms:FindFirstChild(seekchaseRoom) then
+                    game.ReplicatedStorage:FindFirstChild("TriggerEventCollision").Parent=game.Workspace.CurrentRooms:FindFirstChild(seekchaseRoom)
+                else
+                    game.ReplicatedStorage:FindFirstChild("TriggerEventCollision"):Destroy()
+                end
+            end
+			addconnect:Disconnect()
+		end
+	end
+})
+
 game["Run Service"].RenderStepped:Connect(function(dealta) 
     if flags.ChangeSpeed==true then
         if game.Players.LocalPlayer.Character then
@@ -115,4 +159,21 @@ game.Workspace.ChildAdded:Connect(function (child)
             child:FindFirstChild("TouchInterest"):Destroy()  
         end 
     end
+    task.spawn(function()
+        if child.Name:gsub("Moving","") == "Eyes" then
+            if flags.noeyesdamage == true then
+                eyesspawned = true
+                local con = game:GetService("RunService").RenderStepped:Connect(function()
+                    eyesspawned = true
+                    local legrot = 0
+                    local bodypitch = 85 -- legit -65
+                    local bodyrot = 0
+                    game:GetService("ReplicatedStorage").EntityInfo.MotorReplication:FireServer(legrot, bodypitch, bodyrot, false)
+                end)
+                inst.Destroying:Wait()
+                con:Disconnect()
+                eyesspawned = false
+            end
+        end
+    end)
 end)

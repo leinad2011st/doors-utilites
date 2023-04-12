@@ -111,7 +111,7 @@ client:AddToggle('fullBright',{
 
             fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
                 game:GetService("Lighting").Ambient = Color3.new(0,0,0)
-                game:GetService("Lighting").OutdoorAmbient = Color3.new(254,254,254)
+                game:GetService("Lighting").OutdoorAmbient = Color3.new(200,200,200)
                 game:GetService("Lighting").Brightness = 1
                 game:GetService("Lighting").GlobalShadows=false
                 game:GetService("Lighting").FogStart = 9999999
@@ -164,7 +164,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
                     print("AHHAHA")
                 end
                 wait()
-            until #humanoid:GetPlayingAnimationTracks()==0
+            until #humanoid:GetPlayingAnimationTracks()==1
 
         end
     end

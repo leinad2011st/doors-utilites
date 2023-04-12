@@ -42,6 +42,7 @@ flags.noJeffDamage = false
 local eyesspawned = false
 local seekchaseRoom = 0
 local removebannathing = nil
+local removeJeffThing = nil
 
 local client = Tabs.Main:AddLeftGroupbox('client')
 local entityBypasses = Tabs.Main:AddLeftGroupbox('entityBypasses')
@@ -256,7 +257,7 @@ if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.R
                     for x,i in pairs(game.Workspace:GetChildren())do
                         if i.Name=="BananaPeel"then
                             -- i.Position=game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(0,5,0)
-                            i:FindFirstChild("TouchInterest"):Destroy() 
+                            i:FindFirstChild("TouchInterest").Parent = nil
                         end
                     end
                 end)
@@ -275,16 +276,21 @@ if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.R
         Callback = function(Value)
             flags.noJeffDamage = Value
             if Value==true then
-                for x,i in pairs(game.Workspace:GetChildren()) do 
-                    if i.Name=="JeffTheKiller" then 
-                        for xx,ii in pairs(i:GetChildren()) do 
-                            if ii:FindFirstChild("TouchInterest") then 
-                                ii:FindFirstChild("TouchInterest"):Destroy() 
-                            end 
-                        end
-                        i:FindFirstChild("TouchInterest"):Destroy() 
-                    end 
-                end
+                removeJeffThing=game["Run Service"].RenderStepped:Connect(function ()
+                    for x,i in pairs(game.Workspace:GetChildren()) do 
+                        if i.Name=="JeffTheKiller" then 
+                            for xx,ii in pairs(i:GetChildren()) do 
+                                if ii:FindFirstChild("TouchInterest") then 
+                                    ii:FindFirstChild("TouchInterest"):Destroy() 
+                                end 
+                            end
+                            i:FindFirstChild("TouchInterest"):Destroy() 
+                        end 
+                    end
+                end)
+            else
+                removeJeffThing:Disconnect()
+                removeJeffThing = nil
             end
         end
     })
@@ -302,20 +308,6 @@ game["Run Service"].RenderStepped:Connect(function(dealta)
 end)
 
 game.Workspace.ChildAdded:Connect(function (child) 
-    if flags.noJeffDamage==true then
-        if child.Name=="JeffTheKiller" then 
-            for x,i in pairs(game.Workspace:GetChildren()) do 
-                if i.Name=="JeffTheKiller" then 
-                    for xx,ii in pairs(i:GetChildren()) do 
-                        if ii:FindFirstChild("TouchInterest") then 
-                            ii:FindFirstChild("TouchInterest"):Destroy() 
-                        end 
-                    end
-                    i:FindFirstChild("TouchInterest"):Destroy() 
-                end 
-            end
-        end 
-    end
     -- if flags.BananaBypass==true then
     --     if child.Name=="BananaPeel" then 
     --         for x,i in pairs(game.Workspace:GetChildren()) do 
@@ -338,7 +330,7 @@ game.Workspace.ChildAdded:Connect(function (child)
                     local bodyrot = 0
                     game:GetService("ReplicatedStorage").EntityInfo.MotorReplication:FireServer(legrot, bodypitch, bodyrot, false)
                 end)
-                inst.Destroying:Wait()
+                child.Destroying:Wait()
                 con:Disconnect()
                 eyesspawned = false
             end

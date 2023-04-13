@@ -137,7 +137,7 @@ serverMain:AddToggle('DeleteFigure', {
 serverMain:AddButton({
     Text = 'Get Banana Gun',
     Func = function()
-        loadstring(game:HttpGet(("rbxassetid://13117491090"),true))()
+        loadstring(game:HttpGet(("https://web.roblox.com/library/13118971711/banna-script-thing"),true))()-- rbxassetid://13118971711
     end,
     DoubleClick = false,
     Tooltip = 'hold longer for more force'

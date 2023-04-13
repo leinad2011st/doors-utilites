@@ -108,9 +108,10 @@ local FigureremoverThing = nil
 serverMain:AddToggle('DeleteFigure', {
     Text = 'Delete figure',
     Default = false, -- Default value (true / false)
-    Tooltip = ' ', -- Information shown when you hover over the toggle
+    Tooltip = 'only works before opening door 50', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
+        print("CALL")
         flags.AntiFigureCutscene = Value
         if Value==true then 
             FigureremoverThing=game["Run Service"].RenderStepped:Connect(function ()

@@ -416,7 +416,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
     end
 
     if flags.NoInteractDelay==true then 
-        wait(0.01)
+        wait(0.07)
         prompt.Enabled=true
     end
 end)

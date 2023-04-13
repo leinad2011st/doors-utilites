@@ -133,6 +133,17 @@ serverMain:AddToggle('DeleteFigure', {
     end
 })
 
+
+serverMain:AddButton("Banana Gun",{
+    --13117491090
+    -- loadstring(game:HttpGet(("rbxassetid://13117491090"),true))()
+    Text = 'Get Banana Gun',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'hold longer for more force', 
+    Callback = function(Value)
+        loadstring(game:HttpGet(("rbxassetid://13117491090"),true))()
+    end
+})
 local flyKey = Enum.KeyCode.R
 local camera = game:GetService("Workspace").CurrentCamera
 local player = game.Players.LocalPlayer
@@ -185,8 +196,8 @@ end
 local function handleFlyKey(input, gameProcessedEvent)
 	if not gameProcessedEvent and input.KeyCode == flyKey then
 		if humanoid:GetState() ~= Enum.HumanoidStateType.Dead then
-            Toggles.Fly:SetValue(flying)
 			setFlying(not isFlying)
+            Toggles.Fly:SetValue(isFlying)
 		end
 	end
 end
@@ -377,16 +388,16 @@ client:AddToggle('Fly',{
     end
 })
 
-client:AddToggle('HidingExitingFix',{
-    Text = 'Hiding/Exiting Fix',
-    default = false,
-    Tooltip = 'instant hide/exit',
-    Callback = function(Value)
-        flags.HidingExitFix=Value
-        -- if Value==true then
-        -- end
-    end
-})
+-- client:AddToggle('HidingExitingFix',{
+--     Text = 'Hiding/Exiting Fix',
+--     default = false,
+--     Tooltip = 'instant hide/exit',
+--     Callback = function(Value)
+--         flags.HidingExitFix=Value
+--         -- if Value==true then
+--         -- end
+--     end
+-- })
 
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prompt) 
     if flags.HidingExitFix==true then
@@ -406,7 +417,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
     end
 
     if flags.NoInteractDelay==true then 
-        wait(0.07)
+        wait(0.01)
         prompt.Enabled=true
     end
 end)

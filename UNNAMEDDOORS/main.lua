@@ -89,12 +89,43 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
                     local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
                     local Door=Room:FindFirstChild("Door")
                     local EVENT=Door:FindFirstChild("ClientOpen")
-                    EVENT:FireServer()
+                    repeat
+                        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame= workspace.CurrentRooms["50"].FigureSetup.FigureCamPos.CFrame
+                        EVENT:FireServer()
+                        wait()
+                    until workspace.CurrentRooms:FindFirstChild("51")
+                    
                 end
             end)
         elseif Value==false then 
             figurething:Disconnect()
             figurething = nil
+        end
+    end
+})
+
+local FigureremoverThing = nil
+serverMain:AddToggle('OpenDoor50NoCutscene', {
+    Text = 'open door 50 without cutscene',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Disable Figure cutscene', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.AntiFigureCutscene = Value
+        if Value==true then 
+            FigureremoverThing=game["Run Service"].RenderStepped:Connect(function ()
+                local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
+                local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
+                if latesetRoom==49 then 
+                    local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root
+                    local cframe = CFrame.new(ragdollly.Position.X,ragdollly.Position.Y-20,ragdollly.Position.Z)
+                    workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root.CFrame=cframe
+                end
+
+            end)
+        elseif Value==false then 
+            FigureremoverThing:Disconnect()
+            FigureremoverThing = nil
         end
     end
 })
@@ -151,6 +182,7 @@ end
 local function handleFlyKey(input, gameProcessedEvent)
 	if not gameProcessedEvent and input.KeyCode == flyKey then
 		if humanoid:GetState() ~= Enum.HumanoidStateType.Dead then
+            Toggles.Fly:SetValue(flying)
 			setFlying(not isFlying)
 		end
 	end
@@ -194,6 +226,7 @@ function ToggleNoclip()
 end
 
 function setNoClip(Val)
+    Toggles.NoClip:SetValue(Val)
     isEnabled=Val
 end
 
@@ -540,6 +573,8 @@ end)
 
 
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
+    --Seek_Arm
+
     print("new ROOM: "..room.Name)
     print("well anti dupe = ".. tostring(flags.AntiDupe))
     for xx,ii in pairs(game.Workspace.CurrentRooms:GetChildren()) do 

@@ -542,17 +542,19 @@ end)
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
     print("new ROOM: "..room.Name)
     print("well anti dupe = ".. tostring(flags.AntiDupe))
-    for x,i in pairs(game.Workspace.CurrentRooms[room.Name]:GetChildren()) do 
-        print("ASSET"..i.Name)
-        -- print("new ROOM: "..room.Name)
-        if flags.AntiDupe == true then 
-            print("well anti dupe")
-            if i.Name=="Closet" then
-                print("LOAD DELETE hahhahha")
-                if i:FindFirstChild("DoorFake") then
-                    Debris:AddItem(i:FindFirstChild("DoorFake").Hidden:FindFirstChild("TouchInterest"), 0.01)
-                    print("L BOSO DUPE/SUBSPACE TRIPMINE")
-                end        
+    for xx,ii in pairs(game.Workspace.CurrentRooms:GetChildren()) do 
+        for x,i in pairs(ii:GetChildren()) do 
+            print("ASSET"..i.Name)
+            -- print("new ROOM: "..room.Name)
+            if flags.AntiDupe == true then 
+                print("well anti dupe")
+                if i.Name=="Closet" then
+                    print("LOAD DELETE hahhahha")
+                    if i:FindFirstChild("DoorFake") then
+                        Debris:AddItem(i:FindFirstChild("DoorFake").Hidden:FindFirstChild("TouchInterest"), 0.01)
+                        print("L BOSO DUPE/SUBSPACE TRIPMINE")
+                    end        
+                end
             end
         end
     end

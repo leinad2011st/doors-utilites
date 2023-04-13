@@ -134,15 +134,13 @@ serverMain:AddToggle('DeleteFigure', {
 })
 
 
-serverMain:AddButton("Banana Gun",{
-    --13117491090
-    -- loadstring(game:HttpGet(("rbxassetid://13117491090"),true))()
+serverMain:AddButton({
     Text = 'Get Banana Gun',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'hold longer for more force', 
-    Callback = function(Value)
+    Func = function()
         loadstring(game:HttpGet(("rbxassetid://13117491090"),true))()
-    end
+    end,
+    DoubleClick = false,
+    Tooltip = 'hold longer for more force'
 })
 local flyKey = Enum.KeyCode.R
 local camera = game:GetService("Workspace").CurrentCamera

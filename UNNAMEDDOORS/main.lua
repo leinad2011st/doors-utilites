@@ -105,10 +105,10 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
 })
 
 local FigureremoverThing = nil
-serverMain:AddToggle('OpenDoor50NoCutscene', {
-    Text = 'open door 50 without cutscene',
+serverMain:AddToggle('DeleteFigure', {
+    Text = 'Delete figure',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Disable Figure cutscene', -- Information shown when you hover over the toggle
+    Tooltip = ' ', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         flags.AntiFigureCutscene = Value

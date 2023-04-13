@@ -61,6 +61,8 @@ flags.InstantInteract = false
 flags.HidingExitFix = false
 flags.AntiDupe = false --Closet
 flags.AntiFigureCutscene = false
+flags.antiseekarms = false
+flags.NoInteractDelay = false
 
 
 local eyesspawned = false
@@ -336,6 +338,14 @@ client:AddToggle('InstantInteract',{
         flags.InstantInteract=Value
     end
 })
+client:AddToggle('NoInteractDelay',{
+    Text = 'No Interact Delay',
+    default = false,
+    Tooltip = 'Disables The Delay for most ProximityPrompts',
+    Callback = function(Value)
+        flags.NoInteractDelay=Value
+    end
+})
 
 client:AddToggle('NoClip',{
     Text = 'NOCLIP (N)',
@@ -393,6 +403,11 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
             -- until #humanoid:GetPlayingAnimationTracks()==1
 
         end
+    end
+
+    if flags.NoInteractDelay==true then 
+        wait(0.07)
+        prompt.Enabled=true
     end
 end)
 
@@ -475,6 +490,16 @@ entityBypasses:AddToggle('DisableChase', {
 	end
 })
 
+--antiseekarms
+entityBypasses:AddToggle('antiseekarms', {
+    Text = "Delete Seek Arms",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Seek', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.antiseekarms = Value
+    end
+})
 
 
 if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("Greed") then
@@ -572,20 +597,36 @@ game.Workspace.ChildAdded:Connect(function (child)
     end)
 end)
 
-
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
     --Seek_Arm
+    task.spawn(function() 
+        wait(0.1)
+        if room:FindFirstChild("Assets"):FindFirstChild("Seek_Arm") then 
+            if flags.antiseekarms==true then
+                local thing = game:GetService("RunService").RenderStepped:Connect(function() 
+                    for x,i in pairs(room:GetChildren())do 
+                        if i.Name == "Seek_Arm" then 
+                            Debris:AddItem(i,0.01)
+                        end
+                    end
+                end)
+                wait(20)
+                thing:Disconnect()
+            end
+        end
+    end)
 
-    print("new ROOM: "..room.Name)
-    print("well anti dupe = ".. tostring(flags.AntiDupe))
+
+    -- print("new ROOM: "..room.Name)
+    -- print("well anti dupe = ".. tostring(flags.AntiDupe))
     for xx,ii in pairs(game.Workspace.CurrentRooms:GetChildren()) do 
         for x,i in pairs(ii:GetChildren()) do 
-            print("ASSET"..i.Name)
+            -- print("ASSET"..i.Name)
             -- print("new ROOM: "..room.Name)
             if flags.AntiDupe == true then 
-                print("well anti dupe")
+                -- print("well anti dupe")
                 if i.Name=="Closet" then
-                    print("LOAD DELETE hahhahha")
+                    -- print("LOAD DELETE hahhahha")
                     if i:FindFirstChild("DoorFake") then
                         Debris:AddItem(i:FindFirstChild("DoorFake").Hidden:FindFirstChild("TouchInterest"), 0.01)
                         print("L BOSO DUPE/SUBSPACE TRIPMINE")

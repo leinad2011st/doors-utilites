@@ -113,7 +113,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
     end
 })
 serverMain:AddToggle({
-    Name = "Agressive Figure",
+    Text = "Agressive Figure",
     Tooltip = 'only works after opening door 50',
     DoubleClick = false,
     Func = function() 

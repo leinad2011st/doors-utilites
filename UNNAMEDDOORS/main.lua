@@ -421,16 +421,7 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
     end
 end)
 
-game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
-    if flags.InstantInteract==true then
-        if Prompt.Parent.Name~="KeyObtainFake" then
-            Prompt.HoldDuration=0
-        else
-            Prompt.Enabled=false
-            Prompt.HoldDuration=999
-        end
-    end
-end)
+
 
 
 entityBypasses:AddToggle('AntiScreach', {
@@ -643,6 +634,18 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                     end        
                 end
             end
+        end
+    end
+end)
+
+game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
+    if Prompt.Parent.Name=="KeyObtainFake" then
+        Prompt.Enabled=false
+        Prompt.HoldDuration=999
+    end
+    if flags.InstantInteract==true then
+        if Prompt.Parent.Name~="KeyObtainFake" then
+            Prompt.HoldDuration=0
         end
     end
 end)

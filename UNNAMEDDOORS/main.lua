@@ -651,6 +651,8 @@ game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
     end
 end)
 
+SaveManager:SetLibrary(Library)
+
 SaveManager:BuildConfigSection(Tabs['configs'])
 
 SaveManager:LoadAutoloadConfig()

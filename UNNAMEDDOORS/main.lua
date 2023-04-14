@@ -112,24 +112,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
         end
     end
 })
-serverMain:AddButton({
-    Text = "Agressive Figure",
-    Tooltip = 'only works after opening door 50',
-    DoubleClick = false,
-    Func = function() 
-        if workspace.CurrentRooms["51"] then
-			local char = game.Players.LocalPlayer.Character
-            local pos=char.HumanoidRootPart.CFrame
-			local door = workspace.CurrentRooms["51"].Door
-			char:PivotTo(door.Hidden.CFrame)
-			if door:FindFirstChild("ClientOpen") then
-				door.ClientOpen:FireServer()
-			end
-			wait(.2)
-			char:PivotTo(pos)
-		end
-    end
-})
+
 
 
 local FigureremoverThing = nil
@@ -159,6 +142,26 @@ serverMain:AddToggle('DeleteFigure', {
     end
 })
 
+serverMain:AddButton({
+    Text = "Agressive Figure",
+    Tooltip = 'only works after opening door 50',
+    DoubleClick = false,
+    Func = function() 
+        if workspace.CurrentRooms["51"] then
+			local char = game.Players.LocalPlayer.Character
+            local pos=char.HumanoidRootPart.CFrame
+			local door = workspace.CurrentRooms["51"].Door
+			char:PivotTo(door.Hidden.CFrame)
+			if door:FindFirstChild("ClientOpen") then
+				door.ClientOpen:FireServer()
+			end
+			wait(.2)
+			char:PivotTo(pos)
+		end
+    end
+})
+
+entityBypasses:AddLabel('---SUPER HARD MODE---')
 
 serverMain:AddButton({
     Text = 'Get Banana Gun',

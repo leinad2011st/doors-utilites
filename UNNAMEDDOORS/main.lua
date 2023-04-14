@@ -47,6 +47,7 @@ local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
     Server = Window:AddTab('Server'),
+    ['configs'] = Window:AddTab('configs'),
 }
 
 
@@ -649,6 +650,10 @@ game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
         end
     end
 end)
+
+ThemeManager:ApplyToTab(Tabs['configs'])
+
+SaveManager:LoadAutoloadConfig()
 
 
 game:GetService("UserInputService").InputBegan:Connect(handleFlyKey)

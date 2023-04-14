@@ -112,7 +112,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
         end
     end
 })
-serverMain:AddToggle('AgressiveFigure',{
+serverMain:AddToggle({
     Name = "Agressive Figure",
     Tooltip = 'only works after opening door 50',
     DoubleClick = false,
@@ -127,7 +127,7 @@ serverMain:AddToggle('AgressiveFigure',{
 			end
 			wait(.2)
 			char:PivotTo(pos)
-		else
+		end
     end
 })
 

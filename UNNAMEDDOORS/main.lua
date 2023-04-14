@@ -92,11 +92,16 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
                     local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
                     local Door=Room:FindFirstChild("Door")
                     local EVENT=Door:FindFirstChild("ClientOpen")
-                    repeat
-                        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame= workspace.CurrentRooms["50"].FigureSetup.FigureCamPos.CFrame
-                        EVENT:FireServer()
-                        wait()
-                    until workspace.CurrentRooms:FindFirstChild("51")
+                    local door = workspace.CurrentRooms["49"].Door
+                    char:PivotTo(door.Hidden.CFrame)
+                    if door:FindFirstChild("ClientOpen") then
+                        door.ClientOpen:FireServer()
+                    end
+                    -- repeat
+                        --game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame= workspace.CurrentRooms["50"].FigureSetup.FigureCamPos.CFrame
+                    --     EVENT:FireServer()
+                    --     wait()
+                    -- until workspace.CurrentRooms:FindFirstChild("51")
                     
                 end
             end)
@@ -106,6 +111,25 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
         end
     end
 })
+serverMain:AddToggle('AgressiveFigure',{
+    Name = "Agressive Figure",
+    Tooltip = 'only works after opening door 50',
+    DoubleClick = false,
+    Func = function() 
+        if workspace.CurrentRooms["51"] then
+			local char = game.Players.LocalPlayer.Character
+            local pos=char.HumanoidRootPart.CFrame
+			local door = workspace.CurrentRooms["51"].Door
+			char:PivotTo(door.Hidden.CFrame)
+			if door:FindFirstChild("ClientOpen") then
+				door.ClientOpen:FireServer()
+			end
+			wait(.2)
+			char:PivotTo(pos)
+		else
+    end
+})
+
 
 local FigureremoverThing = nil
 serverMain:AddToggle('DeleteFigure', {
@@ -139,6 +163,17 @@ serverMain:AddButton({
     Text = 'Get Banana Gun',
     Func = function()
         loadstring(game:GetObjects('rbxassetid://13118971711')[1].Source)()-- rbxassetid://13118971711
+    end,
+    DoubleClick = false,
+    Tooltip = 'hold longer for more force'
+})
+
+--game:GetObjects("rbxassetid://13129056104")[1]  jeff gun
+
+serverMain:AddButton({
+    Text = 'Get Jeff Gun',
+    Func = function()
+        loadstring(game:GetObjects("rbxassetid://13129056104")[1])()-- rbxassetid://13129056104
     end,
     DoubleClick = false,
     Tooltip = 'hold longer for more force'
@@ -564,8 +599,7 @@ game["Run Service"].RenderStepped:Connect(function(dealta)
                 game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed=Options.WalkSpeed.Value
             end
         end
-    end
-    
+    end 
 end)
 
 game.Workspace.ChildAdded:Connect(function (child) 

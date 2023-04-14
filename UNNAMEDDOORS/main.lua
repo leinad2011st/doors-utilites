@@ -651,7 +651,7 @@ game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
     end
 end)
 
-ThemeManager:ApplyToTab(Tabs['configs'])
+SaveManager:BuildConfigSection(Tabs['configs'])
 
 SaveManager:LoadAutoloadConfig()
 

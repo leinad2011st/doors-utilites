@@ -51,6 +51,12 @@ local Tabs = {
     ['configs'] = Window:AddTab('configs'),
 }
 
+local ishardmode = false
+
+if game:GetService("ReplicatedStorage").GameData.Floor.Value=="Fools" then 
+    ishardmode=true
+end
+
 
 local flags = {}
 flags.ChangeSpeed = false
@@ -160,27 +166,29 @@ serverMain:AddButton({
     end
 })
 
-entityBypasses:AddLabel('---SUPER HARD MODE---')
+if ishardmode==true then 
+    serverMain:AddLabel('---SUPER HARD MODE---')
 
-serverMain:AddButton({
-    Text = 'Get Banana Gun',
-    Func = function()
-        loadstring(game:GetObjects('rbxassetid://13118971711')[1].Source)()-- rbxassetid://13118971711
-    end,
-    DoubleClick = false,
-    Tooltip = 'hold longer for more force'
-})
-
---game:GetObjects("rbxassetid://13129056104")[1]  jeff gun
-
-serverMain:AddButton({
-    Text = 'Get Jeff Gun',
-    Func = function()
-        loadstring(game:GetObjects("rbxassetid://13129056104")[1].Source)()-- rbxassetid://13129056104
-    end,
-    DoubleClick = false,
-    Tooltip = 'hold longer for more force'
-})
+    serverMain:AddButton({
+        Text = 'Get Banana Gun',
+        Func = function()
+            loadstring(game:GetObjects('rbxassetid://13118971711')[1].Source)()-- rbxassetid://13118971711
+        end,
+        DoubleClick = false,
+        Tooltip = 'hold longer for more force'
+    })
+    
+    --game:GetObjects("rbxassetid://13129056104")[1]  jeff gun
+    
+    serverMain:AddButton({
+        Text = 'Get Jeff Gun',
+        Func = function()
+            loadstring(game:GetObjects("rbxassetid://13129056104")[1].Source)()-- rbxassetid://13129056104
+        end,
+        DoubleClick = false,
+        Tooltip = 'hold longer for more force'
+    })
+end
 
 local flyKey = Enum.KeyCode.R
 local camera = game:GetService("Workspace").CurrentCamera
@@ -542,7 +550,7 @@ entityBypasses:AddToggle('antiseekarms', {
 })
 
 
-if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("Greed") then
+if ishardmode==true then
     entityBypasses:AddLabel('---SUPER HARD MODE---')
     entityBypasses:AddToggle('AntiBanana', {
         Text = 'Bypass Banana',

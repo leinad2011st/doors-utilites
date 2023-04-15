@@ -117,7 +117,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
 
 -- local FigureremoverThing = nil
 serverMain:AddToggle({
-    Text = 'Delete figure',
+    Text = 'Delete Figure',
     Tooltip = 'only works before opening door 50', -- Information shown when you hover over the toggle
     DoubleClick = false,
     Func = function(Value)
@@ -128,9 +128,9 @@ serverMain:AddToggle({
             local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
             local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
             if latesetRoom==49 then 
-                local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root
-                local cframe = CFrame.new(ragdollly.Position.X,ragdollly.Position.Y-20,ragdollly.Position.Z)
-                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root.CFrame=cframe
+                local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso
+                local cframe = CFrame.new(ragdollly.Position.X,ragdollly.Position.Y+10,ragdollly.Position.Z)
+                ragdollly.CFrame=cframe
             end
 
             -- end)

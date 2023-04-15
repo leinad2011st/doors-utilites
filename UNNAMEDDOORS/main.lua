@@ -116,12 +116,11 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
 
 
 -- local FigureremoverThing = nil
-serverMain:AddToggle('DeleteFigure', {
+serverMain:AddToggle({
     Text = 'Delete figure',
-    Default = false, -- Default value (true / false)
     Tooltip = 'only works before opening door 50', -- Information shown when you hover over the toggle
-
-    Callback = function(Value)
+    DoubleClick = false,
+    Func = function(Value)
         print("CALL")
         -- flags.AntiFigureCutscene = Value
         -- if Value==true then 

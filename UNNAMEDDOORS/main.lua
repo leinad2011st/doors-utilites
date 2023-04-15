@@ -72,7 +72,7 @@ flags.AntiFigureCutscene = false
 flags.antiseekarms = false
 flags.NoInteractDelay = false
 flags.GuidingLightSkip = false
-
+flags.JumpScareSkip = false
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -575,13 +575,49 @@ entityBypasses:AddToggle('GuidingLightSkip', {
         
         flags.GuidingLightSkip = Value
         if Value then 
-            GuidingLightSkipHolder = game["Run Service"].RenderStepped:Connect(function () 
+            GuidingLightSkipHolder = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").Died:Connect(function ()  
+                
                 game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death.Visible=false
+                
+                --UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
+                --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel Statistics = {0.5, 0}, {0.430000007, 0}
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Visible=true
+
+                --UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
+                --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead HodlerRevive = {0.5, 0}, {0.119999997, 0}
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Visible=true
+                --UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
+                --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive DeathPanelDead =  {0.5, 0}, {0.800000012, 0}
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Visible=true
+                --UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
+                --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics DeathPanel = {0.5, 0}, {0.930000007, 0}
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Visible=true
             end)
         else 
             GuidingLightSkipHolder:Disconnect()
             GuidingLightSkipHolder=nil
         end
+    end
+})
+
+local GuidingLightSkipHolder = nil
+entityBypasses:AddToggle('JumpScareSkip', {
+    Text = "Skip All Light Message",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Guiding Light', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.JumpScareSkip = Value
+        game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_A90.Visible=Value
+        game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Ambush.Visible=Value
+        game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Rush.Visible=Value
+        game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Seek.Visible=Value
+        game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Goblino.Visible=Value
+        game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Skeleton.Visible=Value
     end
 })
 

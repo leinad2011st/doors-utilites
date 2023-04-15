@@ -116,7 +116,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
 
 
 -- local FigureremoverThing = nil
-serverMain:AddToggle({
+serverMain:AddButton({
     Text = 'Delete Figure',
     Tooltip = 'only works before opening door 50', -- Information shown when you hover over the toggle
     DoubleClick = false,

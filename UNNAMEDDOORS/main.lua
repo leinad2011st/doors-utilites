@@ -567,9 +567,9 @@ entityBypasses:AddToggle('antiseekarms', {
 --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death
 local GuidingLightSkipHolder = nil
 entityBypasses:AddToggle('GuidingLightSkip', {
-    Text = "Delete Seek Arms",
+    Text = "Skip Guiding Light Message",
     Default = false, -- Default value (true / false)
-    Tooltip = 'Bypass Seek', -- Information shown when you hover over the toggle
+    Tooltip = 'Bypass Guiding Light', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         

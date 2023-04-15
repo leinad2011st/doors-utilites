@@ -71,6 +71,7 @@ flags.AntiDupe = false --Closet
 flags.AntiFigureCutscene = false
 flags.antiseekarms = false
 flags.NoInteractDelay = false
+flags.GuidingLightSkip = false
 
 
 local eyesspawned = false
@@ -121,6 +122,10 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
 
 
 
+
+
+
+
 -- local FigureremoverThing = nil
 serverMain:AddButton({
     Text = 'Delete Figure',
@@ -133,9 +138,9 @@ serverMain:AddButton({
         --     FigureremoverThing=game["Run Service"].RenderStepped:Connect(function ()
             local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
             local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
-            if latesetRoom==49 then 
+            if latesetRoom==49 or flags.AntiFigureCutscene==true then 
                 local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso
-                local cframe = CFrame.new(ragdollly.Position.X,ragdollly.Position.Y+10,ragdollly.Position.Z)
+                local cframe = CFrame.new(ragdollly.Position.X-999999999,ragdollly.Position.Y-100,ragdollly.Position.Z-999999999)
                 ragdollly.CFrame=cframe
             end
 
@@ -156,12 +161,21 @@ serverMain:AddButton({
 			local char = game.Players.LocalPlayer.Character
             local pos=char.HumanoidRootPart.CFrame
 			local door = workspace.CurrentRooms["51"].Door
-			char:PivotTo(door.Hidden.CFrame)
-			if door:FindFirstChild("ClientOpen") then
-				door.ClientOpen:FireServer()
-			end
-			wait(.2)
-			char:PivotTo(pos)
+            local agg = false
+            spawn(function() 
+                wait(.5)
+                agg=true
+                char:PivotTo(pos)
+            end)
+            repeat
+                char:PivotTo(door.Hidden.CFrame)
+                if door:FindFirstChild("ClientOpen") then
+                    door.ClientOpen:FireServer()
+                end
+                wait()
+            until agg==true
+
+
 		end
     end
 })
@@ -550,6 +564,27 @@ entityBypasses:AddToggle('antiseekarms', {
 })
 
 
+--game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death
+local GuidingLightSkipHolder = nil
+entityBypasses:AddToggle('GuidingLightSkip', {
+    Text = "Delete Seek Arms",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Seek', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        
+        flags.GuidingLightSkip = Value
+        if Value then 
+            GuidingLightSkipHolder = game["Run Service"].RenderStepped:Connect(function () 
+                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death.Visible=false
+            end)
+        else 
+            GuidingLightSkipHolder:Disconnect()
+            GuidingLightSkipHolder=nil
+        end
+    end
+})
+
 if ishardmode==true then
     entityBypasses:AddLabel('---SUPER HARD MODE---')
     entityBypasses:AddToggle('AntiBanana', {
@@ -648,7 +683,8 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
     --Seek_Arm
     task.spawn(function() 
         wait(0.1)
-        if room:FindFirstChild("Assets"):FindFirstChild("Seek_Arm") then 
+        local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
+        if theroom:FindFirstChild("Assets"):FindFirstChild("Seek_Arm") then
             if flags.antiseekarms==true then
                 local thing = game:GetService("RunService").RenderStepped:Connect(function() 
                     for x,i in pairs(room:GetChildren())do 

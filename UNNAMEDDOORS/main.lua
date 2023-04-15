@@ -87,7 +87,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
         flags.AntiFigureCutscene = Value
         if Value==true then 
             figurething=game["Run Service"].RenderStepped:Connect(function () 
-                local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
+                local latesetRoom=game.CurrentRoom:GetChildren()[1].Name
                 local plusroom = latesetRoom+1
                 if plusroom==50 then
                     local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
@@ -115,7 +115,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
 
 
 
-local FigureremoverThing = nil
+-- local FigureremoverThing = nil
 serverMain:AddToggle('DeleteFigure', {
     Text = 'Delete figure',
     Default = false, -- Default value (true / false)
@@ -123,22 +123,22 @@ serverMain:AddToggle('DeleteFigure', {
 
     Callback = function(Value)
         print("CALL")
-        flags.AntiFigureCutscene = Value
-        if Value==true then 
-            FigureremoverThing=game["Run Service"].RenderStepped:Connect(function ()
-                local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
-                local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
-                if latesetRoom==49 then 
-                    local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root
-                    local cframe = CFrame.new(ragdollly.Position.X,ragdollly.Position.Y-20,ragdollly.Position.Z)
-                    workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root.CFrame=cframe
-                end
+        -- flags.AntiFigureCutscene = Value
+        -- if Value==true then 
+        --     FigureremoverThing=game["Run Service"].RenderStepped:Connect(function ()
+            local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
+            local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
+            if latesetRoom==49 then 
+                local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root
+                local cframe = CFrame.new(ragdollly.Position.X,ragdollly.Position.Y-20,ragdollly.Position.Z)
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root.CFrame=cframe
+            end
 
-            end)
-        elseif Value==false then 
-            FigureremoverThing:Disconnect()
-            FigureremoverThing = nil
-        end
+            -- end)
+        -- elseif Value==false then 
+        --     FigureremoverThing:Disconnect()
+        --     FigureremoverThing = nil
+        -- end
     end
 })
 
@@ -177,7 +177,7 @@ serverMain:AddButton({
 serverMain:AddButton({
     Text = 'Get Jeff Gun',
     Func = function()
-        loadstring(game:GetObjects("rbxassetid://13129056104")[1])()-- rbxassetid://13129056104
+        loadstring(game:GetObjects("rbxassetid://13129056104")[1].Source)()-- rbxassetid://13129056104
     end,
     DoubleClick = false,
     Tooltip = 'hold longer for more force'

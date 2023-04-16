@@ -21,14 +21,12 @@ end
 --TO DO
 
 
-
+--FINNISH UP ESP FULLLY
 
 --ADD YOUR KEY BIND SCRIPT INTO THIS
---ethier buttons or key bind settings tab
---add noclip and fly scripts
+--key bind settings tab
 --maybe freecam
--- DEFFENTILY ADD CONFIG/ unload
---DEBUG ANTI DUPE
+-- DEFFENTILY ADD CONFIG/ unload window
 
 -- --------------------------------------------------------------------------- --
 
@@ -750,6 +748,15 @@ game.Workspace.ChildAdded:Connect(function (child)
 end)
 
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
+    task.spawn(function() 
+        local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
+        for x,i in pairs(theroom:GetDescendants()()) do
+            if i.Name == "KeyObtain" then 
+                EspManager.AddEsp(i,Color3.new(1,1,1),"KeyObtain"..theroom.Name)
+            end
+    
+        end
+    end)
     --Seek_Arm
     task.spawn(function() 
         wait(0.1)

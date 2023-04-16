@@ -168,20 +168,15 @@ serverMain:AddButton({
 			local char = game.Players.LocalPlayer.Character
             local pos=char.HumanoidRootPart.CFrame
 			local door = workspace.CurrentRooms["51"].Door
-            local agg = false
-            spawn(function() 
-                wait(.5)
-                agg=true
-                char:PivotTo(pos)
-            end)
             repeat
                 char:PivotTo(door.Hidden.CFrame)
                 if door:FindFirstChild("ClientOpen") then
                     door.ClientOpen:FireServer()
                 end
+                repeats=repeats+1
                 wait()
-            until agg==true
-
+            until repeats==maxrepeats
+            char:PivotTo(pos)
 
 		end
     end

@@ -4,6 +4,7 @@ local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
+local EspManager = loadstring(game:HttpGet(""))
 
 local Debris = game:GetService("Debris")
 
@@ -73,6 +74,8 @@ flags.antiseekarms = false
 flags.NoInteractDelay = false
 flags.GuidingLightSkip = false
 flags.JumpScareSkip = false
+
+
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -583,20 +586,20 @@ entityBypasses:AddToggle('GuidingLightSkip', {
                 
                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel Statistics = {0.5, 0}, {0.430000007, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
+                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Visible=true
     
                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead HodlerRevive = {0.5, 0}, {0.119999997, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
+                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Visible=true
                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive DeathPanelDead =  {0.5, 0}, {0.800000012, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
+                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Visible=true
                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics DeathPanel = {0.5, 0}, {0.930000007, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
+                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Visible=true
                 else 
                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death.Visible=false

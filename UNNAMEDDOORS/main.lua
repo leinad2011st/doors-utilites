@@ -94,7 +94,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
         flags.AntiFigureCutscene = Value
         if Value==true then 
             figurething=game["Run Service"].RenderStepped:Connect(function () 
-                local latesetRoom=game.CurrentRoom:GetChildren()[1].Name
+                local latesetRoom=game.Workspace.CurrentRoom:GetChildren()[1].Name
                 local plusroom = latesetRoom+1
                 if plusroom==50 then
                     local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)

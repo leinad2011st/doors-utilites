@@ -94,17 +94,24 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
         flags.AntiFigureCutscene = Value
         if Value==true then 
             figurething=game["Run Service"].RenderStepped:Connect(function () 
-                local latesetRoom=game.Workspace.CurrentRoom:GetChildren()[1].Name
+                local latesetRoom=workspace.CurrentRooms:GetChildren()[1].Name
                 local plusroom = latesetRoom+1
                 if plusroom==50 then
-                    local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
+                    local Room = workspace.CurrentRooms:FindFirstChild(latesetRoom)
                     local Door=Room:FindFirstChild("Door")
                     local EVENT=Door:FindFirstChild("ClientOpen")
                     local door = workspace.CurrentRooms["49"].Door
-                    char:PivotTo(door.Hidden.CFrame)
-                    if door:FindFirstChild("ClientOpen") then
-                        door.ClientOpen:FireServer()
-                    end
+                    local maxrepeats = 50
+                    local repeats = 0
+                    repeat
+                        wait()
+                        char:PivotTo(door.Hidden.CFrame)
+                        if door:FindFirstChild("ClientOpen") then
+                            door.ClientOpen:FireServer()
+                        end
+                        repeats=repeats+1
+                    until repeats==maxrepeats
+
                     -- repeat
                         --game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame= workspace.CurrentRooms["50"].FigureSetup.FigureCamPos.CFrame
                     --     EVENT:FireServer()

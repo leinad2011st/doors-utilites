@@ -7,13 +7,23 @@ if GlobalESPFolder == nil then
 	GlobalESPFolder.Name = "ESPFolder"
 end
 
+function EspManager.AddEsp(Item,color,Text) 
+    local name = Item.Name
+	local esp_folder = GlobalESPFolder:FindFirstChild(name)
+	if game.Players:FindFirstChild(name) then
+		esp_folder = GlobalESPFolder:FindFirstChild("PlayerESP")
+		if not esp_folder then
+			esp_folder = Instance.new("Folder")
+			esp_folder.Parent = GlobalESPFolder
+			esp_folder.Name = "PlayerESP"
+		end
+	end
+	if not esp_folder then
+		esp_folder = Instance.new("Folder")
+		esp_folder.Parent = GlobalESPFolder
+		esp_folder.Name = name
+	end
 
-local Items = {
-	Key = "KeyObtain"
-}
-
-EspManager.AddEsp = function (Item,color,Text) 
-	if table.find(Item.Name) then
 		local highlight = Instance.new("Highlight",Item)
 		highlight.Adornee = Item
 		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
@@ -63,7 +73,4 @@ EspManager.AddEsp = function (Item,color,Text)
 		end)
         --ADD TRACKERS
         --HERE IS LINK: https://github.com/mstudio45/poopdoors_edited/blob/117f50c199de457e2142104fec8e4da7618eba27/poopdoors_edited.lua#LC637
-    end
 end
-
-return EspManager

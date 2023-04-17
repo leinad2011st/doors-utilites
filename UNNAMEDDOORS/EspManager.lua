@@ -1,4 +1,6 @@
-local EspManager = {}
+local EspManager = {
+	esp=true
+}
 
 local GlobalESPFolder = game.CoreGui:FindFirstChild("ESPFolder")
 

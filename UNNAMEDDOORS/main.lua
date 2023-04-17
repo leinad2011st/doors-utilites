@@ -762,7 +762,7 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
         for x,i in pairs(theroom:GetDescendants()) do
             if i.Name == "KeyObtain" then 
-                EspManager.AddEsp(i,Color3.new(1,1,1),"KeyObtain"..theroom.Name)
+                EspManager:AddEsp(i,Color3.new(1,1,1),"KeyObtain"..theroom.Name)
             end
     
         end

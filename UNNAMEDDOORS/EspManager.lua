@@ -7,7 +7,7 @@ if GlobalESPFolder == nil then
 	GlobalESPFolder.Name = "ESPFolder"
 end
 
-function EspManager.AddEsp(Item,color,Text) 
+function EspManage:AddEsp(Item,color,Text) 
     local name = Item.Name
 	local esp_folder = GlobalESPFolder:FindFirstChild(name)
 	if game.Players:FindFirstChild(name) then
@@ -74,3 +74,6 @@ function EspManager.AddEsp(Item,color,Text)
         --ADD TRACKERS
         --HERE IS LINK: https://github.com/mstudio45/poopdoors_edited/blob/117f50c199de457e2142104fec8e4da7618eba27/poopdoors_edited.lua#LC637
 end
+
+getgenv().EspManager = EspManager
+return EspManager

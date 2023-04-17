@@ -75,6 +75,7 @@ flags.JumpScareSkip = false
 flags.AntiHalt = false
 flags.AntiGlitch = false
 flags.AntiVoid = false
+flags.HidingReach = false
 
 
 local eyesspawned = false
@@ -455,6 +456,15 @@ client:AddToggle('Fly',{
     end
 })
 
+client:AddToggle('HidingReach',{
+    Text = 'Hiding Reach',
+    default = false,
+    Tooltip = 'Hide from a further distance',
+    Callback = function(Value)
+        flags.HidingReach = Value
+    end
+})
+
 -- client:AddToggle('HidingExitingFix',{
 --     Text = 'Hiding/Exiting Fix',
 --     default = false,
@@ -796,11 +806,13 @@ game.Workspace.ChildAdded:Connect(function (child)
                 eyesspawned = false
             end
             elseif child.Name:gsub("Moving","") == "Rush" then
-                if child:FindFirstChild("RushNew").Position.Y~=-10000 then 
+                print("RUSHING DOT")
+                if child:FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
                     EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,0,0),"Rush")
                 end
             elseif child.Name:gsub("Moving","") == "Ambush" then
-                if child:FindFirstChild("RushNew").Position.Y~=-10000 then 
+                print("AmbushING DOT")
+                if child:FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
                     EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,20,0),"Ambush")
                 end
             elseif child.Name:gsub("Moving","") == "Seek" then 
@@ -815,6 +827,21 @@ task.spawn(function()
     for x,IE in pairs(theroom:GetDescendants()) do
         if IE.Name == "KeyObtain" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
+        elseif IE.Name == "Flashlight"then
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"FlashLight")
+        elseif IE.Name=="Battery" then
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
+        elseif IE.Name=="Candle" then 
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
+        end
+
+
+        if IE.Name=="Wardrobe" then 
+            if flags.HidingReach == true then 
+                if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
+                    IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
+                end
+            end
         end
     end
 end)

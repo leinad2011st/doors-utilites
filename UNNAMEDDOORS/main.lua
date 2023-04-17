@@ -755,7 +755,7 @@ task.spawn(function()
     local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
     for x,IE in pairs(theroom:GetDescendants()) do
         if IE.Name == "KeyObtain" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..theroom.Name)
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
         end
     end
 end)

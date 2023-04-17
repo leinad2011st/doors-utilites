@@ -743,7 +743,11 @@ game.Workspace.ChildAdded:Connect(function (child)
                 con:Disconnect()
                 eyesspawned = false
             end
-        end
+            elseif child.Name:gsub("Moving","") == "Rush" then
+                EspManager:AddEsp(child,Color3.fromRGB(255,0,0),"Rush")
+            elseif child.Name:gsub("Moving","") == "Ambush" then
+                EspManager:AddEsp(child,Color3.fromRGB(255,20,0),"Ambush")
+            end
     end)
 end)
 
@@ -782,6 +786,14 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                 wait(20)
                 thing:Disconnect()
             end
+        elseif theroom==50 or room == 100 then 
+                local figuresetup = room:WaitForChild("FigureSetup")
+
+                if figuresetup then
+                    local fig = figuresetup:WaitForChild("FigureRagdoll")
+                    task.wait(0.1)
+                    EspManager:AddEsp(fig,Color3.fromRGB(255,25,25),"Figure")
+                end 
         end
     end)
 

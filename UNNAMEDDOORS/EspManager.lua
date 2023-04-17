@@ -82,4 +82,3 @@ function EspManager:AddEsp(Item,color,Text)
 end
 
 getgenv().EspManager = EspManager
-return EspManager

@@ -835,7 +835,10 @@ task.spawn(function()
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
         elseif IE.Name=="Lighter" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
+        elseif IE.Name=="Lockpick" then 
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
         end
+            
             
 
 

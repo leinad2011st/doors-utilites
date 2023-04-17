@@ -150,7 +150,7 @@ serverMain:AddButton({
             local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
             if latesetRoom==49 or flags.AntiFigureCutscene==true then 
                 local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso
-                local cframe = CFrame.new(ragdollly.Position.X-999999999,ragdollly.Position.Y-100,ragdollly.Position.Z-999999999)
+                local cframe = CFrame.new(ragdollly.Position.X-500,ragdollly.Position.Y-100,ragdollly.Position.Z-500)
                 ragdollly.CFrame=cframe
             end
 
@@ -171,6 +171,8 @@ serverMain:AddButton({
 			local char = game.Players.LocalPlayer.Character
             local pos=char.HumanoidRootPart.CFrame
 			local door = workspace.CurrentRooms["51"].Door
+            local repeats = 0
+            local maxrepeats = 50
             repeat
                 char:PivotTo(door.Hidden.CFrame)
                 if door:FindFirstChild("ClientOpen") then

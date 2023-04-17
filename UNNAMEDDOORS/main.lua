@@ -807,12 +807,12 @@ game.Workspace.ChildAdded:Connect(function (child)
             end
             elseif child.Name:gsub("Moving","") == "Rush" then
                 print("RUSHING DOT")
-                if child:FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
+                if game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
                     EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,0,0),"Rush")
                 end
             elseif child.Name:gsub("Moving","") == "Ambush" then
                 print("AmbushING DOT")
-                if child:FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
+                if game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
                     EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,20,0),"Ambush")
                 end
             elseif child.Name:gsub("Moving","") == "Seek" then 

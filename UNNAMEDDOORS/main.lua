@@ -794,9 +794,13 @@ game.Workspace.ChildAdded:Connect(function (child)
                 eyesspawned = false
             end
             elseif child.Name:gsub("Moving","") == "Rush" then
-                EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),Color3.fromRGB(255,0,0),"Rush")
+                if child.Position.Y~=-10000 then 
+                    EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),Color3.fromRGB(255,0,0),"Rush")
+                end
             elseif child.Name:gsub("Moving","") == "Ambush" then
-                EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"),Color3.fromRGB(255,20,0),"Ambush")
+                if child.Position.Y~=-10000 then 
+                    EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"),Color3.fromRGB(255,20,0),"Ambush")
+                end
             end
     end)
 end)

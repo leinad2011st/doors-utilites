@@ -10,9 +10,6 @@ if GlobalESPFolder == nil then
 end
 
 function EspManager:AddEsp(Item,color,Text) 
-	print(Item)
-	print(color)
-	print(Text)
     local name = Item.Name
 
 	local esp_folder = GlobalESPFolder:FindFirstChild(name)

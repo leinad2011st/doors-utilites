@@ -816,7 +816,7 @@ game.Workspace.ChildAdded:Connect(function (child)
                     EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,20,0),"Ambush")
                 end
             elseif child.Name:gsub("Moving","") == "Seek" then 
-                EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"),Color3.fromRGB(255,20,0),"Seek")
+                EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"),Color3.fromRGB(255,0,0),"Seek")
             end
                 
     end)
@@ -833,7 +833,10 @@ task.spawn(function()
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
         elseif IE.Name=="Candle" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
+        elseif IE.Name=="Lighter" then 
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
         end
+            
 
 
         if IE.Name=="Wardrobe" then 
@@ -857,7 +860,7 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
         for x,i in pairs(theroom:GetDescendants()) do
             if i.Name == "KeyObtain" then 
-                EspManager:AddEsp(i,Color3.new(1,1,1),"KeyObtain"..tostring(tonumber(theroom.Name)+1))
+                EspManager:AddEsp(i,Color3.new(1,1,1),"KeyObtain")
             end
     
         end

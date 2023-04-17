@@ -72,7 +72,9 @@ flags.antiseekarms = false
 flags.NoInteractDelay = false
 flags.GuidingLightSkip = false
 flags.JumpScareSkip = false
-
+flags.AntiHalt = false
+flags.AntiGlitch = false
+flags.AntiVoid = false
 
 
 local eyesspawned = false
@@ -554,6 +556,54 @@ entityBypasses:AddToggle('DisableChase', {
 		end
 	end
 })
+
+entityBypasses:AddToggle('AntiHalt', {
+    Text = "Bypass Halt",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Halt', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.AntiHalt = Value
+        if Value == true then 
+            game:GetService("ReplicatedStorage").ClientModules.EntityModules:FindFirstChild("Shade").Parent = game:GetService("ReplicatedStorage").ClientModules
+        else 
+            game:GetService("ReplicatedStorage").ClientModules:FindFirstChild("Shade").Parent = game:GetService("ReplicatedStorage").ClientModules.EntityModules
+        end
+    end
+})
+
+entityBypasses:AddToggle('AntiGlitch', {
+    Text = "Bypass Glitch",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Glitch', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.AntiGlitch = Value
+        if Value == true then 
+            game:GetService("ReplicatedStorage").ClientModules.EntityModules:FindFirstChild("Glitch").Parent = game:GetService("ReplicatedStorage").ClientModules
+        else 
+            game:GetService("ReplicatedStorage").ClientModules:FindFirstChild("Glitch").Parent = game:GetService("ReplicatedStorage").ClientModules.EntityModules
+        end
+    end
+})
+
+entityBypasses:AddToggle('AntiVoid', {
+    Text = "Bypass Void",
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Void', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.AntiVoid = Value
+        if Value == true then 
+            game:GetService("ReplicatedStorage").ClientModules.EntityModules:FindFirstChild("Void").Parent = game:GetService("ReplicatedStorage").ClientModules
+        else 
+            game:GetService("ReplicatedStorage").ClientModules:FindFirstChild("Void").Parent = game:GetService("ReplicatedStorage").ClientModules.EntityModules
+        end
+    end
+})
+
+
+
 
 --antiseekarms
 entityBypasses:AddToggle('antiseekarms', {

@@ -10,10 +10,11 @@ if GlobalESPFolder == nil then
 end
 
 function EspManager:AddEsp(Item,color,Text) 
-    local name = Item.Name
 	print(Item)
 	print(color)
 	print(Text)
+    local name = Item.Name
+
 	local esp_folder = GlobalESPFolder:FindFirstChild(name)
 	if game.Players:FindFirstChild(name) then
 		esp_folder = GlobalESPFolder:FindFirstChild("PlayerESP")

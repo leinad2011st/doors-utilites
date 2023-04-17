@@ -842,6 +842,12 @@ task.spawn(function()
                     IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
                 end
             end
+        elseif IE.Name=="Bed" then
+            if flags.HidingReach == true then 
+                if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
+                    IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
+                end
+            end
         end
     end
 end)

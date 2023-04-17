@@ -816,7 +816,7 @@ game.Workspace.ChildAdded:Connect(function (child)
                     EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,20,0),"Ambush")
                 end
             elseif child.Name:gsub("Moving","") == "Seek" then 
-                EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"),Color3.fromRGB(255,0,0),"Seek")
+                EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),Color3.fromRGB(255,0,0),"Seek")
             end
                 
     end)
@@ -837,7 +837,16 @@ task.spawn(function()
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
         elseif IE.Name=="Lockpick" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
+        elseif IE.Name=="Vitamins" then 
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Vitamins")
+        elseif IE.Name == "CrucifixOnTheWall" then 
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Crucifix")
+        elseif IE.Name=="LiveHintBook" then 
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
         end
+            
+            
+            
             
             
 

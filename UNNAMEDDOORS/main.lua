@@ -76,6 +76,7 @@ flags.AntiHalt = false
 flags.AntiGlitch = false
 flags.AntiVoid = false
 flags.HidingReach = false
+flags.A100NoLocks = false
 
 
 local eyesspawned = false
@@ -465,6 +466,15 @@ client:AddToggle('HidingReach',{
     end
 })
 
+client:AddToggle('A100NoLocks',{
+    Text = 'A-100 no locks or skelton key',
+    default = false,
+    Tooltip = 'removes',
+    Callback = function(Value)
+        flags.A100NoLocks = Value
+    end
+})
+
 -- client:AddToggle('HidingExitingFix',{
 --     Text = 'Hiding/Exiting Fix',
 --     default = false,
@@ -827,27 +837,31 @@ task.spawn(function()
     for x,IE in pairs(theroom:GetDescendants()) do
         if IE.Name == "KeyObtain" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
-        elseif IE.Name == "Flashlight"then
+        end
+        if IE.Name == "Flashlight"then
             EspManager.AddEsp(IE,Color3.new(1,1,1),"FlashLight")
-        elseif IE.Name=="Battery" then
+        end
+        if IE.Name=="Battery" then
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
-        elseif IE.Name=="Candle" then 
+        end
+        if IE.Name=="Candle" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
-        elseif IE.Name=="Lighter" then 
+        end
+        if IE.Name=="Lighter" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
-        elseif IE.Name=="Lockpick" then 
+        end
+        if IE.Name=="Lockpick" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
-        elseif IE.Name=="Vitamins" then 
+        end
+        if IE.Name=="Vitamins" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Vitamins")
-        elseif IE.Name == "CrucifixOnTheWall" then 
+        end
+        if IE.Name == "CrucifixOnTheWall" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Crucifix")
-        elseif IE.Name=="LiveHintBook" then 
+        end
+        if IE.Name=="LiveHintBook" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
         end
-            
-            
-            
-            
             
 
 
@@ -877,6 +891,8 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
     
         end
     end)
+    if flags.A100NoLocks == true then 
+    end
     --Seek_Arm
     task.spawn(function() 
         wait(0.1)

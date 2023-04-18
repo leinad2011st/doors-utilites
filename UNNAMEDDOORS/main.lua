@@ -862,6 +862,9 @@ task.spawn(function()
         if IE.Name=="LiveHintBook" then 
             EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
         end
+        if IE.Name=="PickupItem" then 
+            EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
+        end
             
 
 

@@ -29,6 +29,7 @@ function EspManager:AddEsp(Item,color,Text)
 
 		local highlight = Instance.new("Highlight",Item)
 		highlight.Adornee = Item
+		highlight.Name = "Charms"
 		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 		highlight.FillColor = Color3.new(0.337255, 0.337255, 0.337255)
 		highlight.OutlineColor = color

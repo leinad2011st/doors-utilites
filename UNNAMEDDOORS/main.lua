@@ -833,66 +833,67 @@ game.Workspace.ChildAdded:Connect(function (child)
 end)
 
 task.spawn(function() 
-    local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
+    local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
     for x,IE in pairs(theroom:GetDescendants()) do
-        if IE.Name == "KeyObtain" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
-        end
-        if IE.Name == "Flashlight"then
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"FlashLight")
-        end
-        if IE.Name=="Battery" then
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
-        end
-        if IE.Name=="Candle" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
-        end
-        if IE.Name=="Lighter" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
-        end
-        if IE.Name=="Lockpick" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
-        end
-        if IE.Name=="Vitamins" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Vitamins")
-        end
-        if IE.Name == "CrucifixOnTheWall" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Crucifix")
-        end
-        if IE.Name=="LiveHintBook" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
-        end
-        if IE.Name=="PickupItem" then 
-            EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
-        end
-            
-
-
-        if IE.Name=="Wardrobe" then 
-            if flags.HidingReach == true then 
-                if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
-                    IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
-                end
-            end
-        elseif IE.Name=="Bed" then
-            if flags.HidingReach == true then 
-                if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
-                    IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
-                end
-            end
+        if i.Name == "KeyObtain" then 
+            EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
         end
     end
 end)
 
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
     task.spawn(function() 
-        local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
-        for x,i in pairs(theroom:GetDescendants()) do
-            if i.Name == "KeyObtain" then 
-                EspManager:AddEsp(i,Color3.new(1,1,1),"KeyObtain")
+        local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
+
+        for x,IE in pairs(theroom:GetDescendants()) do
+            if IE.Name == "KeyObtain" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
             end
+            if IE.Name == "Flashlight"then
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"FlashLight")
+            end
+            if IE.Name=="Battery" then
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
+            end
+            if IE.Name=="Candle" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
+            end
+            if IE.Name=="Lighter" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
+            end
+            if IE.Name=="Lockpick" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
+            end
+            if IE.Name=="Vitamins" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Vitamins")
+            end
+            if IE.Name == "CrucifixOnTheWall" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Crucifix")
+            end
+            if IE.Name=="LiveHintBook" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
+            end
+            if IE.Name=="PickupItem" then 
+                EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
+            end
+                
+        
     
+            if IE.Name=="Wardrobe" then 
+                if flags.HidingReach == true then 
+                    if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
+                        IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
+                    end
+                end
+            elseif IE.Name=="Bed" then
+                if flags.HidingReach == true then 
+                    if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
+                        IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
+                    end
+                end
+            end
         end
+
     end)
     if flags.A100NoLocks == true then 
     end

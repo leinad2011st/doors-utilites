@@ -842,118 +842,119 @@ task.spawn(function()
 end)
 
 workspace.CurrentRooms.ChildAdded:Connect(function(room) 
-    task.spawn(function() 
-        local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
-
-        for x,IE in pairs(theroom:GetDescendants()) do
-            if IE.Name == "KeyObtain" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
-            end
-            if IE.Name == "Flashlight"then
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"FlashLight")
-            end
-            if IE.Name=="Battery" then
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
-            end
-            if IE.Name=="Candle" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
-            end
-            if IE.Name=="Lighter" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
-            end
-            if IE.Name=="Lockpick" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
-            end
-            if IE.Name=="Vitamins" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Vitamins")
-            end
-            if IE.Name == "CrucifixOnTheWall" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Crucifix")
-            end
-            if IE.Name=="LiveHintBook" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
-            end
-            if IE.Name=="PickupItem" then 
-                EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
-            end
-                
-        
-    
-            if IE.Name=="Wardrobe" then 
-                if flags.HidingReach == true then 
-                    if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
-                        IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
-                    end
+        --local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
+        for x,theroom in pairs(workspace.CurrentRooms:GetChildren()) do 
+            for x, IE in pairs(theroom:GetDescendants()) do
+                if IE.Name == "KeyObtain" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
                 end
-            elseif IE.Name=="Bed" then
-                if flags.HidingReach == true then 
-                    if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
-                        IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
-                    end
+                if IE.Name == "Flashlight"then
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"FlashLight")
                 end
-            end
-        end
-
-    end)
-    if flags.A100NoLocks == true then 
-        --A_1000 NO LOCKPICKS OR SKELTON KEY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! MAKE IT
-        if workspace.CurrentRooms:FindFirstChild("60") then 
-            repeat
-                wait(2)
-                workspace.CurrentRooms["60"].RoomsDoor_Entrance.Door.EnterPrompt.Enabled = true
-                workspace.CurrentRooms["60"].RoomsDoor_Entrance.SkullLock.SkullPrompt.Enabled = false
-            until not workspace.CurrentRooms:FindFirstChild("60")
-
-        end 
+                if IE.Name=="Battery" then
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
+                end
+                if IE.Name=="Candle" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
+                end
+                if IE.Name=="Lighter" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
+                end
+                if IE.Name=="Lockpick" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
+                end
+                if IE.Name=="Vitamins" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Vitamins")
+                end
+                if IE.Name == "CrucifixOnTheWall" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Crucifix")
+                end
+                if IE.Name=="LiveHintBook" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
+                end
+                if IE.Name=="PickupItem" then 
+                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
+                end
+                    
+            
         
-    end
-    --Seek_Arm
-    task.spawn(function() 
-        wait(0.1)
-        local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
-        if theroom:FindFirstChild("Assets"):FindFirstChild("Seek_Arm") then
-            if flags.antiseekarms==true then
-                local thing = game:GetService("RunService").RenderStepped:Connect(function() 
-                    for x,i in pairs(room:GetChildren())do 
-                        if i.Name == "Seek_Arm" then 
-                            Debris:AddItem(i,0.01)
+                if IE.Name=="Wardrobe" then 
+                    if flags.HidingReach == true then 
+                        if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
+                            IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
                         end
                     end
-                end)
-                wait(20)
-                thing:Disconnect()
-            end
-        elseif theroom==50 or room == 100 then 
-                local figuresetup = room:WaitForChild("FigureSetup")
-
-                if figuresetup then
-                    local fig = figuresetup:WaitForChild("FigureRagdoll")
-                    task.wait(0.1)
-                    EspManager:AddEsp(fig,Color3.fromRGB(255,25,25),"Figure")
-                end 
-        end
-    end)
-
-
-    -- print("new ROOM: "..room.Name)
-    -- print("well anti dupe = ".. tostring(flags.AntiDupe))
-    for xx,ii in pairs(game.Workspace.CurrentRooms:GetChildren()) do 
-        for x,i in pairs(ii:GetChildren()) do 
-            -- print("ASSET"..i.Name)
-            -- print("new ROOM: "..room.Name)
-            if flags.AntiDupe == true then 
-                -- print("well anti dupe")
-                if i.Name=="Closet" then
-                    -- print("LOAD DELETE hahhahha")
-                    if i:FindFirstChild("DoorFake") then
-                        Debris:AddItem(i:FindFirstChild("DoorFake").Hidden:FindFirstChild("TouchInterest"), 0.01)
-                        print("L BOSO DUPE/SUBSPACE TRIPMINE")
-                    end        
+                elseif IE.Name=="Bed" then
+                    if flags.HidingReach == true then 
+                        if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
+                            IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
+                        end
+                    end
                 end
             end
         end
-    end
+    
+        if flags.A100NoLocks == true then 
+            --A_1000 NO LOCKPICKS OR SKELTON KEY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! MAKE IT
+            if workspace.CurrentRooms:FindFirstChild("60") then 
+                repeat
+                    wait(2)
+                    workspace.CurrentRooms["60"].RoomsDoor_Entrance.Door.EnterPrompt.Enabled = true
+                    workspace.CurrentRooms["60"].RoomsDoor_Entrance.SkullLock.SkullPrompt.Enabled = false
+                until not workspace.CurrentRooms:FindFirstChild("60")
+    
+            end 
+            
+        end
+        --Seek_Arm
+        task.spawn(function() 
+            wait(0.1)
+            local theroom =  workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
+            if theroom:FindFirstChild("Assets"):FindFirstChild("Seek_Arm") then
+                if flags.antiseekarms==true then
+                    local thing = game:GetService("RunService").RenderStepped:Connect(function() 
+                        for x,i in pairs(room:GetChildren())do 
+                            if i.Name == "Seek_Arm" then 
+                                Debris:AddItem(i,0.01)
+                            end
+                        end
+                    end)
+                    wait(20)
+                    thing:Disconnect()
+                end
+            elseif theroom==50 or room == 100 then 
+                    local figuresetup = room:WaitForChild("FigureSetup")
+    
+                    if figuresetup then
+                        local fig = figuresetup:WaitForChild("FigureRagdoll")
+                        task.wait(0.1)
+                        EspManager:AddEsp(fig,Color3.fromRGB(255,25,25),"Figure")
+                    end 
+            end
+        end)
+    
+    
+        -- print("new ROOM: "..room.Name)
+        -- print("well anti dupe = ".. tostring(flags.AntiDupe))
+        for xx,ii in pairs(game.Workspace.CurrentRooms:GetChildren()) do 
+            for x,i in pairs(ii:GetChildren()) do 
+                -- print("ASSET"..i.Name)
+                -- print("new ROOM: "..room.Name)
+                if flags.AntiDupe == true then 
+                    -- print("well anti dupe")
+                    if i.Name=="Closet" then
+                        -- print("LOAD DELETE hahhahha")
+                        if i:FindFirstChild("DoorFake") then
+                            Debris:AddItem(i:FindFirstChild("DoorFake").Hidden:FindFirstChild("TouchInterest"), 0.01)
+                            print("L BOSO DUPE/SUBSPACE TRIPMINE")
+                        end        
+                    end
+                end
+            end
+        end
+    
 end)
+
 
 game:GetService("ProximityPromptService").PromptShown:Connect(function (Prompt)
     if Prompt.Parent.Name=="KeyObtainFake" then

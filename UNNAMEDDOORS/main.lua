@@ -150,11 +150,15 @@ serverMain:AddButton({
         --     FigureremoverThing=game["Run Service"].RenderStepped:Connect(function ()
             local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
             local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
-            if latesetRoom==49 or flags.AntiFigureCutscene==true then 
+            -- if latesetRoom==49 or flags.AntiFigureCutscene==true then 
+            if workspace.CurrentRooms:FindFirstChild("50") then 
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root:ApplyImpulse(0,-1000000,0)
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(0,-1000000,0)
                 local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso
                 local cframe = CFrame.new(ragdollly.Position.X-500,ragdollly.Position.Y-100,ragdollly.Position.Z-500)
                 ragdollly.CFrame=cframe
             end
+            -- end
 
             -- end)
         -- elseif Value==false then 

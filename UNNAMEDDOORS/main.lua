@@ -896,6 +896,16 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
 
     end)
     if flags.A100NoLocks == true then 
+        --A_1000 NO LOCKPICKS OR SKELTON KEY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! MAKE IT
+        if workspace.CurrentRooms:FindFirstChild("60") then 
+            repeat
+                wait(2)
+                workspace.CurrentRooms["60"].RoomsDoor_Entrance.Door.EnterPrompt.Enabled = true
+                workspace.CurrentRooms["60"].RoomsDoor_Entrance.SkullLock.SkullPrompt.Enabled = false
+            until not workspace.CurrentRooms:FindFirstChild("60")
+
+        end 
+        
     end
     --Seek_Arm
     task.spawn(function() 

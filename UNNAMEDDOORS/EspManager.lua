@@ -1,6 +1,4 @@
-local EspManager = {
-	esp=true
-}
+local EspManager = {}
 
 local GlobalESPFolder = game.CoreGui:FindFirstChild("ESPFolder")
 
@@ -9,8 +7,7 @@ if GlobalESPFolder == nil then
 	GlobalESPFolder.Name = "ESPFolder"
 end
 
-function EspManager:AddEsp(Item,color,Text) 
-    local name = Item.Name
+function EspManager:AddEsp(name,Item,color,Text) 
 
 	local esp_folder = GlobalESPFolder:FindFirstChild(name)
 	if game.Players:FindFirstChild(name) then

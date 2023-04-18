@@ -152,8 +152,8 @@ serverMain:AddButton({
             local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
             -- if latesetRoom==49 or flags.AntiFigureCutscene==true then 
             if workspace.CurrentRooms:FindFirstChild("50") then 
-                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root:ApplyImpulse(0,-1000000,0)
-                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(0,-1000000,0)
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(Vector3.new(1, -100000, 1))
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(Vector3.new(1, -100000, 1))
                 local ragdollly = workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso
                 local cframe = CFrame.new(ragdollly.Position.X-500,ragdollly.Position.Y-100,ragdollly.Position.Z-500)
                 ragdollly.CFrame=cframe
@@ -822,15 +822,15 @@ game.Workspace.ChildAdded:Connect(function (child)
             elseif child.Name:gsub("Moving","") == "Rush" then
                 print("RUSHING DOT")
                 if game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,0,0),"Rush")
+                    EspManager:AddEsp("RushMoving",game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,0,0),"Rush")
                 end
             elseif child.Name:gsub("Moving","") == "Ambush" then
                 print("AmbushING DOT")
                 if game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,20,0),"Ambush")
+                    EspManager:AddEsp("AmbushMoving",game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,20,0),"Ambush")
                 end
             elseif child.Name:gsub("Moving","") == "Seek" then 
-                EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),Color3.fromRGB(255,0,0),"Seek")
+                EspManager:AddEsp("SeekMoving",game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),Color3.fromRGB(255,0,0),"Seek")
             end
                 
     end)
@@ -840,7 +840,7 @@ task.spawn(function()
     local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
     for x,IE in pairs(theroom:GetDescendants()) do
         if i.Name == "KeyObtain" then 
-            EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
+            EspManager:AddEsp("KeyObtain",IE,Color3.new(1,1,1),"KeyObtain")
         end
     end
 end)
@@ -849,35 +849,36 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         --local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
         for x,theroom in pairs(workspace.CurrentRooms:GetChildren()) do 
             for x, IE in pairs(theroom:GetDescendants()) do
+                print(IE.Name)
                 if IE.Name == "KeyObtain" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
+                    EspManager.AddEsp("KeyObtain",IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
                 end
                 if IE.Name == "Flashlight"then
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"FlashLight")
+                    EspManager.AddEsp("Flashlight",IE,Color3.new(1,1,1),"FlashLight")
                 end
                 if IE.Name=="Battery" then
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Battery")
+                    EspManager.AddEsp("Battery",IE,Color3.new(1,1,1),"Battery")
                 end
                 if IE.Name=="Candle" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Candle")
+                    EspManager.AddEsp("Candle",IE,Color3.new(1,1,1),"Candle")
                 end
                 if IE.Name=="Lighter" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Lighter")
+                    EspManager.AddEsp("Lighter",IE,Color3.new(1,1,1),"Lighter")
                 end
                 if IE.Name=="Lockpick" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Lockpick")
+                    EspManager.AddEsp("Lockpick",IE,Color3.new(1,1,1),"Lockpick")
                 end
                 if IE.Name=="Vitamins" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Vitamins")
+                    EspManager.AddEsp("Vitamins",IE,Color3.new(1,1,1),"Vitamins")
                 end
                 if IE.Name == "CrucifixOnTheWall" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Crucifix")
+                    EspManager.AddEsp("CrucifixOnTheWall",IE,Color3.new(1,1,1),"Crucifix")
                 end
                 if IE.Name=="LiveHintBook" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
+                    EspManager.AddEsp("LiveHintBook",IE,Color3.new(1,1,1),"Libary Hint Book")
                 end
                 if IE.Name=="PickupItem" then 
-                    EspManager.AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
+                    EspManager.AddEsp("PickupItem",IE,Color3.new(1,1,1),"Libary Paper")
                 end
                     
             
@@ -895,6 +896,7 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                         end
                     end
                 end
+
             end
         end
     

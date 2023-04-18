@@ -138,6 +138,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
 
 
 
+
 -- local FigureremoverThing = nil
 serverMain:AddButton({
     Text = 'Delete Figure',
@@ -851,34 +852,34 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
             for x, IE in pairs(theroom:GetDescendants()) do
                 print(IE.Name)
                 if IE.Name == "KeyObtain" then 
-                    EspManager.AddEsp("KeyObtain",IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
+                    EspManager:AddEsp("KeyObtain",IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
                 end
                 if IE.Name == "Flashlight"then
-                    EspManager.AddEsp("Flashlight",IE,Color3.new(1,1,1),"FlashLight")
+                    EspManager:AddEsp("Flashlight",IE,Color3.new(1,1,1),"FlashLight")
                 end
                 if IE.Name=="Battery" then
-                    EspManager.AddEsp("Battery",IE,Color3.new(1,1,1),"Battery")
+                    EspManager:AddEsp("Battery",IE,Color3.new(1,1,1),"Battery")
                 end
                 if IE.Name=="Candle" then 
-                    EspManager.AddEsp("Candle",IE,Color3.new(1,1,1),"Candle")
+                    EspManager:AddEsp("Candle",IE,Color3.new(1,1,1),"Candle")
                 end
                 if IE.Name=="Lighter" then 
-                    EspManager.AddEsp("Lighter",IE,Color3.new(1,1,1),"Lighter")
+                    EspManager:AddEsp("Lighter",IE,Color3.new(1,1,1),"Lighter")
                 end
                 if IE.Name=="Lockpick" then 
-                    EspManager.AddEsp("Lockpick",IE,Color3.new(1,1,1),"Lockpick")
+                    EspManager:AddEsp("Lockpick",IE,Color3.new(1,1,1),"Lockpick")
                 end
                 if IE.Name=="Vitamins" then 
-                    EspManager.AddEsp("Vitamins",IE,Color3.new(1,1,1),"Vitamins")
+                    EspManager:AddEsp("Vitamins",IE,Color3.new(1,1,1),"Vitamins")
                 end
                 if IE.Name == "CrucifixOnTheWall" then 
-                    EspManager.AddEsp("CrucifixOnTheWall",IE,Color3.new(1,1,1),"Crucifix")
+                    EspManager:AddEsp("CrucifixOnTheWall",IE,Color3.new(1,1,1),"Crucifix")
                 end
                 if IE.Name=="LiveHintBook" then 
-                    EspManager.AddEsp("LiveHintBook",IE,Color3.new(1,1,1),"Libary Hint Book")
+                    EspManager:AddEsp("LiveHintBook",IE,Color3.new(1,1,1),"Libary Hint Book")
                 end
                 if IE.Name=="PickupItem" then 
-                    EspManager.AddEsp("PickupItem",IE,Color3.new(1,1,1),"Libary Paper")
+                    EspManager:AddEsp("PickupItem",IE,Color3.new(1,1,1),"Libary Paper")
                 end
                     
             

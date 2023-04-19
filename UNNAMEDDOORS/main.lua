@@ -47,7 +47,9 @@ local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
     Server = Window:AddTab('Server'),
+    ["Visuals"] = Window:AddTab('configs'),
     ['configs'] = Window:AddTab('configs'),
+
 }
 
 local ishardmode = false
@@ -88,6 +90,40 @@ local client = Tabs.Main:AddLeftGroupbox('client')
 local entityBypasses = Tabs.Main:AddLeftGroupbox('Entity Bypasses')
 
 local serverMain = Tabs.Server:AddLeftGroupbox('Main')
+
+local ESPSettings = tabs.Visuals:AddLeftGroupbox('ESP Settings')
+
+
+local VisualsSettings = {
+    Rush = {
+        ESP = true
+    },
+    Ambush = {
+        ESP = true
+    },
+    Key = {
+        ESP = true
+    },
+    Lever = {
+        ESP = true
+    },
+    Seek = {
+        ESP = true
+    },
+    Door = {
+        ESP = true
+    },
+    Items = {
+        ESP = true
+    },
+    Crucifix = {
+        ESP = true
+    },
+    HintBook = {
+        ESP = true
+    }
+}
+
 
 local figurething = nil
 serverMain:AddToggle('OpenDoor50NoCutscene', {
@@ -820,6 +856,93 @@ game["Run Service"].RenderStepped:Connect(function(dealta)
     end 
 end)
 
+
+
+
+ESPSettings:AddToggle('RushESP', {
+    Text = 'Rush ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Rush.ESP = Value
+    end
+})
+
+ESPSettings:AddToggle('AmbushESP', {
+    Text = 'Ambush ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Ambush.ESP = Value
+    end
+})
+
+ESPSettings:AddToggle('SeekESP', {
+    Text = 'Seek ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Seek.ESP = Value
+    end
+})
+
+ESPSettings:AddToggle('KeyESP', {
+    Text = 'Key ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Key.ESP = Value
+    end
+})
+
+ESPSettings:AddToggle('LeverESP', {
+    Text = 'Lever ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Lever.ESP = Value
+    end
+})
+
+ESPSettings:AddToggle('ItemsESP', {
+    Text = 'Items ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Items.ESP = Value
+    end
+})
+
+ESPSettings:AddToggle('BooksESP', {
+    Text = 'Hint Book ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.HintBook.ESP = Value
+    end
+})
+
+ESPSettings:AddToggle('CrucifixESP', {
+    Text = 'Crucifix ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Crucifix.ESP = Value
+    end
+})
+
+
+ESPSettings:AddToggle('DoorESP', {
+    Text = 'Door ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Door.ESP = Value
+    end
+})
+
+
+
 game.Workspace.ChildAdded:Connect(function (child) 
     -- if flags.BananaBypass==true then
     --     if child.Name=="BananaPeel" then 
@@ -849,16 +972,22 @@ game.Workspace.ChildAdded:Connect(function (child)
             end
             elseif child.Name:gsub("Moving","") == "Rush" then
                 print("RUSHING DOT")
+                if VisualsSettings.Rush.ESP == true then 
                 -- if game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
                     EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),Color3.fromRGB(255,0,0),"Rush", false)
+                end
                 -- end
             elseif child.Name:gsub("Moving","") == "Ambush" then
-                print("AmbushING DOT")
+                if VisualsSettings.Ambush.ESP == true then 
+                    print("AmbushING DOT")
                 -- if game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"),Color3.fromRGB(255,20,0),"Ambush",false)
+                    EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"),Color3.fromRGB(255,20,0),"Ambush",false) 
+                end
                 -- end
-            elseif child.Name:gsub("Moving","") == "Seek" then 
-                EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),Color3.fromRGB(255,0,0),"Seek",false)
+            elseif child.Name:gsub("Moving","") == "Seek" then
+                if VisualsSettings.Seek.ESP == true then  
+                    EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),Color3.fromRGB(255,0,0),"Seek",false) 
+                end
             end
                 
     end)
@@ -868,7 +997,7 @@ task.spawn(function()
     local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
     for x,IE in pairs(theroom:GetDescendants()) do
         if IE.Name == "KeyObtain" then 
-            EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
+            EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain") 
         end
     end
 end)
@@ -878,37 +1007,49 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         for x,theroom in pairs(workspace.CurrentRooms:GetChildren()) do 
             for x, IE in pairs(theroom:GetDescendants()) do
                 if IE.Name == "KeyObtain" and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
+                    if VisualsSettings.Key.ESP == true then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name)) 
+                    end
                 end
                 if IE.Name == "LeverForGate" and IE:IsA("Model") then  
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Lever ".. tostring(tonumber(IE.Parent.Parent.Name)+1) )
+                    if VisualsSettings.Lever.ESP == true then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Lever ".. tostring(tonumber(IE.Parent.Parent.Name)+1) ) 
+                    end
                 end
-                if IE.Name == "Flashlight" and IE:IsA("Model") then
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"FlashLight")
-                end
-                if IE.Name=="Battery" and IE:IsA("Model") then
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Battery")
-                end
-                if IE.Name=="Candle" and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Candle")
-                end
-                if IE.Name=="Lighter" and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Lighter")
-                end
-                if IE.Name=="Lockpick" and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Lockpick")
-                end
-                if IE.Name=="Vitamins" and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Vitamins")
+                if VisualsSettings.Items.ESP == true then 
+                    if IE.Name == "Flashlight" and IE:IsA("Model") then
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"FlashLight")
+                    end
+                    if IE.Name=="Battery" and IE:IsA("Model") then
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Battery")
+                    end
+                    if IE.Name=="Candle" and IE:IsA("Model") then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Candle")
+                    end
+                    if IE.Name=="Lighter" and IE:IsA("Model") then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Lighter")
+                    end
+                    if IE.Name=="Lockpick" and IE:IsA("Model") then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Lockpick")
+                    end
+                    if IE.Name=="Vitamins" and IE:IsA("Model") then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Vitamins")
+                    end
                 end
                 if IE.Name == "CrucifixOnTheWall"  and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Crucifix")
+                    if VisualsSettings.Crucifix.ESP == true then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Crucifix") 
+                    end
                 end
                 if IE.Name=="LiveHintBook" and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
+                    if VisualsSettings.HintBook.ESP == true then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book") 
+                    end
                 end
                 if IE.Name=="PickupItem" and IE:IsA("Model") then 
-                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
+                    if VisualsSettings.HintBook.ESP == true then 
+                        EspManager:AddEsp(IE,Color3.new(1,1,1),"Libary Paper") 
+                    end
                 end
                     
             

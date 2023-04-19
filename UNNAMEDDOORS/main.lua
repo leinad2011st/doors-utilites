@@ -822,14 +822,14 @@ game.Workspace.ChildAdded:Connect(function (child)
             end
             elseif child.Name:gsub("Moving","") == "Rush" then
                 print("RUSHING DOT")
-                if game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,0,0),"Rush")
-                end
+                -- if game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
+                    EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),Color3.fromRGB(255,0,0),"Rush")
+                -- end
             elseif child.Name:gsub("Moving","") == "Ambush" then
                 print("AmbushING DOT")
-                if game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew"),Color3.fromRGB(255,20,0),"Ambush")
-                end
+                -- if game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
+                    EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"),Color3.fromRGB(255,20,0),"Ambush")
+                -- end
             elseif child.Name:gsub("Moving","") == "Seek" then 
                 EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),Color3.fromRGB(255,0,0),"Seek")
             end
@@ -840,8 +840,8 @@ end)
 task.spawn(function() 
     local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
     for x,IE in pairs(theroom:GetDescendants()) do
-        if i.Name == "KeyObtain" then 
-            EspManager:AddEsp("KeyObtain",IE,Color3.new(1,1,1),"KeyObtain")
+        if IE.Name == "KeyObtain" then 
+            EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain")
         end
     end
 end)

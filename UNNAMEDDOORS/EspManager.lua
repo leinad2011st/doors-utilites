@@ -64,18 +64,18 @@ function EspManager:AddEsp(Item,color,Text, esp)
 			--pcall(function() table.remove(boxes, table.find(boxes, bill)) end)
 			bill:Destroy() 
 		end)
-		if esp~=false then 
-			highlight.Destroying:Connect(function() 
-				if highlight.Adornee ~= nil or highlight.Adornee:IsDescendantOf(workspace) then 
-					local highlight = Instance.new("Highlight",Item)
-					highlight.Adornee = Item
-					highlight.Name = "Charms"
-					highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-					highlight.FillColor = Color3.new(0.337255, 0.337255, 0.337255)
-					highlight.OutlineColor = color
-				end
-			end) 
-		end
+		-- if esp~=false then 
+		-- 	highlight.Destroying:Connect(function() 
+		-- 		if highlight.Adornee ~= nil or highlight.Adornee:IsDescendantOf(workspace) then 
+		-- 			local highlight = Instance.new("Highlight",Item)
+		-- 			highlight.Adornee = Item
+		-- 			highlight.Name = "Charms"
+		-- 			highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+		-- 			highlight.FillColor = Color3.new(0.337255, 0.337255, 0.337255)
+		-- 			highlight.OutlineColor = color
+		-- 		end
+		-- 	end) 
+		-- end
 		--while bill do
 		--	if bill.Adornee == nil or not bill.Adornee:IsDescendantOf(workspace) then
 		--		bill.Enabled = false

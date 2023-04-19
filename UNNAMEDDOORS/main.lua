@@ -182,10 +182,10 @@ serverMain:AddButton({
             local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
             -- if latesetRoom==49 or flags.AntiFigureCutscene==true then 
             if workspace.CurrentRooms:FindFirstChild("50") then 
-                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(Vector3.new(10000, 100000, 1000000))
-                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(Vector3.new(10000, 100000, 1000000))
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Root:ApplyImpulse(Vector3.new(10000, 9999999, 1000000))
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(Vector3.new(10000, 9999999, 1000000))
             end
-            -- end
+            -- end 
 
             -- end)
         -- elseif Value==false then 

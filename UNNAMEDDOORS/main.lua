@@ -853,6 +853,9 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                 if IE.Name == "KeyObtain" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
                 end
+                if IE.Name == "LeverForGate" and IE:IsA("Model") then  
+                    EspManager:AddEsp(IE,Color3.new(1,1,1),"Lever "..IE.Parent.Parent.Name)
+                end
                 if IE.Name == "Flashlight" and IE:IsA("Model") then
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"FlashLight")
                 end

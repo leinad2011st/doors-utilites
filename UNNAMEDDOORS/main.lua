@@ -850,35 +850,34 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         --local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
         for x,theroom in pairs(workspace.CurrentRooms:GetChildren()) do 
             for x, IE in pairs(theroom:GetDescendants()) do
-                print(IE.Name)
-                if IE.Name == "KeyObtain" then 
+                if IE.Name == "KeyObtain" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain"..tostring(theroom.Name))
                 end
-                if IE.Name == "Flashlight"then
+                if IE.Name == "Flashlight" and IE:IsA("Model") then
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"FlashLight")
                 end
-                if IE.Name=="Battery" then
+                if IE.Name=="Battery" and IE:IsA("Model") then
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Battery")
                 end
-                if IE.Name=="Candle" then 
+                if IE.Name=="Candle" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Candle")
                 end
-                if IE.Name=="Lighter" then 
+                if IE.Name=="Lighter" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Lighter")
                 end
-                if IE.Name=="Lockpick" then 
+                if IE.Name=="Lockpick" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Lockpick")
                 end
-                if IE.Name=="Vitamins" then 
+                if IE.Name=="Vitamins" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Vitamins")
                 end
-                if IE.Name == "CrucifixOnTheWall" then 
+                if IE.Name == "CrucifixOnTheWall"  and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Crucifix")
                 end
-                if IE.Name=="LiveHintBook" then 
+                if IE.Name=="LiveHintBook" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Libary Hint Book")
                 end
-                if IE.Name=="PickupItem" then 
+                if IE.Name=="PickupItem" and IE:IsA("Model") then 
                     EspManager:AddEsp(IE,Color3.new(1,1,1),"Libary Paper")
                 end
                     

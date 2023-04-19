@@ -170,6 +170,33 @@ serverMain:AddButton({
 })
 
 serverMain:AddButton({
+    Text = 'Delete Figure 2.0',
+    Tooltip = 'only works during the cutscene', -- Information shown when you hover over the toggle
+    DoubleClick = false,
+    Func = function(Value)
+        print("CALL")
+        -- flags.AntiFigureCutscene = Value
+        -- if Value==true then 
+        --     FigureremoverThing=game["Run Service"].RenderStepped:Connect(function ()
+            local latesetRoom=game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
+            local Room = game.Workspace.CurrentRooms:FindFirstChild(latesetRoom)
+            -- if latesetRoom==49 or flags.AntiFigureCutscene==true then 
+            if workspace.CurrentRooms:FindFirstChild("50") then 
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(Vector3.new(10000, 100000, 1000000))
+                workspace.CurrentRooms["50"].FigureSetup.FigureRagdoll.Torso:ApplyImpulse(Vector3.new(10000, 100000, 1000000))
+            end
+            -- end
+
+            -- end)
+        -- elseif Value==false then 
+        --     FigureremoverThing:Disconnect()
+        --     FigureremoverThing = nil
+        -- end
+    end
+})
+
+
+serverMain:AddButton({
     Text = "Agressive Figure",
     Tooltip = 'only works after opening door 50',
     DoubleClick = false,

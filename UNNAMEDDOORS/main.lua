@@ -96,31 +96,40 @@ local ESPSettings = tabs.Visuals:AddLeftGroupbox('ESP Settings')
 
 local VisualsSettings = {
     Rush = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,0,0)
     },
     Ambush = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,25,0)
     },
     Key = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,255,255)
     },
     Lever = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,255,255)
     },
     Seek = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,0,0)
     },
     Door = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,255,255)
     },
     Items = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,255,255)
     },
     Crucifix = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,255,255)
     },
     HintBook = {
-        ESP = true
+        ESP = true,
+        ESPColor = Color3.fromRGB(255,255,255)
     }
 }
 
@@ -868,12 +877,32 @@ ESPSettings:AddToggle('RushESP', {
     end
 })
 
+ESPSettings:AddColorPicker('RushESPColor', {
+    Default = VisualsSettings.Rush.ESPColor, -- Bright green
+    Title = 'Rush ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Rush.ESPColor = Value
+    end
+})
+
 ESPSettings:AddToggle('AmbushESP', {
     Text = 'Ambush ESP',
     Default = true, -- Default value (true / false)
     Tooltip = '',
     Callback = function(Value) 
         VisualsSettings.Ambush.ESP = Value
+    end
+})
+
+ESPSettings:AddColorPicker('AmbushESPColor', {
+    Default = VisualsSettings.Ambush.ESPColor, -- Bright green
+    Title = 'Ambush ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Ambush.ESPColor = Value
     end
 })
 
@@ -886,12 +915,32 @@ ESPSettings:AddToggle('SeekESP', {
     end
 })
 
+ESPSettings:AddColorPicker('SeekESPColor', {
+    Default = VisualsSettings.Seek.ESPColor, -- Bright green
+    Title = 'Seek ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Seek.ESPColor = Value
+    end
+})
+
 ESPSettings:AddToggle('KeyESP', {
     Text = 'Key ESP',
     Default = true, -- Default value (true / false)
     Tooltip = '',
     Callback = function(Value) 
         VisualsSettings.Key.ESP = Value
+    end
+})
+
+ESPSettings:AddColorPicker('KeyESPColor', {
+    Default = VisualsSettings.Key.ESPColor, -- Bright green
+    Title = 'Key ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Key.ESPColor = Value
     end
 })
 
@@ -904,12 +953,32 @@ ESPSettings:AddToggle('LeverESP', {
     end
 })
 
+ESPSettings:AddColorPicker('LeverESPColor', {
+    Default = VisualsSettings.Lever.ESPColor, -- Bright green
+    Title = 'Lever ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Lever.ESPColor = Value
+    end
+})
+
 ESPSettings:AddToggle('ItemsESP', {
     Text = 'Items ESP',
     Default = true, -- Default value (true / false)
     Tooltip = '',
     Callback = function(Value) 
         VisualsSettings.Items.ESP = Value
+    end
+})
+
+ESPSettings:AddColorPicker('ItemsESPColor', {
+    Default = VisualsSettings.Items.ESPColor, -- Bright green
+    Title = 'Items ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Items.ESPColor = Value
     end
 })
 
@@ -922,6 +991,17 @@ ESPSettings:AddToggle('BooksESP', {
     end
 })
 
+ESPSettings:AddColorPicker('BooksESPColor', {
+    Default = VisualsSettings.HintBook.ESPColor, -- Bright green
+    Title = 'Hint Book ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.HintBook.ESPColor = Value
+    end
+})
+
+
 ESPSettings:AddToggle('CrucifixESP', {
     Text = 'Crucifix ESP',
     Default = true, -- Default value (true / false)
@@ -931,6 +1011,17 @@ ESPSettings:AddToggle('CrucifixESP', {
     end
 })
 
+ESPSettings:AddColorPicker('CrucifixESPColor', {
+    Default = VisualsSettings.Crucifix.ESPColor, -- Bright green
+    Title = 'Crucifix ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Crucifix.ESPColor = Value
+    end
+})
+
+
 
 ESPSettings:AddToggle('DoorESP', {
     Text = 'Door ESP',
@@ -938,6 +1029,17 @@ ESPSettings:AddToggle('DoorESP', {
     Tooltip = '',
     Callback = function(Value) 
         VisualsSettings.Door.ESP = Value
+    end
+})
+
+
+ESPSettings:AddColorPicker('DoorESPColor', {
+    Default = VisualsSettings.Door.ESPColor, -- Bright green
+    Title = 'Door ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Door.ESPColor = Value
     end
 })
 

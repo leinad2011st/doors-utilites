@@ -1112,7 +1112,7 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
             for x, IE in pairs(theroom:GetDescendants()) do
                 if IE.Name == "KeyObtain" and IE:IsA("Model") then 
                     if VisualsSettings.Key.ESP == true then 
-                        EspManager:AddEsp(IE,VisualsSettings.Key.ESPColor,"KeyObtain"..tostring(theroom.Name)) 
+                        EspManager:AddEsp(IE,VisualsSettings.Key.ESPColor,"KeyObtain"..tostring(tonumber(theroom.Name)+1 )) 
                     end
                 end
                 if IE.Name == "LeverForGate" and IE:IsA("Model") then  

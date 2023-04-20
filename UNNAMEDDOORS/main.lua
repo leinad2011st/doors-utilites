@@ -47,7 +47,7 @@ local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
     Server = Window:AddTab('Server'),
-    Visuals = Window:AddTab('configs'),
+    Visuals = Window:AddTab('Visuals'),
     ['configs'] = Window:AddTab('configs'),
 
 }
@@ -877,7 +877,7 @@ ESPSettings:AddToggle('RushESP', {
     end
 })
 
-ESPSettings:AddColorPicker('RushESPColor', {
+ESPSettings:AddLabel('RushESP'):AddColorPicker('RushESPColor', {
     Default = VisualsSettings.Rush.ESPColor, -- Bright green
     Title = 'Rush ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -896,7 +896,7 @@ ESPSettings:AddToggle('AmbushESP', {
     end
 })
 
-ESPSettings:AddColorPicker('AmbushESPColor', {
+ESPSettings:AddLabel('Ambush ESP'):AddColorPicker('AmbushESPColor', {
     Default = VisualsSettings.Ambush.ESPColor, -- Bright green
     Title = 'Ambush ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -915,7 +915,7 @@ ESPSettings:AddToggle('SeekESP', {
     end
 })
 
-ESPSettings:AddColorPicker('SeekESPColor', {
+ESPSettings:AddLabel('Seek Color'):AddColorPicker('SeekESPColor', {
     Default = VisualsSettings.Seek.ESPColor, -- Bright green
     Title = 'Seek ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -934,7 +934,7 @@ ESPSettings:AddToggle('KeyESP', {
     end
 })
 
-ESPSettings:AddColorPicker('KeyESPColor', {
+ESPSettings:AddLabel('Key Color'):AddColorPicker('KeyESPColor', {
     Default = VisualsSettings.Key.ESPColor, -- Bright green
     Title = 'Key ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -953,7 +953,7 @@ ESPSettings:AddToggle('LeverESP', {
     end
 })
 
-ESPSettings:AddColorPicker('LeverESPColor', {
+ESPSettings:AddLabel('Lever ESP Color'):AddColorPicker('LeverESPColor', {
     Default = VisualsSettings.Lever.ESPColor, -- Bright green
     Title = 'Lever ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -972,7 +972,7 @@ ESPSettings:AddToggle('ItemsESP', {
     end
 })
 
-ESPSettings:AddColorPicker('ItemsESPColor', {
+ESPSettings:AddLabel('ItemsESPColor'):AddColorPicker('ItemsESPColor', {
     Default = VisualsSettings.Items.ESPColor, -- Bright green
     Title = 'Items ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -991,7 +991,7 @@ ESPSettings:AddToggle('BooksESP', {
     end
 })
 
-ESPSettings:AddColorPicker('BooksESPColor', {
+ESPSettings:AddLabel('HintBookESP'):AddColorPicker('BooksESPColor', {
     Default = VisualsSettings.HintBook.ESPColor, -- Bright green
     Title = 'Hint Book ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -1011,7 +1011,7 @@ ESPSettings:AddToggle('CrucifixESP', {
     end
 })
 
-ESPSettings:AddColorPicker('CrucifixESPColor', {
+ESPSettings:AddLabel('CrucifixESP'):AddColorPicker('CrucifixESPColor', {
     Default = VisualsSettings.Crucifix.ESPColor, -- Bright green
     Title = 'Crucifix ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -1033,7 +1033,7 @@ ESPSettings:AddToggle('DoorESP', {
 })
 
 
-ESPSettings:AddColorPicker('DoorESPColor', {
+ESPSettings:AddLabel('DoorESPColor'):AddColorPicker('DoorESPColor', {
     Default = VisualsSettings.Door.ESPColor, -- Bright green
     Title = 'Door ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)

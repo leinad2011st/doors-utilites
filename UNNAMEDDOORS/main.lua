@@ -47,7 +47,7 @@ local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
     Server = Window:AddTab('Server'),
-    ["Visuals"] = Window:AddTab('configs'),
+    Visuals = Window:AddTab('configs'),
     ['configs'] = Window:AddTab('configs'),
 
 }

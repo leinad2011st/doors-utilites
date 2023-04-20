@@ -25,7 +25,7 @@ function EspManager:AddEsp(Item,color,Text, esp)
 		esp_folder.Name = name
 	end
 	if esp~=false then 
-		local highlight = Instance.new("Highlight",Item)
+		local highlight = Instance.new("Highlight",esp_folder)
 		highlight.Adornee = Item
 		highlight.Name = "Charms"
 		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop

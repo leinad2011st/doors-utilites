@@ -91,7 +91,7 @@ local entityBypasses = Tabs.Main:AddLeftGroupbox('Entity Bypasses')
 
 local serverMain = Tabs.Server:AddLeftGroupbox('Main')
 
-local ESPSettings = tabs.Visuals:AddLeftGroupbox('ESP Settings')
+local ESPSettings = Tabs.Visuals:AddLeftGroupbox('ESP Settings')
 
 
 local VisualsSettings = {

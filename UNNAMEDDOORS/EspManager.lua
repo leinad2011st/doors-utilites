@@ -10,6 +10,9 @@ end
 function EspManager:AddEsp(Item,color,Text, esp) 
     local name = Item.Name
 
+	local highlight
+
+
 	local esp_folder = GlobalESPFolder:FindFirstChild(name)
 	if game.Players:FindFirstChild(name) then
 		esp_folder = GlobalESPFolder:FindFirstChild("PlayerESP")
@@ -25,13 +28,14 @@ function EspManager:AddEsp(Item,color,Text, esp)
 		esp_folder.Name = name
 	end
 	if esp~=false then 
-		local highlight = Instance.new("Highlight",esp_folder)
+		highlight = Instance.new("Highlight",esp_folder)
 		highlight.Adornee = Item
 		highlight.Name = "Charms"
 		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 		highlight.FillColor = Color3.new(0.337255, 0.337255, 0.337255)
 		highlight.OutlineColor = color
 	end
+	
 	--TRACER
 	bill = Instance.new("BillboardGui", esp_folder)
 	bill.AlwaysOnTop = true
@@ -64,18 +68,28 @@ function EspManager:AddEsp(Item,color,Text, esp)
 			--pcall(function() table.remove(boxes, table.find(boxes, bill)) end)
 			bill:Destroy() 
 		end)
-		-- if esp~=false then 
-		-- 	highlight.Destroying:Connect(function() 
-		-- 		if highlight.Adornee ~= nil or highlight.Adornee:IsDescendantOf(workspace) then 
-		-- 			local highlight = Instance.new("Highlight",Item)
-		-- 			highlight.Adornee = Item
-		-- 			highlight.Name = "Charms"
-		-- 			highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-		-- 			highlight.FillColor = Color3.new(0.337255, 0.337255, 0.337255)
-		-- 			highlight.OutlineColor = color
-		-- 		end
-		-- 	end) 
-		-- end
+		if esp~=false then 
+			if highlight then 
+				highlight.Adornee.Destroying:Connect(function() 
+					highlight.Enabled=false
+					highlight.Adornee = nil
+					highlight:Destroy()
+				end) 
+			end
+		end
+		while bill do 
+			wait(5)
+			if not bill.Adornee:IsDescendantOf(workspace) then
+				bill.Enabled = false
+				bill.Adornee = nil
+				bill:Destroy() 
+				if highlight then 
+					highlight.Enabled=false
+					highlight.Adornee = nil
+					highlight:Destroy()
+				end
+			end
+		end
 		--while bill do
 		--	if bill.Adornee == nil or not bill.Adornee:IsDescendantOf(workspace) then
 		--		bill.Enabled = false

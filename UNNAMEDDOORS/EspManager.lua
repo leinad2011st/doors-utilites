@@ -79,7 +79,7 @@ function EspManager:AddEsp(Item,color,Text, esp)
 		end
 		while bill do 
 			wait(5)
-			if not bill then
+			if not bill.Adornee then
 				bill.Enabled = false
 				bill.Adornee = nil
 				bill:Destroy() 

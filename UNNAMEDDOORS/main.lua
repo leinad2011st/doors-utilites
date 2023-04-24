@@ -1103,6 +1103,11 @@ task.spawn(function()
         if IE.Name == "KeyObtain" then 
             EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain") 
         end
+        if IE.Name=="Door" and IE:IsA("Model") then 
+            if VisualsSettings.Door.ESP == true then 
+                EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door") 
+            end
+        end
     end
 end)
 
@@ -1155,6 +1160,12 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                         EspManager:AddEsp(IE,VisualsSettings.HintBook.ESPColor,"Libary Paper") 
                     end
                 end
+
+                if IE.Name=="Door" and IE:IsA("Model") then 
+                    if VisualsSettings.Door.ESP == true then 
+                        EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door") 
+                    end
+                end
                     
             
         
@@ -1176,14 +1187,12 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
         end
     
         if flags.A100NoLocks == true then 
-            --A_1000 NO LOCKPICKS OR SKELTON KEY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! MAKE IT
             if workspace.CurrentRooms:FindFirstChild("60") then 
                 repeat
                     wait(2)
                     workspace.CurrentRooms["60"].RoomsDoor_Entrance.Door.EnterPrompt.Enabled = true
                     workspace.CurrentRooms["60"].RoomsDoor_Entrance.SkullLock.SkullPrompt.Enabled = false
                 until not workspace.CurrentRooms:FindFirstChild("60")
-    
             end 
             
         end

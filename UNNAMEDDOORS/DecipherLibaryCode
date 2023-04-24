@@ -75,7 +75,6 @@ function Decipher:DecipherCode ()
                             for i,img in pairs(hints:GetChildren()) do
                                 if img:IsA("ImageLabel") and img.Visible and v.ImageRectOffset == img.ImageRectOffset then
                                     local num = img:FindFirstChild("TextLabel").Text
-            
                                     code[tonumber(v.Name)] = num 
                                 end
                             end
@@ -84,7 +83,7 @@ function Decipher:DecipherCode ()
                 end
             end
         end
-    end
+    end 
 
     return code
 end

@@ -361,8 +361,8 @@ end
 
 
 
-_G.Keybind = "N"
-_G.IncludeNoclip = true
+local Keybind = "N"
+-- _G.IncludeNoclip = true
 
 local isEnabled = false
 
@@ -393,7 +393,7 @@ end
 UIS.InputBegan:Connect(function(input, gp)
     if gp then return end
 
-    if input.KeyCode == Enum.KeyCode[_G.Keybind] then
+    if input.KeyCode == Enum.KeyCode[Keybind] then
         ToggleNoclip()
         task.wait()
     end
@@ -401,10 +401,10 @@ end)
 
 game:GetService("RunService").RenderStepped:Connect(function()
     if not Char:FindFirstChild("HumanoidRootPart") then return end
-    if _G.IncludeNoclip then
+    -- if _G.IncludeNoclip then
         Char.HumanoidRootPart.CanCollide = not isEnabled
         Char.Collision.CanCollide = not isEnabled
-    end
+    -- end
 
     local HrpCFrame = Char.HumanoidRootPart.CFrame
 

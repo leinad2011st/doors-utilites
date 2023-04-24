@@ -10,6 +10,7 @@ end
 
 
 function EspManager:AddEsp(Item,color,Text, esp) 
+
     local name = Item.Name
 
 	local highlight
@@ -32,6 +33,19 @@ function EspManager:AddEsp(Item,color,Text, esp)
 		esp_folder.Parent = GlobalESPFolder
 		esp_folder.Name = name
 	end
+	task.spawn(function() 
+		
+		for XX,espPP_folder in pairs(GlobalESPFolder:GetChildren()) do 
+			local tabel = {}
+			for x,i in pairs(espPP_folder:GetChildren()) do 
+				if not table.find(tabel,i) then 
+					table.insert(tabel,i)
+				else 
+					i:Destroy()
+				end
+			end
+		end
+	end)
 	if esp~=false then 
 		highlight = Instance.new("Highlight",esp_folder)
 		highlight.Adornee = Item

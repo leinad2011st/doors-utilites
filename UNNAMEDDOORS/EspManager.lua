@@ -7,10 +7,15 @@ if GlobalESPFolder == nil then
 	GlobalESPFolder.Name = "ESPFolder"
 end
 
+
+
 function EspManager:AddEsp(Item,color,Text, esp) 
     local name = Item.Name
 
 	local highlight
+
+
+
 
 
 	local esp_folder = GlobalESPFolder:FindFirstChild(name)
@@ -34,6 +39,17 @@ function EspManager:AddEsp(Item,color,Text, esp)
 		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 		highlight.FillColor = Color3.new(0.337255, 0.337255, 0.337255)
 		highlight.OutlineColor = color
+		game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.PromptServiceHint.Highlight.AttributeChanged:Connect(function (attr) 
+			if attr == "Enabled" then 
+				if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.PromptServiceHint.Highlight.Enabled==true then 
+					if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.PromptServiceHint.Highlight.Adornee == Item then 
+						game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.PromptServiceHint.Highlight.AttributeChanged:Wait()
+						wait(0.1)
+						highlight.Enabled=true
+					end 
+				end 
+			end 
+		end)
 	end
 	
 	--TRACER

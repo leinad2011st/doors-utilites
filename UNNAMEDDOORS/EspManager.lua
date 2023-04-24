@@ -44,7 +44,7 @@ function EspManager:AddEsp(Item,color,Text, esp)
 				if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.PromptServiceHint.Highlight.Enabled==true then 
 					if game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.PromptServiceHint.Highlight.Adornee == Item then 
 						game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.PromptServiceHint.Highlight.AttributeChanged:Wait()
-						wait(0.1)
+						wait(0.5)
 						highlight.Enabled=true
 					end 
 				end 

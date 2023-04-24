@@ -79,7 +79,7 @@ function EspManager:AddEsp(Item,color,Text, esp)
 		end
 		while bill do 
 			wait(5)
-			-- if not bill.Adornee:IsDescendantOf(workspace) then
+			if not bill then
 				bill.Enabled = false
 				bill.Adornee = nil
 				bill:Destroy() 
@@ -88,7 +88,7 @@ function EspManager:AddEsp(Item,color,Text, esp)
 					highlight.Adornee = nil
 					highlight:Destroy()
 				end
-			-- end
+			end
 		end
 		--while bill do
 		--	if bill.Adornee == nil or not bill.Adornee:IsDescendantOf(workspace) then

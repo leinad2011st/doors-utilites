@@ -37,7 +37,7 @@ function EspManager:AddEsp(Item,color,Text, esp)
 	end
 	
 	--TRACER
-	bill = Instance.new("BillboardGui", esp_folder)
+	local bill = Instance.new("BillboardGui", esp_folder)
 	bill.AlwaysOnTop = true
 	bill.Size = UDim2.new(0,400,0,100)
 	bill.Adornee = Item

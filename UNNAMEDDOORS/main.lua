@@ -1166,7 +1166,7 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
 
                 if IE.Name=="Door" and IE:IsA("MeshPart") then 
                     if VisualsSettings.Door.ESP == true then 
-                        EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door") 
+                        EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
                     end
                 end
                     

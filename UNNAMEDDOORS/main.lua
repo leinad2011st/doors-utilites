@@ -1184,6 +1184,9 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                     if IE.Name=="Vitamins" and IE:IsA("Model") then 
                         EspManager:AddEsp(IE,VisualsSettings.Items.ESPColor,"Vitamins")
                     end
+                    if IE.Name=="SkeletonKey" and IE:IsA("Model") then 
+                        EspManager:AddEsp(IE,VisualsSettings.Items.ESPColor,"SkeletonKey")
+                    end
                 end
                 if IE.Name == "CrucifixOnTheWall"  and IE:IsA("Model") then 
                     if VisualsSettings.Crucifix.ESP == true then 

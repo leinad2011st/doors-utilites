@@ -1207,7 +1207,7 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                             if VisualsSettings.Door.ShowRoomName == false then 
                                 EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
                             else 
-                                EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..theroom:GetAttribute("OriginalName").." ["..tostring(tonumber(theroom.Name)+1).."]") 
+                                EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..workspace.CurrentRooms:FindFirstChild(tostring(tonumber(theroom)+1)):GetAttribute("OriginalName").." ["..tostring(tonumber(theroom.Name)+1).."]") 
                             end
                         end
                     else 

@@ -39,7 +39,7 @@ task.spawn(function()
     end
 end)
 task.spawn(function()  
-    for x = 24999,0,1 do 
+    for x = 24999,99999,1 do 
         wait()
             local howmuch = 5 - tostring(x):len()
             local geuss = tostring(x)..tostring(math.pow(10,3+1)):sub(2,howmuch+1)

@@ -120,7 +120,8 @@ local VisualsSettings = {
     },
     Door = {
         ESP = true,
-        ESPColor = Color3.fromRGB(255,255,255)
+        ESPColor = Color3.fromRGB(255,255,255),
+        ShowRoomName = true
     },
     Items = {
         ESP = true,
@@ -269,20 +270,20 @@ serverMain:AddButton({
     end
 })
 
-serverMain:AddButton({
-    Text = "unlock libary",
-    Tooltip = 'geuss the libary code (may lag)',
-    DoubleClick = false,
-    Func = function() 
-        if workspace.CurrentRooms:FindFirstChild("50") then 
-            if ishardmode==false then 
-                LibaryCodeGeusser:Geuss(5)
-            else 
-                LibaryCodeGeusser:Geuss(10)
-            end
-        end
-    end
-})
+-- serverMain:AddButton({
+--     Text = "unlock libary",
+--     Tooltip = 'geuss the libary code (may lag)',
+--     DoubleClick = false,
+--     Func = function() 
+--         if workspace.CurrentRooms:FindFirstChild("50") then 
+--             if ishardmode==false then 
+--                 LibaryCodeGeusser:Geuss(5)
+--             else 
+--                 LibaryCodeGeusser:Geuss(10)
+--             end
+--         end
+--     end
+-- })
 
 
 if ishardmode==true then 
@@ -1055,7 +1056,18 @@ ESPSettings:AddToggle('DoorESP', {
 })
 
 
-ESPSettings:AddLabel('DoorESPColor'):AddColorPicker('DoorESPColor', {
+local doorESPColor = ESPSettings:AddLabel('DoorESPColor')
+
+doorESPColor:AddToggle('ShowRoomName', {
+    Text = 'Door ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Door.ShowRoomName = Value
+    end
+})
+
+doorESPColor:AddColorPicker('DoorESPColor', {
     Default = VisualsSettings.Door.ESPColor, -- Bright green
     Title = 'Door ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
@@ -1126,8 +1138,16 @@ task.spawn(function()
             EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain") 
         end
         if IE.Name=="Door" and IE:IsA("MeshPart") then 
-            if VisualsSettings.Door.ESP == true then 
-                EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door") 
+            if IE.Parent.Name=="Door" and IE.Parent.Parent == theroom then 
+                if VisualsSettings.Door.ESP == true then 
+                    if VisualsSettings.Door.ShowRoomName == false then 
+                        EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
+                    else 
+                        EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..theroom:GetAttribute("OriginalName").." ["..tostring(tonumber(theroom.Name)+1).."]") 
+                    end
+                end
+            else 
+                --IDK
             end
         end
     end
@@ -1184,9 +1204,13 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                 end
 
                 if IE.Name=="Door" and IE:IsA("MeshPart") then 
-                    if IE.Parent.Name=="Door" then 
+                    if IE.Parent.Name=="Door" and IE.Parent.Parent == theroom then 
                         if VisualsSettings.Door.ESP == true then 
-                            EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
+                            if VisualsSettings.Door.ShowRoomName == false then 
+                                EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
+                            else 
+                                EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..theroom:GetAttribute("OriginalName").." ["..tostring(tonumber(theroom.Name)+1).."]") 
+                            end
                         end
                     else 
                         --IDK

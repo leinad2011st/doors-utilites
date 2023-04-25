@@ -552,16 +552,19 @@ client:AddToggle('A100NoLocks',{
     end
 })
 
--- client:AddToggle('HidingExitingFix',{
---     Text = 'Hiding/Exiting Fix',
---     default = false,
---     Tooltip = 'instant hide/exit',
---     Callback = function(Value)
---         flags.HidingExitFix=Value
---         -- if Value==true then
---         -- end
---     end
--- })
+local ANIMSave = {}
+
+client:AddToggle('HidingExitingFix',{
+    Text = 'Hiding/Exiting Fix',
+    default = false,
+    Tooltip = 'instant hide/exit',
+    Callback = function(Value)
+        flags.HidingExitFix=Value
+
+        -- if Value==true then
+        -- end
+    end
+})
 
 game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prompt) 
     if flags.HidingExitFix==true then
@@ -1103,7 +1106,7 @@ task.spawn(function()
         if IE.Name == "KeyObtain" then 
             EspManager:AddEsp(IE,Color3.new(1,1,1),"KeyObtain") 
         end
-        if IE.Name=="Door" and IE:IsA("Model") then 
+        if IE.Name=="Door" and IE:IsA("MeshPart") then 
             if VisualsSettings.Door.ESP == true then 
                 EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door") 
             end
@@ -1161,7 +1164,7 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                     end
                 end
 
-                if IE.Name=="Door" and IE:IsA("Model") then 
+                if IE.Name=="Door" and IE:IsA("MeshPart") then 
                     if VisualsSettings.Door.ESP == true then 
                         EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door") 
                     end
@@ -1174,6 +1177,16 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                         if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
                             IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
                         end
+                    end
+                    if flags.HidingExitFix == true then 
+                        IE:FindFirstChildWhichIsA("ProximityPrompt").PromptButtonHoldEnded:Connect(function  ()
+                            table.insert(ANIMSave,IE:Clone())
+                            game:GetService("Debris"):AddItem(ANIMSave,0.01)
+                            wait(0.5)
+                            IE:FindFirstChild("HiddenPlayer").AttributeChanged:Wait() 
+                            ANIMSave[1].Parent = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+                            ANIMSave={}
+                        end)
                     end
                 elseif IE.Name=="Bed" then
                     if flags.HidingReach == true then 

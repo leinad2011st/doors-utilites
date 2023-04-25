@@ -1056,7 +1056,7 @@ ESPSettings:AddToggle('DoorESP', {
 })
 
 ESPSettings:AddToggle('ShowRoomName', {
-    Text = 'Door ESP',
+    Text = 'Show Room Name',
     Default = true, -- Default value (true / false)
     Tooltip = '',
     Callback = function(Value) 

@@ -1079,7 +1079,7 @@ game.Workspace.ChildAdded:Connect(function (child)
                 print("RUSHING DOT")
                 if VisualsSettings.Rush.ESP == true then 
                 -- if game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),VisualsSettings.Rush.ESP,"Rush", false)
+                    EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),VisualsSettings.Rush.ESPColor,"Rush", false)
                 end
                 -- end
             elseif child.Name:gsub("Moving","") == "Ambush" then
@@ -1165,8 +1165,12 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                 end
 
                 if IE.Name=="Door" and IE:IsA("MeshPart") then 
-                    if VisualsSettings.Door.ESP == true then 
-                        EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
+                    if IE.Parent.Name=="Door" then 
+                        if VisualsSettings.Door.ESP == true then 
+                            EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
+                        end
+                    else 
+                        --IDK
                     end
                 end
                     

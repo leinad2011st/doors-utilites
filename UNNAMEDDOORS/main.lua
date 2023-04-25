@@ -1055,10 +1055,7 @@ ESPSettings:AddToggle('DoorESP', {
     end
 })
 
-
-local doorESPColor = ESPSettings:AddLabel('DoorESPColor')
-
-doorESPColor:AddToggle('ShowRoomName', {
+ESPSettings:AddToggle('ShowRoomName', {
     Text = 'Door ESP',
     Default = true, -- Default value (true / false)
     Tooltip = '',
@@ -1067,7 +1064,8 @@ doorESPColor:AddToggle('ShowRoomName', {
     end
 })
 
-doorESPColor:AddColorPicker('DoorESPColor', {
+
+ESPSettings:AddLabel('DoorESPColor'):AddColorPicker('DoorESPColor', {
     Default = VisualsSettings.Door.ESPColor, -- Bright green
     Title = 'Door ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)

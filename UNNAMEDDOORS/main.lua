@@ -1210,7 +1210,11 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                             if VisualsSettings.Door.ShowRoomName == false then 
                                 EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door ["..tostring(tonumber(theroom.Name)+1).."]") 
                             else 
-                                EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..workspace.CurrentRooms:FindFirstChild(tostring(tonumber(theroom.Name)+1)):GetAttribute("OriginalName").." ["..tostring(tonumber(theroom.Name)+1).."]") 
+                                if workspace.CurrentRooms:FindFirstChild(tostring(tonumber(theroom.Name)+1)) then 
+                                    local feutureName = tostring(tonumber(theroom.Name)+1)
+                                    local futureRoom = workspace.CurrentRooms:FindFirstChild(feutureName)
+                                    EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..futureRoom:GetAttribute("OriginalName").." ["..feutureName.."]") 
+                                end
                             end
                         end
                     else 

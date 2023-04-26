@@ -1108,21 +1108,25 @@ game.Workspace.ChildAdded:Connect(function (child)
                 print("RUSHING DOT")
                 if VisualsSettings.Rush.ESP == true then 
                 -- if game.Workspace:FindFirstChild("RushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),VisualsSettings.Rush.ESPColor,"Rush", false)
+                    task.spawn(function () 
+                        EspManager:AddEsp(game.Workspace:FindFirstChild("RushMoving"),VisualsSettings.Rush.ESPColor,"Rush", false)
+                    end) 
                 end
                 -- end
             elseif child.Name:gsub("Moving","") == "Ambush" then
                 if VisualsSettings.Ambush.ESP == true then 
                     print("AmbushING DOT")
-                    
+                    task.spawn(function () 
                 -- if game.Workspace:FindFirstChild("AmbushMoving"):FindFirstChild("RushNew").CFrame.Position.Y~=-10000 then 
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"),VisualsSettings.Ambush.ESPColor,"Ambush",false) 
+                        EspManager:AddEsp(game.Workspace:FindFirstChild("AmbushMoving"),VisualsSettings.Ambush.ESPColor,"Ambush",false) 
+                    end) 
                 end
                 -- end
             elseif child.Name:gsub("Moving","") == "Seek" then
                 if VisualsSettings.Seek.ESP == true then  
-                    
-                    EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),VisualsSettings.Seek.ESPColor,"Seek",false) 
+                    task.spawn(function ()  
+                        EspManager:AddEsp(game.Workspace:FindFirstChild("SeekMoving"):FindFirstChild("SeekRig"),VisualsSettings.Seek.ESPColor,"Seek",false) 
+                    end) 
                 end
             end
                 

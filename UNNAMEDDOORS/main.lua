@@ -1213,7 +1213,9 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                                 if workspace.CurrentRooms:FindFirstChild(tostring(tonumber(theroom.Name)+1)) then 
                                     local feutureName = tostring(tonumber(theroom.Name)+1)
                                     local futureRoom = workspace.CurrentRooms:FindFirstChild(feutureName)
-                                    EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..futureRoom:GetAttribute("OriginalName").." ["..feutureName.."]") 
+                                    local futureattr = futureRoom:GetAttribute("OriginalName")
+                                    local futureattrGSUBED = futureattr:gsub("Hotel_","")
+                                    EspManager:AddEsp(IE,VisualsSettings.Door.ESPColor,"Door "..futureattrGSUBED.." ["..feutureName.."]") 
                                 end
                             end
                         end

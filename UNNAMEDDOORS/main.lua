@@ -1191,15 +1191,25 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                     if IE.Name=="SkeletonKey" and IE:IsA("Model") then 
                         EspManager:AddEsp(IE,VisualsSettings.Items.ESPColor,"SkeletonKey")
                     end
+                    if IE.Name == "Shears" and IE:IsA("Model") then 
+                        EspManager:AddEsp(IE,VisualsSettings.Items.ESPColor,"Shears")
+                    end
                 end
                 if IE.Name == "CrucifixOnTheWall"  and IE:IsA("Model") then 
                     if VisualsSettings.Crucifix.ESP == true then 
                         EspManager:AddEsp(IE,VisualsSettings.Crucifix.ESPColor,"Crucifix") 
                     end
                 end
+                
                 if IE.Name=="LiveHintBook" and IE:IsA("Model") then 
                     if VisualsSettings.HintBook.ESP == true then 
                         EspManager:AddEsp(IE,VisualsSettings.HintBook.ESPColor,"Libary Hint Book") 
+                    end
+                end
+    
+                if IE.Name=="LiveBreakerPolePickup" and IE:IsA("Model") then 
+                    if VisualsSettings.HintBook.ESP == true then 
+                        EspManager:AddEsp(IE,VisualsSettings.HintBook.ESPColor,"Live Breaker Pole Pickup") 
                     end
                 end
                 if IE.Name=="PickupItem" and IE:IsA("Model") then 

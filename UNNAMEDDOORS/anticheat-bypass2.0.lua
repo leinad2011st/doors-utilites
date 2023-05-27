@@ -37,4 +37,4 @@ function Bypass:Disable()
     HumRootPart.Anchored = false
 end
 
-getgenv().Bypass = Bypass
+getgenv().zipBypass = Bypass

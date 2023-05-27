@@ -160,7 +160,6 @@ bypasses:AddToggle('AntiCheatBypass', {
 })
 
 
-local bypasses = Tabs.Other:AddLeftGroupbox('Bypasses')
 bypasses:AddToggle('INFCloset', {
     Text = 'Infinite closet reach distance',
     Default = false, -- Default value (true / false)
@@ -168,9 +167,9 @@ bypasses:AddToggle('INFCloset', {
     Callback = function(Value)
         flags.INFCloset = Value
         if Value then
-            zipBypass:Enable() 
+            -- zipBypass:Enable() 
         else
-            zipBypass:Disable()
+            -- zipBypass:Disable()
         end
         
     end
@@ -1290,6 +1289,10 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                                 IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
                             else
                                 IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 120
+                                IE:FindFirstChildWhichIsA("ProximityPrompt").Triggered:Connect(function (plr)
+                                    print("DABM")
+                                    -- character:FindFirstChild("Collision"):FindFirstChild("weld").Part1=
+                                end)
                             end
                             
                         end

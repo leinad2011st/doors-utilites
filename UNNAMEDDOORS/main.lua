@@ -85,8 +85,8 @@ flags.AntiVoid = false
 flags.HidingReach = false
 flags.A100NoLocks = false
 flags.AnticheatBypass = false
-
-
+flags.GODMODE = false
+flags.INFCloset = false
 
 
 local eyesspawned = false
@@ -149,6 +149,7 @@ bypasses:AddToggle('AntiCheatBypass', {
     Default = false, -- Default value (true / false)
     Tooltip = '+noclip bypass',
     Callback = function(Value)
+        flags.GODMODE = Value
         if Value then
             zipBypass:Enable() 
         else
@@ -157,6 +158,24 @@ bypasses:AddToggle('AntiCheatBypass', {
         
     end
 })
+
+
+local bypasses = Tabs.Other:AddLeftGroupbox('Bypasses')
+bypasses:AddToggle('INFCloset', {
+    Text = 'Infinite closet reach distance',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'makes all closets reach Distance INFINITE',
+    Callback = function(Value)
+        flags.INFCloset = Value
+        if Value then
+            zipBypass:Enable() 
+        else
+            zipBypass:Disable()
+        end
+        
+    end
+})
+
 
 local linoraSettings = Tabs.Other:AddLeftGroupbox("linoraSettings")
 linoraSettings:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' })
@@ -1267,7 +1286,12 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                 if IE.Name=="Wardrobe" then 
                     if flags.HidingReach == true then 
                         if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
-                            IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
+                            if flags.INFCloset == false then 
+                                IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
+                            else
+                                IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 120
+                            end
+                            
                         end
                     end
                     if flags.HidingExitFix == true then 

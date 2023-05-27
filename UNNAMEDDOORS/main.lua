@@ -7,6 +7,7 @@ local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 local MainEspManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/leinad2011st/doors-utilites/main/UNNAMEDDOORS/EspManager.lua"))()
 local GeussLibaryCode = loadstring(game:HttpGet("https://raw.githubusercontent.com/leinad2011st/doors-utilites/main/UNNAMEDDOORS/geussLibaryCode.lua"))()
+local anticheatManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/leinad2011st/doors-utilites/main/UNNAMEDDOORS/geussLibaryCode.lua"))()
 
 
 local Debris = game:GetService("Debris")
@@ -51,6 +52,7 @@ local Tabs = {
     Main = Window:AddTab('Main'),
     Server = Window:AddTab('Server'),
     Visuals = Window:AddTab('Visuals'),
+    Other = Window:AddTab('Others'),
     ['configs'] = Window:AddTab('configs'),
 
 }
@@ -82,6 +84,9 @@ flags.AntiGlitch = false
 flags.AntiVoid = false
 flags.HidingReach = false
 flags.A100NoLocks = false
+flags.AnticheatBypass = false
+
+
 
 
 local eyesspawned = false
@@ -137,6 +142,15 @@ local VisualsSettings = {
     }
 }
 
+
+Tabs.Other:AddToggle('AntiCheatBypass', {
+    Text = 'godmode',
+    Default = false, -- Default value (true / false)
+    Tooltip = '+noclip bypass',
+    Callback = function(Value)
+    
+    end
+})
 
 local figurething = nil
 serverMain:AddToggle('OpenDoor50NoCutscene', {

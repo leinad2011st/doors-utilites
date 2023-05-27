@@ -17,11 +17,11 @@ local InvisibleCharacter
 local Bypass = {}
 
 local function fixCam(char) 
-	workspace.CurrentCamera:remove()
+	game.workspace.CurrentCamera:remove()
 	wait(.1)
 	repeat wait() until char ~= nil
-	workspace.CurrentCamera.CameraSubject = char:FindFirstChildWhichIsA('Humanoid')
-	workspace.CurrentCamera.CameraType = "Custom"
+	game.workspace.CurrentCamera.CameraSubject = char:FindFirstChildWhichIsA('Humanoid')
+	game.workspace.CurrentCamera.CameraType = "Custom"
 	Player.CameraMinZoomDistance = 0.5
 	Player.CameraMaxZoomDistance = 400
 	Player.CameraMode = "Classic"
@@ -36,7 +36,7 @@ function Bypass:Respawn()
         pcall(function()
             Player.Character = Character
             wait()
-            Character.Parent = workspace
+            Character.Parent = game.workspace
             Character:FindFirstChildWhichIsA('Humanoid'):Destroy()
             IsInvis = false
             InvisibleCharacter.Parent = nil
@@ -46,7 +46,7 @@ function Bypass:Respawn()
         pcall(function()
             Player.Character = Character
             wait()
-            Character.Parent = workspace
+            Character.Parent = game.workspace
             Character:FindFirstChildWhichIsA('Humanoid'):Destroy()
             Bypass:Disable()
         end)
@@ -59,30 +59,32 @@ function Bypass:Enable()
     -- Full credit to AmokahFox @V3rmillion
     -- and infinite yield script for invis command
     for x,i in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do 
-        local save = i:Clone() 
-        for xx,ii in pairs(save:GetDescendants()) do 
-            if ii:IsA("LocalScript")then 
-                if ii.Enabled == true then 
-                    local thingdefine = Instance.new("ObjectValue",ii) thingdefine.Name="ThisThingWasEnableedPlsEnable" 
-                    ii.Enabled=false 
-                end
-            end
-        end
-        task.spawn(function () 
-            wait(0.8)
-            save.Parent = game.Players.LocalPlayer.PlayerGui
+        if i.Name == "MainUI" then 
+            local save = i:Clone() 
             for xx,ii in pairs(save:GetDescendants()) do 
                 if ii:IsA("LocalScript")then 
-                    
-                    if ii:FindFirstChild("ThisThingWasEnableedPlsEnable") then 
-                        ii.Enabled=true
-                        wait(0.1)
-                        ii:FindFirstChild("ThisThingWasEnableedPlsEnable"):Destroy()
+                    if ii.Enabled == true then 
+                        local thingdefine = Instance.new("ObjectValue",ii) thingdefine.Name="ThisThingWasEnableedPlsEnable" 
+                        ii.Enabled=false 
                     end
-                    
                 end
             end
-        end)
+            task.spawn(function () 
+                wait(0.8)
+                save.Parent = game.Players.LocalPlayer.PlayerGui
+                for xx,ii in pairs(save:GetDescendants()) do 
+                    if ii:IsA("LocalScript")then 
+                        
+                        if ii:FindFirstChild("ThisThingWasEnableedPlsEnable") then 
+                            ii.Enabled=true
+                            wait(0.1)
+                            ii:FindFirstChild("ThisThingWasEnableedPlsEnable"):Destroy()
+                        end
+                        
+                    end
+                end
+            end)
+        end
     end
 
     Character.Archivable = true
@@ -139,22 +141,25 @@ function Bypass:Enable()
     if IsInvis == true then return end
     IsInvis = true
 
-    while IsInvis do
-        wait()
-        Character:FindFirstChild("HumanoidRootPart").Anchored = true
-        Character:FindFirstChild("HumanoidRootPart").CFrame = InvisibleCharacter:FindFirstChild("HumanoidRootPart").CFrame
-    end
+    
+    task.spawn(function () 
+        while IsInvis do
+            wait(1)
+            -- Character:FindFirstChild("HumanoidRootPart").Anchored = true
+            Character:FindFirstChild("HumanoidRootPart").CFrame = InvisibleCharacter:FindFirstChild("HumanoidRootPart").CFrame
+        end
+    end)
 
 
-    CF = workspace.CurrentCamera.CFrame
+    CF = game.workspace.CurrentCamera.CFrame
     local CF_1 = Player.Character.HumanoidRootPart.CFrame
     
-    workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
+    game.workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
     wait(.2)
-    workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+    game.workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
     InvisibleCharacter = InvisibleCharacter
-    -- Character.Parent = Lighting
-    InvisibleCharacter.Parent = workspace
+    -- Character.Parent = game.Lighting
+    InvisibleCharacter.Parent = game.workspace
     InvisibleCharacter.HumanoidRootPart.CFrame = CF_1
     Player.Character = InvisibleCharacter
     fixCam(InvisibleCharacter)
@@ -167,6 +172,14 @@ function Bypass:Disable()
 
 
     if IsInvis == false then return end
+
+    task.spawn(function () 
+    repeat
+        wait()
+        Character:FindFirstChild("HumanoidRootPart").Anchored = false
+    until Character:FindFirstChild("HumanoidRootPart").Anchored == false
+    end)
+    
 
     for x,i in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do 
         local save = i:Clone() 
@@ -197,13 +210,13 @@ function Bypass:Disable()
 
     invisFix:Disconnect()
     invisDied:Disconnect()
-    CF = workspace.CurrentCamera.CFrame
+    CF = game.workspace.CurrentCamera.CFrame
     Character = Character
     local CF_1 = Player.Character.HumanoidRootPart.CFrame
     Character.HumanoidRootPart.CFrame = CF_1
     InvisibleCharacter:Destroy()
     Player.Character = Character
-    Character.Parent = workspace
+    Character.Parent = game.workspace
     IsInvis = false
     Player.Character.Animate.Disabled = true
     Player.Character.Animate.Disabled = false

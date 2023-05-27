@@ -143,7 +143,8 @@ local VisualsSettings = {
 }
 
 
-Tabs.Other:AddToggle('AntiCheatBypass', {
+local bypasses = Tabs.Other:AddLeftGroupbox('Bypasses')
+bypasses:AddToggle('AntiCheatBypass', {
     Text = 'godmode',
     Default = false, -- Default value (true / false)
     Tooltip = '+noclip bypass',
@@ -156,6 +157,10 @@ Tabs.Other:AddToggle('AntiCheatBypass', {
         
     end
 })
+
+local linoraSettings = Tabs.Other:AddLeftGroupbox("linoraSettings")
+linoraSettings:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' })
+Library.ToggleKeybind = Options.MenuKeybind
 
 local figurething = nil
 serverMain:AddToggle('OpenDoor50NoCutscene', {

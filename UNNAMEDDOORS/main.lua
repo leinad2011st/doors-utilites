@@ -1175,6 +1175,20 @@ game.Workspace.ChildAdded:Connect(function (child)
     end)
 end)
 
+
+game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prompt) 
+    if prompt.Parent.Name=="Wardrobe" then 
+        if flags.INFCloset==true then 
+            game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = prompt.Parent.Main 
+            task.wait(1)
+            game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        
+        end 
+        
+    end
+    --game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = game.Workspace.CurrentRooms["2"].Assets.Wardrobe.Main 
+end)
+
 task.spawn(function() 
     local theroom =  workspace.CurrentRooms:FindFirstChild(tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)) 
     for x,IE in pairs(theroom:GetDescendants()) do

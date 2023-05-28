@@ -1180,11 +1180,18 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
     if prompt.Parent.Name=="Wardrobe" then 
         if flags.INFCloset==true then 
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = prompt.Parent.Main 
+            
+            local weld = Instance.new("Weld",game.Players.LocalPlayer.Character:FindFirstChild("Collision"))
+            weld.Part0 = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
+            weld.Part1 = prompt.Parent.Main 
+            weld.Name = "TRIP"
+
             task.wait(0.01)
-            prompt:InputHoldEnd()
-            task.wait(2)
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         
+            prompt:InputHoldEnd()
+            task.wait(0.2)
+            weld:Destroy()
         end 
         
     end
@@ -1301,27 +1308,26 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                 if IE.Name=="Wardrobe" then 
                     if flags.HidingReach == true then 
                         if IE:FindFirstChildWhichIsA("ProximityPrompt") then 
-                            if flags.INFCloset == false then 
+                            -- if flags.INFCloset == false then 
                                 IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 18.5 
-                            else
-                                IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 120
-                                IE:FindFirstChildWhichIsA("ProximityPrompt").Triggered:Connect(function (plr)
-                                    print("DABM")
-                                    -- character:FindFirstChild("Collision"):FindFirstChild("weld").Part1=
-                                end)
-                            end
+                            -- else
+                                
+                            -- end
                             
                         end
                     end
+                    if flags.INFCloset == true then
+                        IE:FindFirstChildWhichIsA("ProximityPrompt").MaxActivationDistance = 120
+                    end
                     if flags.HidingExitFix == true then 
-                        IE:FindFirstChildWhichIsA("ProximityPrompt").PromptButtonHoldEnded:Connect(function  ()
-                            table.insert(ANIMSave,IE:Clone())
-                            game:GetService("Debris"):AddItem(ANIMSave,0.01)
-                            wait(0.5)
-                            IE:FindFirstChild("HiddenPlayer").AttributeChanged:Wait() 
-                            ANIMSave[1].Parent = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
-                            ANIMSave={}
-                        end)
+                        -- IE:FindFirstChildWhichIsA("ProximityPrompt").PromptButtonHoldEnded:Connect(function  ()
+                        --     table.insert(ANIMSave,IE:Clone())
+                        --     game:GetService("Debris"):AddItem(ANIMSave,0.01)
+                        --     wait(0.5)
+                        --     IE:FindFirstChild("HiddenPlayer").AttributeChanged:Wait() 
+                        --     ANIMSave[1].Parent = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+                        --     ANIMSave={}
+                        -- end)
                     end
                 elseif IE.Name=="Bed" then
                     if flags.HidingReach == true then 

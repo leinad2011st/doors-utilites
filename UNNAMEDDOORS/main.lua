@@ -1189,9 +1189,9 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
             task.wait(0.01)
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         
-            script.Parent:InputHoldBegin()
+            prompt:InputHoldBegin()
             wait(0.01)
-            script.Parent:InputHoldEnd()
+            prompt:InputHoldEnd()
 
             task.wait(0.2)
             weld:Destroy()

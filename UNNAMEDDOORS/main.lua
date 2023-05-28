@@ -1182,14 +1182,17 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = prompt.Parent.Main 
             
             local weld = Instance.new("Weld",game.Players.LocalPlayer.Character:FindFirstChild("Collision"))
-            weld.Part0 = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
+            weld.Part0 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             weld.Part1 = prompt.Parent.Main 
             weld.Name = "TRIP"
 
             task.wait(0.01)
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         
-            prompt:InputHoldEnd()
+            script.Parent:InputHoldBegin()
+            wait(0.01)
+            script.Parent:InputHoldEnd()
+
             task.wait(0.2)
             weld:Destroy()
         end 

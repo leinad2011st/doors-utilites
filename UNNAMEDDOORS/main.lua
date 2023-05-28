@@ -1180,6 +1180,8 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
     if prompt.Parent.Name=="Wardrobe" then 
         if flags.INFCloset==true then 
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = prompt.Parent.Main 
+            task.wait(0.01)
+            prompt:InputHoldEnd()
             task.wait(2)
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         

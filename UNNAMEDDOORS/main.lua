@@ -1180,21 +1180,18 @@ game:GetService("ProximityPromptService").PromptTriggered:Connect(function (prom
     if prompt.Parent.Name=="Wardrobe" then 
         if flags.INFCloset==true then 
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = prompt.Parent.Main 
-            
-            local weld = Instance.new("Weld",game.Players.LocalPlayer.Character:FindFirstChild("Collision"))
-            weld.Part0 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            weld.Part1 = prompt.Parent.Main 
-            weld.Name = "TRIP"
-
+            game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part0 = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
+            -- local weld = Instance.new("Weld",game.Players.LocalPlayer.Character:FindFirstChild("Collision"))
+            -- weld.Part0 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            -- weld.Part1 = prompt.Parent.Main 
+            -- weld.Name = "TRIP"
+            prompt:InputHoldBegin()
+            task.wait(0.01)
+            prompt:InputHoldEnd()
             task.wait(0.01)
             game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        
-            prompt:InputHoldBegin()
-            wait(0.01)
-            prompt:InputHoldEnd()
-
+            game.Players.LocalPlayer.Character:FindFirstChild("Collision").Weld.Part0 = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
             task.wait(0.2)
-            weld:Destroy()
         end 
         
     end
@@ -1370,13 +1367,24 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                     thing:Disconnect()
                 end
             elseif theroom==50 or room == 100 then 
-                    local figuresetup = room:WaitForChild("FigureSetup")
-    
-                    if figuresetup then
-                        local fig = figuresetup:WaitForChild("FigureRagdoll")
-                        task.wait(0.1)
-                        EspManager:AddEsp(fig,Color3.fromRGB(255,25,25),"Figure")
-                    end 
+                repeat
+                    wait(0.1)
+                until room:FindFirstChild("FigureSetup")
+                local figuresetup = room:WaitForChild("FigureSetup")
+
+                if figuresetup then
+                    local fig = figuresetup:WaitForChild("FigureRagdoll")
+                    task.wait(0.1)
+                    EspManager:AddEsp(fig,Color3.fromRGB(255,25,25),"Figure")
+                end 
+
+                if flags.GODMODE then 
+                    for x,i in pairs(figuresetup:GetDescendants())do 
+                        if i:IsA("TouchTransmitter") then 
+                            Debris:AddItem(i,0.01)
+                        end
+                    end
+                end
             end
         end)
     

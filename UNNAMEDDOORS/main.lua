@@ -9,15 +9,46 @@ local MainEspManager = loadstring(game:HttpGet("https://raw.githubusercontent.co
 local GeussLibaryCode = loadstring(game:HttpGet("https://raw.githubusercontent.com/leinad2011st/doors-utilites/main/UNNAMEDDOORS/geussLibaryCode.lua"))()
 local anticheatManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/leinad2011st/doors-utilites/main/UNNAMEDDOORS/anticheat-bypass2.0.lua"))()
 
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
 
 local Debris = game:GetService("Debris")
+
+
+function playSound(Id)
+    local notif = Instance.new("Sound");
+    notif.Parent = game.SoundService;
+    notif.SoundId = "rbxassetid://"..tostring(Id);
+    notif.Volume = 1;
+    notif:Play();
+    notif.Stopped:Wait();
+    notif:Destroy()
+end
+
+function message(title, text, timee)
+	task.spawn(function()
+        playSound(4590657391)
+	end)
+	Notification:Notify(
+		{Title = title, Description = text},
+		{OutlineColor = Color3.fromRGB(80, 80, 80),Time = timee or 5, Type = "default"}
+	)
+end 
+
 
 
 if game.PlaceId ~= 6839171747 and game.PlaceId ~= 6516141723 then 
     print("Not in doors")
     print("why")
+    message("Not In Doors!!!!!!!!")
     return
 end
+
+if getgenv().GameShowMainGUI==true then
+    message("Gui Already Loaded")
+
+    return
+end 
 
 -- --------------------------------------------------------------------------- --
 
@@ -183,13 +214,13 @@ OtherMain:AddButton({
     Text = 'Lock Mouse',
     Tooltip = 'MOUSE',
     Func = function()
-        MainGame.freemouse = true
+        MainGame.freemouse = false
     end
 })
 
 local HIdePlayersHandlera = nil
 OtherMain:AddToggle('HideOtherPlayers',{
-    Text = 'Hide Other Players',
+    Text = 'Disable Hide Other Players',
     Default = false,
     Tooltip = 'during seek chase',
     Callback = function(Value)
@@ -208,7 +239,7 @@ OtherMain:AddToggle('HideOtherPlayers',{
 })
 
 OtherMain:AddToggle('CamShake',{
-    Text = 'CamShake Enabled',
+    Text = 'Disable CamShake ',
     Default = false,
     Tooltip = '',
     Callback = function(Value)

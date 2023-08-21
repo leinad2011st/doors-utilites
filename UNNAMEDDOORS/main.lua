@@ -83,7 +83,7 @@ local Tabs = {
     Main = Window:AddTab('Main'),
     Server = Window:AddTab('Server'),
     Visuals = Window:AddTab('Visuals'),
-    Other = Window:AddTab('Others'),
+    -- Other = Window:AddTab('Others'),
     ['configs'] = Window:AddTab('configs'),
 
 }
@@ -192,23 +192,23 @@ bypasses:AddToggle('AntiCheatBypass', {
 })
 
 
-bypasses:AddToggle('INFCloset', {
-    Text = 'Infinite closet reach distance',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'makes all closets reach Distance INFINITE',
-    Callback = function(Value)
-        flags.INFCloset = Value
-        if Value then
-            -- zipBypass:Enable() 
-        else
-            -- zipBypass:Disable()
-        end
+-- bypasses:AddToggle('INFCloset', {
+--     Text = 'Infinite closet reach distance',
+--     Default = false, -- Default value (true / false)
+--     Tooltip = 'makes all closets reach Distance INFINITE',
+--     Callback = function(Value)
+--         flags.INFCloset = Value
+--         if Value then
+--             -- zipBypass:Enable() 
+--         else
+--             -- zipBypass:Disable()
+--         end
         
-    end
-})
+--     end
+-- })
 
 
-local OtherMain = Tabs.Other:AddRightGroupbox('Other')
+local OtherMain = Tabs.Main:AddRightGroupbox('Other')
 
 -- OtherMain:AddButton({
 --     Text = 'Lock Mouse',

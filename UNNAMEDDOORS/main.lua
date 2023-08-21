@@ -210,11 +210,31 @@ bypasses:AddToggle('INFCloset', {
 
 local OtherMain = Tabs.Other:AddRightGroupbox('Other')
 
-OtherMain:AddButton({
-    Text = 'Lock Mouse',
-    Tooltip = 'MOUSE',
-    Func = function()
-        MainGame.freemouse = false
+-- OtherMain:AddButton({
+--     Text = 'Lock Mouse',
+--     Tooltip = 'MOUSE',
+--     Func = function()
+--         MainGame.freemouse = true
+--     end
+-- })
+
+local UnlockerMouse = nil
+OtherMain:AddToggle('Mouse Unlocker',{
+    Text = 'Force Lock Mouse',
+    Default = false,
+    Tooltip = 'during cutscenes',
+    Callback = function(Value)
+        -- require( game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainUI"):FindFirstChild("Initiator"):FindFirstChild("Main_Game")).freemouse = true
+        if Value then 
+            UnlockerMouse = game["Run Service"].RenderStepped:Connect(function()
+                MainGame.freemouse = true
+            end)
+        else
+            UnlockerMouse:Disconnect()
+            UnlockerMouse = nil
+        end
+
+
     end
 })
 

@@ -101,6 +101,7 @@ local serverMain = Tabs.Server:AddLeftGroupbox('Main')
 
 local ESPSettings = Tabs.Visuals:AddLeftGroupbox('ESP Settings')
 
+local MainGame = require(game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainUI"):FindFirstChild("Initiator"):FindFirstChild("Main_Game"))
 
 local VisualsSettings = {
     Rush = {
@@ -143,7 +144,7 @@ local VisualsSettings = {
 }
 
 
-local bypasses = Tabs.Other:AddLeftGroupbox('Bypasses')
+local bypasses = Tabs.Main:AddRightGroupbox('Bypasses')
 bypasses:AddToggle('AntiCheatBypass', {
     Text = 'godmode',
     Default = false, -- Default value (true / false)
@@ -174,6 +175,58 @@ bypasses:AddToggle('INFCloset', {
         
     end
 })
+
+
+local OtherMain = Tabs.Other:AddRightGroupbox('Other')
+
+OtherMain:AddButton({
+    Text = 'Lock Mouse',
+    Tooltip = 'MOUSE',
+    Func = function()
+        MainGame.freemouse = true
+    end
+})
+
+local HIdePlayersHandlera = nil
+OtherMain:AddToggle('HideOtherPlayers',{
+    Text = 'Hide Other Players',
+    Default = false,
+    Tooltip = 'during seek chase',
+    Callback = function(Value)
+        -- require( game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainUI"):FindFirstChild("Initiator"):FindFirstChild("Main_Game")).freemouse = true
+        if Value then 
+            HIdePlayersHandlera = game["Run Service"].RenderStepped:Connect(function()
+                MainGame.hideplayers = 0
+            end)
+        else
+            HIdePlayersHandlera:Disconnect()
+            HIdePlayersHandlera = nil
+        end
+
+
+    end
+})
+
+OtherMain:AddToggle('CamShake',{
+    Text = 'CamShake Enabled',
+    Default = false,
+    Tooltip = '',
+    Callback = function(Value)
+        -- require( game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainUI"):FindFirstChild("Initiator"):FindFirstChild("Main_Game")).freemouse = true
+        if Value then 
+            MainGame.camShaker = MainGame.camShakerModule.new(0, function(p1)
+                MainGame.csgo = p1;
+            end);
+        else
+            MainGame.camShaker = MainGame.camShakerModule.new(200, function(p1)
+                MainGame.csgo = p1;
+            end);
+        end
+
+
+    end
+})
+
 
 
 local linoraSettings = Tabs.Other:AddLeftGroupbox("linoraSettings")
@@ -1379,9 +1432,10 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                 end 
 
                 if flags.GODMODE then 
+                    wait(5)
                     for x,i in pairs(figuresetup:GetDescendants())do 
                         if i:IsA("TouchTransmitter") then 
-                            Debris:AddItem(i,0.01)
+                            Debris:AddItem(i,0.1)
                         end
                     end
                 end

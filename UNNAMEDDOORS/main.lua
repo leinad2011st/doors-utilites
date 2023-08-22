@@ -171,6 +171,10 @@ local VisualsSettings = {
     HintBook = {
         ESP = true,
         ESPColor = Color3.fromRGB(255,255,255)
+    },
+    Players = {
+        ESP = true,
+        ESPColor = Color3.fromRGB(0,255,0)
     }
 }
 
@@ -1218,6 +1222,36 @@ ESPSettings:AddLabel('DoorESPColor'):AddColorPicker('DoorESPColor', {
     end
 })
 
+ESPSettings:AddToggle('PlayerESP', {
+    Text = 'Player ESP',
+    Default = true, -- Default value (true / false)
+    Tooltip = '',
+    Callback = function(Value) 
+        VisualsSettings.Players.ESP = Value
+    end
+})
+
+ESPSettings:AddLabel('Player ESP'):AddColorPicker('PlayerESPColor', {
+    Default = VisualsSettings.Ambush.ESPColor, -- Bright green
+    Title = 'Player ESP Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        VisualsSettings.Players.ESPColor = Value
+    end
+})
+
+
+game.Players.PlayerAdded:Connect(function (plr) 
+    if VisualsSettings.Players.ESP == true then 
+        task.spawn(function () 
+            EspManager:AddEsp(plr.Character,VisualsSettings.Players.ESPColor,"Rush", true)
+        end) 
+    else
+        Debris:AddItem(game.CoreGui:FindFirstChild("ESPFolder"):FindFirstChild(plr.Character.Name),0.01)
+        
+    end
+end)
 
 
 game.Workspace.ChildAdded:Connect(function (child) 

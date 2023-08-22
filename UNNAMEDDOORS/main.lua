@@ -83,7 +83,7 @@ local Tabs = {
     Main = Window:AddTab('Main'),
     Server = Window:AddTab('Server'),
     Visuals = Window:AddTab('Visuals'),
-    -- Other = Window:AddTab('Others'),
+    Other = Window:AddTab('Others'),
     ['configs'] = Window:AddTab('configs'),
 
 }

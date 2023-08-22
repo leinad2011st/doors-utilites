@@ -233,8 +233,6 @@ OtherMain:AddToggle('Mouse Unlocker',{
             UnlockerMouse:Disconnect()
             UnlockerMouse = nil
         end
-
-
     end
 })
 
@@ -273,8 +271,6 @@ OtherMain:AddToggle('CamShake',{
                 MainGame.csgo = p1;
             end);
         end
-
-
     end
 })
 
@@ -293,7 +289,7 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
     Callback = function(Value)
         flags.AntiFigureCutscene = Value
         if Value==true then 
-            figurething=game["Run Service"].RenderStepped:Connect(function () 
+            figurething=game.Workspace.CurrentRooms.ChildAdded:Connect(function () 
                 local latesetRoom=workspace.CurrentRooms:GetChildren()[1].Name
                 local plusroom = latesetRoom+1
                 if plusroom==50 then
@@ -301,15 +297,16 @@ serverMain:AddToggle('OpenDoor50NoCutscene', {
                     local Door=Room:FindFirstChild("Door")
                     local EVENT=Door:FindFirstChild("ClientOpen")
                     local door = workspace.CurrentRooms["49"].Door
-                    local maxrepeats = 50
+                    local maxrepeats = 200
                     local repeats = 0
                     repeat
-                        wait()
                         char:PivotTo(door.Hidden.CFrame)
                         if door:FindFirstChild("ClientOpen") then
                             door.ClientOpen:FireServer()
                         end
                         repeats=repeats+1
+                        
+                        wait()
                     until repeats==maxrepeats
 
                     -- repeat

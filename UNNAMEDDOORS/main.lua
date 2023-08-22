@@ -231,7 +231,7 @@ OtherMain:AddToggle('Mouse Unlocker',{
         -- require( game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainUI"):FindFirstChild("Initiator"):FindFirstChild("Main_Game")).freemouse = true
         if Value then 
             UnlockerMouse = game["Run Service"].RenderStepped:Connect(function()
-                MainGame.freemouse = true
+                MainGame.freemouse = false
             end)
         else
             UnlockerMouse:Disconnect()

@@ -40,7 +40,7 @@ end
 if game.PlaceId ~= 6839171747 and game.PlaceId ~= 6516141723 then 
     print("Not in doors")
     print("why")
-    message("Not In Doors!!!!!!!!")
+    message("Not In Doors!!!!!!!!","Join Doors To run script")
     return
 end
 

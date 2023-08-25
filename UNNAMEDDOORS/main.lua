@@ -214,13 +214,13 @@ bypasses:AddToggle('AntiCheatBypass', {
 
 local OtherMain = Tabs.Main:AddRightGroupbox('Other')
 
--- OtherMain:AddButton({
---     Text = 'Lock Mouse',
---     Tooltip = 'MOUSE',
---     Func = function()
---         MainGame.freemouse = true
---     end
--- })
+OtherMain:AddButton({
+    Text = 'Kill',
+    Tooltip = 'KILL',
+    Func = function()
+        game.Players.LocalPlayer.Character.Humanoid.Health=0
+    end
+})
 
 local UnlockerMouse = nil
 OtherMain:AddToggle('Mouse Unlocker',{

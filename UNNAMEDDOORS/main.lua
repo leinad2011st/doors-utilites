@@ -118,7 +118,7 @@ flags.A100NoLocks = false
 flags.AnticheatBypass = false
 flags.GODMODE = false
 flags.INFCloset = false
-
+flags.NoFog = false
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -598,6 +598,22 @@ client:AddSlider('WalkSpeed', {
     end
 })
 
+
+
+client:AddToggle('NoFog',{
+    Text = 'Full Bright',
+    default = false,
+    Tooltip = 'Gives Full Bright',
+    Callback = function(Value)
+        flags.NoFog=Value
+        if flags.NoFog then 
+            game:GetService("Lighting").Fog.Parent = game.Workspace
+        else
+            game.Workspace.Fog.Parent =  game:GetService("Lighting")
+        end
+    end
+})
+
 --FULL BRIGHT STUFF
 
 _G.Ambient=game:GetService("Lighting").Ambient
@@ -614,6 +630,8 @@ client:AddToggle('fullBright',{
     Tooltip = 'Gives Full Bright',
     Callback = function(Value)
         flags.Fullbright=Value
+
+
         if flags.Fullbright==true then
 
             fullbrightThing=game["Run Service"].RenderStepped:Connect(function ()
@@ -638,6 +656,9 @@ client:AddToggle('fullBright',{
         end
     end
 })
+
+
+
 
 client:AddToggle('InstantInteract',{
     Text = 'Instant Interact',

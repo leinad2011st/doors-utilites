@@ -601,9 +601,9 @@ client:AddSlider('WalkSpeed', {
 
 
 client:AddToggle('NoFog',{
-    Text = 'Full Bright',
+    Text = 'No Fog',
     default = false,
-    Tooltip = 'Gives Full Bright',
+    Tooltip = 'Deletes Fog',
     Callback = function(Value)
         flags.NoFog=Value
         if flags.NoFog then 

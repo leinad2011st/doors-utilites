@@ -108,8 +108,6 @@ flags.AntiDupe = false --Closet
 flags.AntiFigureCutscene = false
 flags.antiseekarms = false
 flags.NoInteractDelay = false
-flags.GuidingLightSkip = false
-flags.JumpScareSkip = false
 flags.AntiHalt = false
 flags.AntiGlitch = false
 flags.AntiVoid = false
@@ -133,6 +131,7 @@ local serverMain = Tabs.Server:AddLeftGroupbox('Main')
 local ESPSettings = Tabs.Visuals:AddLeftGroupbox('ESP Settings')
 
 local MainGame = require(game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainUI"):FindFirstChild("Initiator"):FindFirstChild("Main_Game"))
+local LiveModifiers = game:GetService("ReplicatedStorage").LiveModifiers
 
 local VisualsSettings = {
     Rush = {
@@ -893,90 +892,90 @@ entityBypasses:AddToggle('antiseekarms', {
 
 
 --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death
-local GuidingLightSkipHolder = nil
-entityBypasses:AddToggle('GuidingLightSkip', {
-    Text = "Skip Guiding Light Message",
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Bypass Guiding Light', -- Information shown when you hover over the toggle
+-- local GuidingLightSkipHolder = nil
+-- entityBypasses:AddToggle('GuidingLightSkip', {
+--     Text = "Skip Guiding Light Message",
+--     Default = false, -- Default value (true / false)
+--     Tooltip = 'Bypass Guiding Light', -- Information shown when you hover over the toggle
 
-    Callback = function(Value)
+--     Callback = function(Value)
         
-        flags.GuidingLightSkip = Value
-        if Value then 
-            GuidingLightSkipHolder = game["Run Service"].RenderStepped:Connect(function ()
-                if game:GetService("Players").LocalPlayer.Character.Humanoid.Health==0 then 
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death.Visible=false
+--         flags.GuidingLightSkip = Value
+--         if Value then 
+--             GuidingLightSkipHolder = game["Run Service"].RenderStepped:Connect(function ()
+--                 if game:GetService("Players").LocalPlayer.Character.Humanoid.Health==0 then 
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death.Visible=false
                 
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel Statistics = {0.5, 0}, {0.430000007, 0}
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Visible=true
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel Statistics = {0.5, 0}, {0.430000007, 0}
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Visible=true
     
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead HodlerRevive = {0.5, 0}, {0.119999997, 0}
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Visible=true
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive DeathPanelDead =  {0.5, 0}, {0.800000012, 0}
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Visible=true
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics DeathPanel = {0.5, 0}, {0.930000007, 0}
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Visible=true
-                else 
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death.Visible=false
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead HodlerRevive = {0.5, 0}, {0.119999997, 0}
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Visible=true
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive DeathPanelDead =  {0.5, 0}, {0.800000012, 0}
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Visible=true
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics DeathPanel = {0.5, 0}, {0.930000007, 0}
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Visible=true
+--                 else 
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Death.Visible=false
                 
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel Statistics = {0.5, 0}, {0.430000007, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Visible=false
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel Statistics = {0.5, 0}, {0.430000007, 0}
+--                     -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.430000007, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanel.Visible=false
     
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead HodlerRevive = {0.5, 0}, {0.119999997, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Visible=false
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive DeathPanelDead =  {0.5, 0}, {0.800000012, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Visible=false
-                    --UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
-                    --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics DeathPanel = {0.5, 0}, {0.930000007, 0}
-                    -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
-                    game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Visible=false
-                end
-            end)
-        else 
-            GuidingLightSkipHolder:Disconnect()
-            GuidingLightSkipHolder=nil
-        end
-    end
-})
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead HodlerRevive = {0.5, 0}, {0.119999997, 0}
+--                     -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.119999997, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.DeathPanelDead.Visible=false
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive DeathPanelDead =  {0.5, 0}, {0.800000012, 0}
+--                     -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.800000012, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.HodlerRevive.Visible=false
+--                     --UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
+--                     --game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics DeathPanel = {0.5, 0}, {0.930000007, 0}
+--                     -- game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Position = UDim2.new(UDim.new(0.5, 0),UDim.new(0.930000007, 0))
+--                     game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Statistics.Visible=false
+--                 end
+--             end)
+--         else 
+--             GuidingLightSkipHolder:Disconnect()
+--             GuidingLightSkipHolder=nil
+--         end
+--     end
+-- })
 
-local JumppySkip = nil
-entityBypasses:AddToggle('JumpScareSkip', {
-    Text = "Skip All JumpScares ",
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Bypass JumpScares', -- Information shown when you hover over the toggle
+-- local JumppySkip = nil
+-- entityBypasses:AddToggle('JumpScareSkip', {
+--     Text = "Skip All JumpScares ",
+--     Default = false, -- Default value (true / false)
+--     Tooltip = 'Bypass JumpScares', -- Information shown when you hover over the toggle
 
-    Callback = function(Value)
-        flags.JumpScareSkip = Value
-        if Value==true then 
-            JumppySkip = game["Run Service"].RenderStepped:Connect(function ()
-                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_A90.Visible= false
-                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Ambush.Visible=false
-                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Rush.Visible=false
-                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Seek.Visible=false
-                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Goblino.Visible=false
-                game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Skeleton.Visible=false
-            end)
-        else 
-            JumppySkip:Disconnect()
-            JumppySkip=nil
-        end
+--     Callback = function(Value)
+--         flags.JumpScareSkip = Value
+--         if Value==true then 
+--             JumppySkip = game["Run Service"].RenderStepped:Connect(function ()
+--                 game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_A90.Visible= false
+--                 game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Ambush.Visible=false
+--                 game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Rush.Visible=false
+--                 game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_Seek.Visible=false
+--                 game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Goblino.Visible=false
+--                 game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Skeleton.Visible=false
+--             end)
+--         else 
+--             JumppySkip:Disconnect()
+--             JumppySkip=nil
+--         end
 
-    end
-})
+--     end
+-- })
 
 if ishardmode==true then
     entityBypasses:AddLabel('---SUPER HARD MODE---')

@@ -117,6 +117,7 @@ flags.AnticheatBypass = false
 flags.GODMODE = false
 flags.INFCloset = false
 flags.NoFog = false
+flags.antisnare = false
 
 local eyesspawned = false
 local seekchaseRoom = 0
@@ -598,20 +599,22 @@ client:AddSlider('WalkSpeed', {
 })
 
 
-
-client:AddToggle('NoFog',{
-    Text = 'No Fog',
-    default = false,
-    Tooltip = 'Deletes Fog',
-    Callback = function(Value)
-        flags.NoFog=Value
-        if flags.NoFog then 
-            game:GetService("Lighting").Fog.Parent = game.Workspace
-        else
-            game.Workspace.Fog.Parent =  game:GetService("Lighting")
+if game:GetService("Lighting"):FindFirstChild("Fog") then 
+    client:AddToggle('NoFog',{
+        Text = 'No Fog',
+        default = false,
+        Tooltip = 'Deletes Fog',
+        Callback = function(Value)
+            flags.NoFog=Value
+            if flags.NoFog then 
+                game:GetService("Lighting").Fog.Parent = game.Workspace
+            else
+                game.Workspace.Fog.Parent =  game:GetService("Lighting")
+            end
         end
-    end
-})
+    })
+end
+
 
 --FULL BRIGHT STUFF
 
@@ -860,6 +863,17 @@ entityBypasses:AddToggle('AntiGlitch', {
         end
     end
 })
+
+entityBypasses:AddToggle('AntiSnare', {
+    Text = 'Bypass Snare',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Bypass Snare', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        flags.antisnare = Value
+    end
+})
+
 
 entityBypasses:AddToggle('AntiVoid', {
     Text = "Bypass Void",
@@ -1476,6 +1490,17 @@ workspace.CurrentRooms.ChildAdded:Connect(function(room)
                         end
                     end
                 end
+
+                if flags.antisnare == true then 
+                    if IE.Name=="Snare" then 
+                        if IE:FindFirstChild("Hitbox") then 
+                            if IE:FindFirstChild("Hitbox"):FindFirstChild("TouchInterest") then 
+                                Debris:AddItem(IE:FindFirstChild("Hitbox"):FindFirstChild("TouchInterest"),0.01)
+                            end
+                        end
+                    end
+                end
+               
 
             end
         end
